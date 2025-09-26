@@ -78,29 +78,29 @@ LOCAL = 1
 ;-------------------------------------------------
 IF LOCAL
 	IF カードID == 23030
-		PRINTFORMW 「%カード名%을 특수소환！」
+		PRINTFORMW 「%カード名%을 특수 소환！」
 	ELSEIF カードID == 23050
 		PRINTFORMW 「나타나라、%カード名%！」
 	ELSE
 		SELECTCASE 소환出処
 			;패에서 
 			CASE 召種손패
-				PRINTFORMW 「%カード名%을 패에서 특수소환！」
+				PRINTFORMW 「%カード名%을 패에서 특수 소환！」
 			;마법함정ゾーンから。　キリ番・シェイプシスターなどを出す場合
 			CASE 召種마함
-				PRINTFORMW 「%カード名%을 특수소환。」
+				PRINTFORMW 「%カード名%을 특수 소환。」
 			;덱에서 
 			CASE 召種덱
-				PRINTFORMW 「덱에서、%カード名%을 특수소환！」
+				PRINTFORMW 「덱에서、%カード名%을 특수 소환！」
 			;EX덱에서 
 			CASE 召種EX덱
-				PRINTFORMW 「EX덱에서 %カード名%을 특수소환！」
+				PRINTFORMW 「EX덱에서 %カード名%을 특수 소환！」
 			;묘지에서 
 			CASE 召種묘지
 				PRINTFORMW 「부활하라、%カード名%！」
 			;제외状態から
 			CASE 召種제외
-				PRINTFORMW 「제외된 %カード名%을 특수소환！」
+				PRINTFORMW 「제외된 %カード名%을 특수 소환！」
 			;主にトークン生成
 			CASE 10
 				PRINTFORMW 「나타나라、%カード名%！」
@@ -130,7 +130,7 @@ IF LOCAL
 	SELECTCASE カード種
 		;의식소환
 		CASE 의식
-			PRINTFORMW 「몬스터를 의식소환！　나와라、%カード名%！」
+			PRINTFORMW 「몬스터를 의식 소환！　나와라、%カード名%！」
 		;융합소환
 		CASE 융합
 			IF カードID == 50555
@@ -215,7 +215,7 @@ IF LOCAL
 			PRINTFORMW 「링크 소환！　%カード名%！」
 		;遊戯王作品이외의 EXのモンスター
 		CASE 초차원
-			PRINTFORMW 「%カード名%을 초차원에서 특수소환！」
+			PRINTFORMW 「%カード名%을 초차원에서 특수 소환！」
 	ENDSELECT
 ENDIF
 
@@ -245,9 +245,9 @@ IF LOCAL
 		;마함발동
 		CASE 3
 			IF カード種 == 速攻마법
-				PRINTFORMW 「속공마법 발동！　%カード名%！」
+				PRINTFORMW 「속공 마법 발동！　%カード名%！」
 			ELSEIF カード種 == 지속마법
-				PRINTFORMW 「지속마법、%カード名%의 효과를 발동！」
+				PRINTFORMW 「지속 마법、%カード名%의 효과를 발동！」
 			ELSEIF カード種 == フィールド
 				PRINTFORMW 「필드 마법、%カード名%의 효과를 발동！」
 			ELSEIF カード種 == 通常함정
@@ -360,11 +360,11 @@ LOCAL = 1
 IF LOCAL
 	SELECTCASE RAND:3 + 1
 		CASE 1
-			PRINTFORMW 「ドロー！」
+			PRINTFORMW 「드로우ー！」
 		CASE 2			
-			PRINTFORMW 「カード達よ、答えてくれ…！　ドロー！」
+			PRINTFORMW 「카드들이여、대답하라…！　드로우ー！」
 		CASE 3
-			PRINTFORMW 「ドロー……ッ！」
+			PRINTFORMW 「드로우ー……！」
 	ENDSELECT
 ENDIF
 
@@ -461,7 +461,7 @@ IF LOCAL
 	ELSEIF カードID == 50570
 		PRINTFORMW 「가라、라이프・스트림・드래곤！　라이프・이즈・ 뷰티홀！」
 	ELSEIF カードID == 50555
-		PRINTFORMW 「스타더스트 드래곤로 공격！　퍼저라、슈팅・소닉！」
+		PRINTFORMW 「스타더스트 드래곤으로 공격！　퍼져라、슈팅・소닉！」
 	ELSEIF カードID == 50557
 		PRINTFORMW 「가라、세이비어・스타 드래곤！　슈팅・블래스터 소닉！」
 	ELSEIF カードID == 50556
@@ -475,7 +475,7 @@ IF LOCAL
 	ELSEIF カードID == 50581
 		PRINTFORMW 「성광신룡 스타더스트・쉬프르의 공격！　초신성격！」
 	ELSEIF カードID == 50555
-		PRINTFORMW 「波動竜騎士 ドラゴエクィテスの攻撃！ 　スパイラル・ジャベリン！」
+		PRINTFORMW 「파동룡기사 드래고에퀴테스의 공격！ 　스파이럴・자베린！」
 	ELSE
 		SELECTCASE RAND:3 + 1
 			CASE 1

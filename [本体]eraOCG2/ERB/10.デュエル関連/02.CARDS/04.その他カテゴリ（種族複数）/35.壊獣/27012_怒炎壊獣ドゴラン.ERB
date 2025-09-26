@@ -109,7 +109,8 @@ ELSEIF 종류 == 필드起動
 	효과範囲마함 = 1
 	효과範囲상대필드 = 1
 	효과範囲상대마함 = 1
-	효과条件カテゴリ = 파괴수
+	효과条件カテゴリ:0 = 파괴수
+	효과条件カテゴリ:1 = 대파괴수
 	효과条件CNT = 1
 	CALL CARD_CHECK_ADV(듀얼리스트,종류,ゾーン,場所)
 	SIF RESULT:9 < 2
@@ -166,13 +167,14 @@ ELSEIF 종류 == 필드起動
 	CALL CARD_CHOICE(듀얼리스트,종류,ゾーン,場所,27012,2)
 	IF RESULT == 0
 		REPEAT 2
-PRINTL 파괴수 카운터를 제거할 카드를 선택
+			PRINTL 파괴수 카운터를 제거할 카드를 선택
 			CALL FULLRESET
 			효과範囲필드 = 1
 			효과範囲마함 = 1
 			효과範囲상대필드 = 1
 			효과範囲상대마함 = 1
-			효과条件カテゴリ = 파괴수
+			효과条件カテゴリ:0 = 파괴수
+			효과条件カテゴリ:1 = 대파괴수
 			효과条件個Ｃ所持 = 999
 			CALL CARD_CHOOSE_ADV(듀얼리스트,ゾーン,場所)
 			IF RESULT != 9999
@@ -182,7 +184,7 @@ PRINTL 파괴수 카운터를 제거할 카드를 선택
 			ENDIF
 		REND
 		IF 条件달성 == 2
-			PRINTFORMW ドゴランの화염が全てを焼き尽くす！
+			PRINTFORMW 도고란의 화염이 모든것을 불태운다！
 			CALL FULLRESET
 			CALL CARD_REMOVAL_BASIC(듀얼리스트,"필드全体",場所,"묘지")
 			CALL SET_FIELD_INFO(듀얼리스트,"필드",場所,"直無",1)

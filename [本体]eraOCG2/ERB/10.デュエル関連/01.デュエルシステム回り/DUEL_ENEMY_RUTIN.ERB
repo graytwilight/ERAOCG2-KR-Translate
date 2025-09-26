@@ -147,9 +147,28 @@ CASE "플레시아의 충혹마"
 	IF 종류 == 필드起動 || 종류 == フリー誘発
 		CALL FULLRESET_EXT
 		濾過範囲묘지 = 1
+		濾過範囲제외 = 1
 		濾過条件名前 = 홀티아의 충혹마
 		CALL CARD_CHECK_EXT("상대",0,"",場所)
 		SIF RESULT == 0
+			RETURN 1
+	ENDIF
+CASE "날개들의 여왕 티타니아"
+	IF 종류 == 필드起動 || 종류 == フリー誘発
+		CALL FULLRESET_EXT
+		濾過範囲상대필드 = 1
+		濾過条件以攻撃力 = 2000
+		CALL CARD_CHECK_EXT("상대",0,"",場所)
+		SIF RESULT == 0
+			RETURN 1
+	ENDIF
+CASE "숲을 채색하는 엘프 여왕"
+	IF 종류 == 필드起動 || 종류 == フリー誘発
+		CALL FULLRESET_EXT
+		濾過範囲상대필드 = 1
+		濾過条件CNT = 1
+		CALL CARD_CHECK_EXT("상대",0,"",場所)
+		SIF RESULT < 2
 			RETURN 1
 	ENDIF
 CASE "하루 우라라"
@@ -616,17 +635,6 @@ SELECTCASE RESULTS
 ENDSELECT
 
 
-
-
-
-
-
-
-
-
-
-
-
 ;特定の条件下以外で出させたくない場合はここで설정
 @ENEMY_RUTIN_EXDECK(カードID)
 #DIM DYNAMIC 소환法
@@ -935,6 +943,11 @@ SELECTCASE RESULTS
 		RETURN 2600
 	CASE "저승사자 고즈"
 		RETURN -10000
+
+	CASE "날개들의 여왕 티타니아"
+		RETURN 20000
+
+
 	CASEELSE
 		IF 손패플래그
 			TRYCALLFORM CARDCAN_{カードID}("상대",소환時,"필드")
@@ -969,6 +982,22 @@ IF 효과条件손패취득 == 1
 	ELSE
 		;無かったら修正値+20000
 		修正値 += 20000
+	ENDIF
+	TRYCALLFORM CARD_{カードID}, "종류"
+	IF RESULT == フィールド
+		修正値 += 20
+	ELSEIF RESULT == 지속마법
+		修正値 += 10
+	ELSEIF RESULT == 通常마법
+		修正値 += 5
+	ELSEIF RESULT == 速攻마법
+		修正値 += 3
+	ELSEIF RESULT == 装備마법
+		修正値 += 0
+	ELSEIF RESULT == 지속함정
+		修正値 += 2
+	ELSEIF RESULT == 通常함정
+		修正値 += 1
 	ENDIF
 ENDIF
 ;PRINTFORML 효과条件優先名前:%효과条件優先名前%

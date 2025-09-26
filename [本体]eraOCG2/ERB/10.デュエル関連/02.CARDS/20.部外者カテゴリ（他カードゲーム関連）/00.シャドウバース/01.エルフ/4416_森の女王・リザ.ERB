@@ -1,0 +1,140 @@
+﻿@CARDNAME_4416,参照先
+;ココで지정カードの名前、略称を返す予定
+#DIMS DYNAMIC 参照先
+
+VARSET RESULT
+VARSET RESULTS
+
+SELECTCASE 参照先
+	CASE "名前"
+		RESULTS = 숲의 여왕 리자
+	CASE "略称"
+		RESULTS = 숲의 여왕 리자
+	CASE "カテゴリ"
+		RESULTS:0 = 엘프 클래스
+		RESULTS:4 = Shadowverse
+ENDSELECT
+
+
+@CARD_4416(参照先)
+
+#DIMS DYNAMIC 参照先
+VARSET RESULT
+VARSET RESULTS
+
+SELECTCASE 参照先
+	CASE "外部者"
+		RETURN 1
+	CASE "종류"
+		RETURN 효과モン
+	CASE "속성"
+		RETURN 바람속성
+	CASE "종족"
+		RETURN 사이킥족
+	CASE "レベル"
+		RETURN 3
+	CASE "攻撃力"
+		RETURN 1200
+	CASE "守備力"
+		RETURN 2000
+	CASE "성별"
+		RETURN 牝性
+	CASE "추가日"
+		RETURN 250925
+ENDSELECT
+
+RETURN 0
+
+@CARD_EXPLANATION_4416(종류)
+#DIM DYNAMIC 종류
+
+PRINTL このカード名の①の효과は１ターンに１度しか발동できない。
+CALLFORM CARD_ABLE(1,소환時)
+PRINTL ①：このカードが소환した場合に발동できる。
+PRINTL 덱からレベル２以下の「엘프 클래스」モンスター１体を손패に加える。
+CALLFORM CARD_ABLE(10,필드起動)
+PRINTL ②：자신メインフェイズに１度だけ、このカードは「進化」できる。
+PRINTL そうした場合、このカードの攻撃力・守備力は８００アップし、
+PRINTL 덱からレベル３以上の「엘프 클래스」モンスター１体を손패に加え、
+PRINTL 자신フィールドのレベル４以下のモンスターは상대エンドフェイズまで一時破壊耐性を得る。
+
+@CARDCAN_4416(듀얼리스트,종류,ゾーン,場所)
+#DIMS DYNAMIC 듀얼리스트
+#DIMS DYNAMIC ゾーン
+#DIM DYNAMIC 종류
+#DIM DYNAMIC 場所
+
+CALL CARD_NEGATE(듀얼리스트,종류,ゾーン,場所,4416)
+SIF RESULT == 1
+	RETURN 0
+
+IF 종류 == 소환時
+	SIF 발동済_1(듀얼리스트,4416)
+		RETURN 0
+	CALL FULLRESET
+	효과範囲덱 = 1
+	효과条件カテゴリ = 엘프 클래스
+	CALLFORM 효과条件レベル_ADV(2, "以下")	
+	효과条件종류 = モン全般
+	CALL CARD_CHECK_ADV(듀얼리스트,종류,ゾーン,場所)
+	SIF RESULT != 1
+		RETURN 0
+	RETURN 1
+ELSEIF 종류 == 필드起動
+	SIF GETVAR(@"%듀얼리스트%_MZ_条達:場所") != 0
+		RETURN 0
+	SIF 발동済_1(듀얼리스트,覚醒발동)
+		RETURN 0
+	SIF メインフェイズ != 1
+		RETURN 0
+	SIF ターンプレイヤー != 듀얼리스트
+		RETURN 0
+	CALL CARD_DRAW_CHECK
+	RETURN 1
+ELSEIF 종류 == 永紋章起動
+	RETURN 1
+ENDIF
+
+@CARDEFFECT_4416(듀얼리스트,종류,ゾーン,場所)
+#DIMS DYNAMIC 듀얼리스트
+#DIMS DYNAMIC ゾーン
+#DIM DYNAMIC 종류
+#DIM DYNAMIC 場所
+#DIMS DYNAMIC 対面者
+#DIM DYNAMIC カウンタ
+#DIM DYNAMIC 選択カード
+#DIM DYNAMIC 守備力修正
+
+IF 종류 == 소환時
+	CALL CARD_CHOICE(듀얼리스트,종류,ゾーン,場所,4416,1)
+	IF RESULT == 0
+		CALL FULLRESET
+		효과範囲덱 = 1
+		효과条件カテゴリ = 엘프 클래스
+		CALLFORM 효과条件レベル_ADV(2, "以下")	
+		효과条件종류 = モン全般
+		CALL CARD_ADD_ADV(듀얼리스트,ゾーン,場所)
+	ENDIF
+ELSEIF 종류 == 필드起動
+	CALL CARD_CHOICE(듀얼리스트,종류,ゾーン,場所,覚醒발동,1)
+	IF RESULT == 0
+		CALL SET_FIELD_INFO(듀얼리스트,"필드",場所,"条達",2,1)
+		CALL SET_FIELD_INFO(듀얼리스트,"필드",場所,"永攻",800)
+		CALL SET_FIELD_INFO(듀얼리스트,"필드",場所,"永守",800)
+		CALL FULLRESET
+		효과範囲덱 = 1
+		효과条件カテゴリ = 엘프 클래스
+		CALLFORM 효과条件レベル_ADV(3, "以上")	
+		효과条件종류 = モン全般
+		CALL CARD_ADD_ADV(듀얼리스트,ゾーン,場所)
+		CALL CARD_RESERV(듀얼리스트,4416,永紋章予約)
+	ENDIF
+ELSEIF 종류 == 永紋章起動
+	IF ターンプレイヤー == 対面者 && エンドフェイズ == 1
+		SETVAR @"%듀얼리스트%_永紋章:場所", -1
+	ENDIF
+	CALL FULLRESET
+	CALLFORM 효과条件レベル_ADV(4, "以下")	
+	CALL STATCHANGE_EFFECT(듀얼리스트,"필드",場所,"一破",1)
+ENDIF
+

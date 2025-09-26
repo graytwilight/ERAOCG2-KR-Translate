@@ -101,7 +101,8 @@ ELSEIF 종류 == 효과後誘発
 	효과範囲마함 = 1
 	효과範囲상대필드 = 1
 	효과範囲상대마함 = 1
-	효과条件カテゴリ = 파괴수
+	효과条件カテゴリ:0 = 파괴수
+	효과条件カテゴリ:1 = 대파괴수
 	효과条件CNT = 1
 	CALL CARD_CHECK_ADV(듀얼리스트,종류,ゾーン,場所)
 	SIF RESULT:9 < 2
@@ -156,13 +157,14 @@ ELSEIF 종류 == 효과後誘発
 	CALL CARD_CHOICE(듀얼리스트,종류,ゾーン,場所,30202,2)
 	IF RESULT == 0
 		REPEAT 2
-PRINTL 파괴수 카운터를 제거할 카드 선택
+			PRINTL 파괴수 카운터를 제거할 카드 선택
 			CALL FULLRESET
 			효과範囲필드 = 1
 			효과範囲마함 = 1
 			효과範囲상대필드 = 1
 			효과範囲상대마함 = 1
-			효과条件カテゴリ = 파괴수
+			효과条件カテゴリ:0 = 파괴수
+			효과条件カテゴリ:1 = 대파괴수
 			효과条件個Ｃ所持 = 999
 			CALL CARD_CHOOSE_ADV(듀얼리스트,ゾーン,場所)
 			IF RESULT != 9999
@@ -172,7 +174,7 @@ PRINTL 파괴수 카운터를 제거할 카드 선택
 			ENDIF
 		REND
 		IF 条件달성 == 2
-			PRINTFORMW クモグスの糸が상대を絡め取る！
+			PRINTFORMW 쿠모구스의 실이 상대를 묶는다！
 			효과先 = FINAL_SUMMON_TARGET(듀얼리스트,1)
 			CALL FULLRESET
 			효과추가종류 = 4

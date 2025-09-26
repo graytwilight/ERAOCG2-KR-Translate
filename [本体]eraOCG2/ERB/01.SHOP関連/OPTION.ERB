@@ -489,8 +489,8 @@ TFLAG:100 = 0
 PRINTL 
 CUSTOMDRAWLINE —
 PRINTL 　[1000] - 결정　　　　　　　　　 　[1001] - 리셋
-PRINTL 　[1002] - 커맨드 필터 저장  　       [1003] - 커맨드 필터 로드
-PRINTL 　[1010] - SM필터   　　　　　　 　 [1011] - Ｖ필터
+PRINTL 　[1002] - 커맨드 필터 저장  　     [1003] - 커맨드 필터 로드
+PRINTL 　[1010] - SM필터   　　　　　　 　[1011] - Ｖ필터
 INPUT
 IF RESULT == 1000
 	RETURN 0
@@ -619,7 +619,7 @@ FOR カウンタ,1,CHARANUM
 NEXT
 
 
-FOR カウンタ, 1,5000
+FOR カウンタ, 1,9000
 	SIF !EXISTCSV(カウンタ)
 		CONTINUE
 	
@@ -654,10 +654,18 @@ FOR カウンタ, 1,5000
 	CFLAG:설정캐릭터_ID:키스상실상대 = -1
 	CFLAG:설정캐릭터_ID:처녀버린상대 = -1
 	CFLAG:설정캐릭터_ID:동정버린상대 = -1
-	SIF TALENT:설정캐릭터_ID:듀얼리스트 >= 1
+	SIF TALENT:설정캐릭터_ID:듀얼리스트 >= 1 && TALENT:설정캐릭터_ID:외부자 == 0
 		CFLAG:설정캐릭터_ID:오프라인레이트 = 4000
 NEXT
 
+;Anonym추가
+FOR 설정캐릭터_ID,0,CHARANUM
+	IF TALENT:설정캐릭터_ID:듀얼리스트 != 0 && TALENT:설정캐릭터_ID:외부자 == 0 && CFLAG:설정캐릭터_ID:오프라인레이트 == 0
+		CFLAG:설정캐릭터_ID:오프라인레이트 = 4000
+	ELSE
+		CFLAG:설정캐릭터_ID:오프라인레이트 = 0
+	ENDIF
+NEXT
 
 @RESET_CHARA_TALENT
 #DIM DYNAMIC 캐릭터クター番号,5000
@@ -717,8 +725,11 @@ ELSE
 
 		CSTR:캐릭터_ID:등장작품 = %CSVCSTR(NO:캐릭터_ID,10)%
 
-		SIF TALENT:캐릭터_ID:듀얼리스트 >= 1
+		IF TALENT:캐릭터_ID:듀얼리스트 >= 1 && TALENT:캐릭터_ID:외부자 == 0
 			CFLAG:캐릭터_ID:오프라인레이트 = 4000
+		ELSE
+			CFLAG:캐릭터_ID:오프라인레이트 = 0
+		ENDIF
 		CALL CLOTHES_SETTING(캐릭터_ID)
 		CALL SET_BODYSIZE(캐릭터_ID,0,2)
 		; CALL SHOP_BUST_RESET(캐릭터_ID)

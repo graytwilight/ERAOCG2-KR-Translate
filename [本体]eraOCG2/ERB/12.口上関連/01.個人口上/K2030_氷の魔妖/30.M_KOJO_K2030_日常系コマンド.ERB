@@ -462,7 +462,7 @@ IF LOCAL
 						PRINTFORMW 「……別に外見で負けてるとは思わないけれど」
 						PRINTFORMW 「ここにいると無性に『若いっていいわね……』って気持ちになってよくないわ」
 					CASE 3
-						PRINTFORML 「%CSTR:TARGET:MASCALL%、ここで稽古をつけてやってるんだって？」
+						PRINTFORML 「%CSTR:TARGET:MASCALL%、たまにここで稽古をつけてやってるんだって？」
 						PRINTFORMW 「つよいつよいとは思ってたけど、思った以上に評価されてるのね」
 				ENDSELECT
 			ELSEIF CFLAG:TARGET:현재위치 == 場所_スタジアム || CFLAG:TARGET:현재위치 == 場所_観客席
@@ -478,18 +478,113 @@ IF LOCAL
 						PRINTFORML 「うん、大丈夫。……信じてる」
 						PRINTFORMW 「今ここで戦ってるデュエリスト全員よりも%CSTR:TARGET:MASCALL%のほうが強いって、そうわたしは信じてるわ」
 				ENDSELECT
-			ELSEIF CFLAG:TARGET:현재위치 == 場所_中継地点
+			ELSEIF CFLAG:TARGET:현재위치 == 場所_직장
+				SELECTCASE RAND:3
+					CASE 0
+						PRINTFORMW 「ニンゲンは愚か……なぜわざわざ辛いと思うことをしようとするのかしら……」
+					CASE 1
+						PRINTFORMW 「わざわざ직장まで来る必要ないと思うのだけど……」
+					CASE 2
+						PRINTFORMW 「……望むなら壊して差し上げましょうか？」
+						PRINTFORMW 「ふふふ、たまには妖怪らしいことしないとねぇ……。冗談よ」
+				ENDSELECT
+			ELSEIF CFLAG:TARGET:현재위치 == 場所_学校内
 				SELECTCASE RAND:4
 					CASE 0
-						PRINTFORMW 「ここからいろんな世界にいけるのね……」
+						PRINTFORMW 「%CSTR:TARGET:MASCALL%もここで学んだのかしら？」
 					CASE 1
-						PRINTFORMW 「あの案内人さんかわいらしいけど……まさか不埒な眼をむけてないでしょうね？」
+						PRINTFORMW 「ふぅん……、もしかして制服目的なのかしら？」
 					CASE 2
-						PRINTFORMW 「ここからならわたしたちの世界にもいけるのかしら……」
-						PRINTFORMW 「……うぅん、無理そうね。ま、%CSTR:TARGET:MASCALL%との生活のほうが楽しいからいいんだけど」
+						PRINTFORMW 「……別に外見で負けてるとは思わないけれど」
+						PRINTFORMW 「ここにいると無性に『若いっていいわね……』って気持ちになってよくないわ」
 					CASE 3
-						PRINTFORML 「あら目的地はここなの？　それとも別の世界に飛ぶのかしら」
-						PRINTFORMW 「まぁわたしはどっちでもいいわ。%CSTR:TARGET:MASCALL%と一緒ならどこだっていいの」
+						PRINTFORML 「%CSTR:TARGET:MASCALL%、ここで稽古をつけてやってるんだって？」
+						PRINTFORMW 「つよいつよいとは思ってたけど、思った以上に評価されてるのね」
+				ENDSELECT
+			ELSEIF CFLAG:TARGET:현재위치 == 場所_카지노
+				SELECTCASE RAND:3
+					CASE 0
+						PRINTFORMW 「……ふふ、いつの時代もニンゲンは욕망にまみれてるのね」
+					CASE 1
+						PRINTFORMW 「ふふふ、大勝ちしてやるわ……！」
+					CASE 2
+						PRINTFORMW 「まさか%CSTR:TARGET:MASCALL%は카지노で破産なんてバカはしないわよねぇ？」
+						PRINTFORMW 「……ちょっと、なんで目をそらすの。『イシズガチャ脳とけりゅううう』！？　は！？　まちなさい、ちょっと！？」
+				ENDSELECT
+			ELSEIF CFLAG:TARGET:현재위치 == 場所_牧場
+				IF 依頼_完了횟수:304 != 0
+					IF TALENT:TARGET:모유체질
+				SELECTCASE RAND:4
+					CASE 0
+						PRINTFORMW 「この牧場で働いてるみんなが羨ましいわ……❤」
+							CASE 1
+								PRINTFORMW 「ねぇ、お金に困ってないかしら」
+								PRINTFORMW 「……もしよければ、わたしのこのおっぱい、存分につかって、ね……❤」
+							CASE 2
+								PRINTFORML 「この牧場を見てると、身体の奥が疼くのよ」
+								PRINTFORMW 「……あぁ、わたしも%CSTR:TARGET:MASCALL%に飼われたい、って……❤」
+							CASE 3
+								PRINTFORML 「んっ……❤　やだわ、お乳、溢れてきそう……❤」
+								PRINTFORMW 「どう……？　『乳搾り体験』興味ないかしら……❤」
+						ENDSELECT
+					ELSE
+						SELECTCASE RAND:4
+							CASE 0
+								PRINTFORMW 「ここ、%CSTR:TARGET:MASCALL%の所有物なんだって？　意外とお金持ってたのね……」
+							CASE 1
+								PRINTFORML 「……ねぇここ、ほんとに牧場？」
+								PRINTFORMW 「家畜の姿も見えないけど、一体何を飼ってるというの？」
+							CASE 2
+								PRINTFORMW 「へぇ、牧場と言っても家畜特有のくさいニオイしないのね」
+								PRINTFORMW 「かわりになんだか乳臭いけど。牛やヤギならそんなものなのかしら」
+							CASE 3
+								PRINTFORMW 「せっかく見学にきたんだから『乳搾り体験』みたいなサービスないのかしら。そこんとこどうなの、牧場主さん？」
+						ENDSELECT						
+					ENDIF
+				ELSE
+					PRINTFORMW 「さびれた牧場ね……。廃業間近とかなのかしら」
+				ENDIF
+			ELSEIF CFLAG:TARGET:현재위치 == 場所_KL入口
+				SELECTCASE RAND:3
+					CASE 0
+						PRINTFORMW 「……ひと、すごいわね……やっぱ別のところにしない？」
+					CASE 1
+						PRINTFORMW 「どれだけ並ばなきゃダメなの……」
+					CASE 2
+						PRINTFORMW 「高い！　え、なんで入場だけでこんな高いの！？」
+						PRINTFORMW 「……へぇ、子供は無料。……ちょっと、止めないでよ。今だけ『雪娘』の姿になるだけよ」
+				ENDSELECT			
+			ELSEIF CFLAG:TARGET:현재위치 == 場所_KL広場
+				SELECTCASE RAND:4
+					CASE 0
+						PRINTFORMW 「……」
+						PRINTFORMW %CALLNAME:TARGET%は想像以上のスケールに声もなく圧倒されている
+					CASE 1
+						PRINTFORMW 「迷いそうだわ……地図とかないかしら」
+					CASE 2
+						PRINTFORMW 「中も人混みがヒドいわね……」
+						PRINTFORMW 「……ほら、はぐれたらどうしようとか考えない？　ほら、察しなさいよ」
+					CASE 3
+						PRINTFORML 「さっ、どこからいくの？」
+						PRINTFORMW いつも通りを装う%CALLNAME:TARGET%だが、その目は隠しきれない期待の色がうつっている
+				ENDSELECT
+			ELSEIF CFLAG:TARGET:현재위치 == 場所_ジャングル || CFLAG:TARGET:현재위치 == 場所_スリルゾーン || CFLAG:TARGET:현재위치 == 場所_お城 || CFLAG:TARGET:현재위치 == 場所_観覧車 || CFLAG:TARGET:현재위치 == 場所_KCスタジアム
+				SELECTCASE RAND:4
+					CASE 0
+						PRINTFORMW 「……ふふっ♪　ねぇ！　次はどこに行きましょうかっ」
+						PRINTFORMW %CALLNAME:TARGET%はウキウキでパンフレットを覗き込んでいる
+					CASE 1
+						PRINTFORMW 「楽しかったわ……！　もう一度行ってもいいわ……！」
+					CASE 2
+						PRINTFORMW 「それだけ人気ってことだろうけど、さすがに並ぶことになるわね……」
+						PRINTFORMW 「……それでも退屈しないのは、隣にだれかがいるから、かな……」
+					CASE 3
+						IF CFLAG:TARGET:현재위치 == 場所_観覧車
+							PRINTFORMW 「……知ってるわよ、本で読んだ。……二人きりの男女は頂上で、……키스、するんでしょ」
+						ELSE
+							PRINTFORML 「ふふ……！　限られた時間でどれだけ周れるかしら……！」
+							PRINTFORMW 「さぁ、%CSTR:TARGET:MASCALL%もちゃんとついてきなさいっ！　今日はたのしむわよ……！」
+						ENDIF
 				ENDSELECT
 			ELSEIF CFLAG:TARGET:현재위치 == 場所_마법都市
 				SELECTCASE RAND:4
@@ -1587,7 +1682,7 @@ IF LOCAL
 		PRINTFORMW 「いっぱい、いっぱい、わたしなりに頑張って来たつもりだったのに」
 		PRINTFORMW 「結局、本当の幸せは身近なものでした、なんて……──今日日、三文小説でも結末にしないわよ」
 		PRINTFORML 
-		PRINTFORML 　　　　　　　　　　　　　　　　　・・・・・
+		PRINTFORML 　　　　　　　　　　　　　　　　　　　・・・・・
 		PRINTFORMW 「……ねぇ、知ってる？　わたしね、……名前がないの」
 		PRINTFORMW 「ただの雪女でしかないの、わたし。それが嫌で嫌で、力さえあれば『わたし』になれると思ってたの」
 		PRINTFORMW 「だけど、だから……お願いよ」
@@ -1955,6 +2050,13 @@ IF LOCAL
 		;添い寝する時
 		IF CFLAG:TARGET:수면 == 1
 			
+		ELSEIF CFLAG:TARGET:현재위치 == 場所_浴室
+			IF TALENT:TARGET:연모 >=1 || TALENT:TARGET:굴복됨
+				PRINTFORMW 「あったかぁい……しあわせぇ……」
+				PRINTFORMW 「……ふふっ、%CSTR:TARGET:MASCALL%はどうかしら、ねぇ背もたれさん？」
+			ELSE
+				PRINTFORMW 「なんで%CSTR:TARGET:MASCALL%とこんなこと……。……殺すわよ、こっち向くな」
+			ENDIF	
 		;それ以外
 		ELSE
 			SELECTCASE RAND:3
@@ -2752,7 +2854,7 @@ IF LOCAL
 	;エロ配信
 	ELSEIF CFLAG:아르바이트 == 451
 		PRINTFORML 「さぁて、どういう配信にしようかしら」
-		PRINTFORMW 「まずはわたしの
+		PRINT 「まずはわたしの
 			IF TALENT:TARGET:가슴사이즈 >= 2
 				PRINT この手に収まりきらない爆乳を
 			ELSE

@@ -128,8 +128,7 @@ ELSEIF 종류 == 지속효과
 ELSEIF 종류 == 攻撃後強制誘発
 	SIF ゾーン != "필드"
 		RETURN 0
-	SIF 戦闘場所(듀얼리스트) != 場所
-		RETURN 0
+
 	SIF モンスター数(対面者) != 0
 		RETURN 0
 	RETURN 1
@@ -175,6 +174,7 @@ ELSEIF 종류 == 지속효과
 	CALL STATCHANGE_EFFECT(듀얼리스트,"自身",場所,"追戦",1)
 ELSEIF 종류 == 攻撃後強制誘発
 	CALL SET_FIELD_INFO(듀얼리스트,"필드",場所,"戦",-99,1)
+	CALL SET_FIELD_INFO(듀얼리스트,"필드",場所,"追戦",-99,1)
 ENDIF
 
 

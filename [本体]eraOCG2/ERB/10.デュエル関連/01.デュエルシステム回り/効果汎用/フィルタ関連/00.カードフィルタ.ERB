@@ -278,8 +278,6 @@ FOR カウンタ,0,サーチ範囲
 				;上級値を使い、裏側플래그まで確認している。
 				TRYCALLFORM CARD_KANPRINT("상대필드",(カウンタ + 上級値),대상カードID)
 			ELSEIF 参照先 == "마함"		
-				SIF GETVAR(@"%実行者%_魔_表:カウンタ") >= 2
-					裏側플래그 = 3
 				CALL CARD_SETCOLOR(実行者,参照先,カウンタ)
 				;上級値を使い、裏側플래그まで確認している。
 				TRYCALLFORM CARD_KANPRINT("상대마함",(カウンタ + 上級値),대상カードID)

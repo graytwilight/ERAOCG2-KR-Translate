@@ -1,0 +1,226 @@
+﻿@CARDNAME_33008,参照先
+;ココで지정カードの名前、略称を返す予定
+#DIMS DYNAMIC 参照先
+
+VARSET RESULT
+VARSET RESULTS
+
+SELECTCASE 参照先
+	CASE "名前"
+		RESULTS = 대파괴수유도반
+	CASE "略称"
+		RESULTS = 유도반
+	CASE "カテゴリ"
+		RESULTS:0 = 대파괴수
+		RESULTS:1 = 게임 오리지널
+ENDSELECT
+
+@CARD_33008(参照先)
+
+#DIMS DYNAMIC 参照先
+VARSET RESULT
+VARSET RESULTS
+
+SELECTCASE 参照先
+	CASE "종류"
+		RETURN 효과モン
+	CASE "속성"
+		RETURN 빛속성
+	CASE "종족"
+		RETURN 사이킥족
+	CASE "レベル"
+		RETURN 2
+	CASE "攻撃力"
+		RETURN 600
+	CASE "守備力"
+		RETURN 600
+	CASE "성별"
+		RETURN 雄性
+	CASE "レア度"
+		RETURN CMN
+	CASE "生成カード"
+		RETURN 133008
+	CASE "추가日"
+		RETURN 250923
+ENDSELECT
+
+RETURN 0
+
+@CARD_EXPLANATION_33008(종류)
+#DIM DYNAMIC 종류
+
+PRINTL このカード名の①②の효과はそれぞれ１ターンに１度しか使用できない。
+CALLFORM CARD_ABLE(1,필드起動)
+PRINTL ①：손패の「파괴수」または「대파괴수」カードを상대に見せて발동できる。
+PRINTL このカードをリリースし、「파괴수」モンスター１枚を덱から손패に加える。
+PRINTL その後、상대フィールドに「파괴수유도 비콘」１体を守備표시で특수소환する。
+CALLFORM CARD_ABLE(2,묘지起動)
+PRINTL ②：フィールドに「파괴수」モンスターが存在する場合、묘지のこのカードを제외して발동できる。
+PRINTL 덱から「대파괴수」마법・함정カード１枚を손패に加える。
+
+@CARDCAN_33008(듀얼리스트,종류,ゾーン,場所)
+#DIMS DYNAMIC 듀얼리스트
+#DIMS DYNAMIC ゾーン
+#DIM DYNAMIC 종류
+#DIM DYNAMIC 場所
+
+CALL CARD_NEGATE(듀얼리스트,종류,ゾーン,場所,33008)
+SIF RESULT == 1
+	RETURN 0
+
+IF 종류 == 필드起動
+	SIF 발동済_1(듀얼리스트,33008)
+		RETURN 0
+	SIF ゾーン != "필드"
+		RETURN 0
+	SIF メインフェイズ != 1
+		RETURN 0
+	SIF ターンプレイヤー != 듀얼리스트
+		RETURN 0
+	CALL FULLRESET
+	효과範囲손패 = 1
+	효과条件カテゴリ:0 = 파괴수
+	효과条件カテゴリ:1 = 대파괴수
+	CALL CARD_CHECK_ADV(듀얼리스트,종류,ゾーン,場所)
+	SIF RESULT != 1
+		RETURN 0
+	CALL FULLRESET
+	효과範囲덱 = 1
+	효과条件カテゴリ = 파괴수
+	효과条件종류 = モン全般
+	CALL CARD_CHECK_ADV(듀얼리스트,종류,ゾーン,場所)
+	SIF RESULT != 1
+		RETURN 0
+	RETURN 1
+
+ELSEIF 종류 == 묘지起動
+	SIF 발동済_2(듀얼리스트,33008)
+		RETURN 0
+	SIF ゾーン != "묘지"
+		RETURN 0
+	SIF メインフェイズ != 1
+		RETURN 0
+	SIF ターンプレイヤー != 듀얼리스트
+		RETURN 0
+	SIF GETVAR(@"%듀얼리스트%_제외NG置換") >= 1
+		RETURN 0
+	CALL FULLRESET
+	효과範囲필드 = 1
+	효과範囲상대필드 = 1
+	효과条件カテゴリ = 파괴수
+	CALL CARD_CHECK_ADV(듀얼리스트,종류,ゾーン,場所)
+	SIF RESULT != 1
+		RETURN 0
+	CALL FULLRESET
+	효과範囲덱 = 1
+	효과条件カテゴリ = 대파괴수
+	효과条件종류 = 마함全般
+	CALL CARD_CHECK_ADV(듀얼리스트,종류,ゾーン,場所)
+	SIF RESULT != 1
+		RETURN 0
+	RETURN 1
+
+ENDIF
+
+@CARDEFFECT_33008(듀얼리스트,종류,ゾーン,場所)
+#DIMS DYNAMIC 듀얼리스트
+#DIMS DYNAMIC 対面者
+#DIMS DYNAMIC ゾーン
+#DIM DYNAMIC 종류
+#DIM DYNAMIC 場所
+
+CALL 対面者판정(듀얼리스트)
+対面者 = %RESULTS%
+
+IF 종류 == 필드起動
+	CALL CARD_CHOICE(듀얼리스트,종류,ゾーン,場所,33008,1)
+	IF RESULT == 0
+		CALL CARD_DISPOSE(듀얼리스트,ゾーン,場所)
+		IF RESULT == 1
+			PRINTL 見せる손패を選んでください
+			CALL FULLRESET
+			효과範囲손패 = 1
+			효과条件カテゴリ:0 = 파괴수
+			효과条件カテゴリ:1 = 대파괴수
+			CALL CARD_CHOOSE_ADV(듀얼리스트,ゾーン,場所)
+			IF RESULT != 9999
+				PRINTL 손패に加えるカードを選んでください
+				CALL FULLRESET
+				효과範囲덱 = 1
+				효과条件カテゴリ = 파괴수
+				효과条件종류 = モン全般
+				CALL CARD_ADD_ADV(듀얼리스트,ゾーン,場所)
+				IF RESULT == 1
+					CALL CARD_SS_CHECK(対面者,133008,"")
+					IF RESULT != 1
+						CALL FULLRESET
+						CALL CARD_GENERATE(対面者,133008,"守備표시")
+					ENDIF
+				ENDIF
+			ENDIF
+		ENDIF
+	ENDIF
+
+ELSEIF 종류 == 묘지起動
+	CALL CARD_CHOICE(듀얼리스트,종류,ゾーン,場所,33008,2)
+	IF RESULT == 0
+		CALL CARD_DISPOSE(듀얼리스트,ゾーン,場所)
+		CALL FULLRESET
+		효과範囲덱 = 1
+		효과条件カテゴリ = 대파괴수
+		효과条件종류 = 마함全般
+		CALL CARD_ADD_ADV(듀얼리스트,ゾーン,場所)
+	ENDIF
+
+ENDIF
+
+
+@CARDNAME_133008,参照先
+;ココで지정カードの名前、略称を返す予定
+#DIMS DYNAMIC 参照先
+
+VARSET RESULT
+VARSET RESULTS
+
+SELECTCASE 参照先
+	CASE "名前"
+		RESULTS = 파괴수유도 비콘
+	CASE "略称"
+		RESULTS = 유도 비콘
+	CASE "カテゴリ"
+		RESULTS:0 = 대파괴수
+ENDSELECT
+
+
+@CARD_133008(参照先)
+
+#DIMS DYNAMIC 参照先
+VARSET RESULT
+VARSET RESULTS
+
+SELECTCASE 参照先
+	CASE "종류"
+		RETURN 通常モン
+	CASE "トークン"
+		RETURN 1
+	CASE "속성"
+		RETURN 빛속성
+	CASE "종족"
+		RETURN 기계족
+	CASE "レベル"
+		RETURN 1
+	CASE "攻撃力"
+		RETURN 0
+	CASE "守備力"
+		RETURN 0
+ENDSELECT
+
+
+@CARDCAN_133008(듀얼리스트,종류,ゾーン,場所)
+#DIMS DYNAMIC 듀얼리스트
+#DIMS DYNAMIC ゾーン
+#DIM DYNAMIC 종류
+#DIM DYNAMIC 場所
+#DIMS DYNAMIC 対面者
+
+RETURN 0

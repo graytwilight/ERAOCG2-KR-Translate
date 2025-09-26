@@ -133,7 +133,7 @@ IF LOCAL
 			PRINTFORMW 「몬스터를 의식소환！　나와라、%カード名%！」
 		;융합소환
 		CASE 융합
-			IF カードID == 0000
+			IF カードID == 50555
 				PRINTFORMW 「이것이、지금의 내가 도출해낸 결론이다！　너희들의 힘을 하나로！
 				PRINTFORMW 　나타나라、%カード名%！」
 				;エクィテス実装前
@@ -188,8 +188,10 @@ IF LOCAL
 				PRINTFORMW 「결집한 마음이、빛나는 기적을 일으킨다。빛이 비추는 길이 되어라！
 				PRINTFORMW 　싱크로 소환！　빛을 내려라、슈팅 세이비어・스타 드래곤！」
 			ELSEIF カードID == 50558
+				SETCOLOR C_GOLD
 				PRINTFORMW 「오버탑・클리어 마인드！　결집한 별이 하나가 될 때、새로운 유대가 미래를 밝히니！빛이 비추는 길이 되어라！
 				PRINTFORMW 　리미트 오버 액셀 싱크로！　진화의 빛、슈팅・퀘이사・드래곤！」
+				RESETCOLOR
 			ELSEIF カードID == 50559
 				PRINTFORMW 「탑클리어 마인드！　결집한 별이 유대를 이어주고、기도와 함께 미래로 나아간다！　빛이 비추는 길이 되어라！
 				PRINTFORMW 　델타 액셀 싱크로！　도래하라、코즈믹・블레이저・드래곤！」
@@ -472,6 +474,8 @@ IF LOCAL
 		PRINTFORMW 「진섬광룡 스타더스트・크로니클의 공격！　유성황섬격！」
 	ELSEIF カードID == 50581
 		PRINTFORMW 「성광신룡 스타더스트・쉬프르의 공격！　초신성격！」
+	ELSEIF カードID == 50555
+		PRINTFORMW 「波動竜騎士 ドラゴエクィテスの攻撃！ 　スパイラル・ジャベリン！」
 	ELSE
 		SELECTCASE RAND:3 + 1
 			CASE 1

@@ -165,6 +165,140 @@ ENDIF
 ;査定基準＝別のバリアントを参考
 
 VARSET 最終価値
+VARSET 価格보정
+
+
+VARSET 価格보정
+IF ABL:캐릭터_ID:Ｃ감각 < 3
+	価格보정 = 0
+ELSEIF ABL:캐릭터_ID:Ｃ감각 == 3
+	価格보정 = 250
+ELSEIF ABL:캐릭터_ID:Ｃ감각 == 4
+	価格보정 = 400
+ELSEIF ABL:캐릭터_ID:Ｃ감각 >= 5
+	価格보정 = 100 * (ABL:캐릭터_ID:Ｃ감각)
+ENDIF
+IF 価格보정 != 0 && TALENT:캐릭터_ID:자위광 == 0
+	PRINTFORML Ｃ감각LV{ABL:캐릭터_ID:Ｖ감각} + {価格보정}
+ELSEIF 価格보정 != 0 && TALENT:캐릭터_ID:자위광
+	TIMES 価格보정, 1.50
+	PRINTFORML Ｃ감각LV{ABL:캐릭터_ID:Ｖ감각} + {価格보정} （자위광×1.5）
+ENDIF
+最終価値 += 価格보정
+
+VARSET 価格보정
+IF ABL:캐릭터_ID:Ｖ감각 < 2
+	価格보정 = 0
+ELSEIF ABL:캐릭터_ID:Ｖ감각 == 2
+	価格보정 = 250
+ELSEIF ABL:캐릭터_ID:Ｖ감각 == 3
+	価格보정 = 500
+ELSEIF ABL:캐릭터_ID:Ｖ감각 == 4
+	価格보정 = 1000
+ELSEIF ABL:캐릭터_ID:Ｖ감각 >= 5
+	価格보정 = 300 * (ABL:캐릭터_ID:Ｖ감각)
+ENDIF
+IF 価格보정 != 0 && TALENT:캐릭터_ID:음호 == 0
+	PRINTFORML Ｖ감각LV{ABL:캐릭터_ID:Ｖ감각} + {価格보정}
+ELSEIF 価格보정 != 0 && TALENT:캐릭터_ID:음호
+	TIMES 価格보정, 1.50
+	PRINTFORML Ｖ감각LV{ABL:캐릭터_ID:Ｖ감각} + {価格보정} （음호×1.5）
+ENDIF
+最終価値 += 価格보정
+
+VARSET 価格보정
+IF ABL:캐릭터_ID:Ａ감각 < 2
+	価格보정 = 0
+ELSEIF ABL:캐릭터_ID:Ａ감각 == 2
+	価格보정 = 250
+ELSEIF ABL:캐릭터_ID:Ａ감각 == 3
+	価格보정 = 400
+ELSEIF ABL:캐릭터_ID:Ａ감각 == 4
+	価格보정 = 700
+ELSEIF ABL:캐릭터_ID:Ａ감각 >= 5
+	価格보정 = 200 * (ABL:캐릭터_ID:Ａ감각)
+ENDIF
+IF 価格보정 != 0 && TALENT:캐릭터_ID:엉덩이광 == 0
+	PRINTFORML Ａ감각LV{ABL:캐릭터_ID:Ａ감각} + {価格보정}
+ELSEIF 価格보정 != 0 && TALENT:캐릭터_ID:엉덩이광
+	TIMES 価格보정, 1.50
+	PRINTFORML Ａ감각LV{ABL:캐릭터_ID:Ａ감각} + {価格보정} （엉덩이광×1.5）
+ENDIF
+最終価値 += 価格보정
+
+
+VARSET 価格보정
+IF ABL:캐릭터_ID:Ｂ감각 < 3
+	価格보정 = 0
+ELSEIF ABL:캐릭터_ID:Ｂ감각 == 3
+	価格보정 = 320
+ELSEIF ABL:캐릭터_ID:Ｂ감각 == 4
+	価格보정 = 480
+ELSEIF ABL:캐릭터_ID:Ｂ감각 >= 5
+	価格보정 = 150 * (ABL:캐릭터_ID:Ｂ감각)
+ENDIF
+IF 価格보정 != 0 && TALENT:캐릭터_ID:음유 == 0
+	PRINTFORML Ｂ감각LV{ABL:캐릭터_ID:Ｂ감각} + {価格보정}
+ELSEIF 価格보정 != 0 && TALENT:캐릭터_ID:음유
+	TIMES 価格보정, 1.50
+	PRINTFORML Ｂ감각LV{ABL:캐릭터_ID:Ｂ감각} + {価格보정} （음유×1.5）
+ENDIF
+最終価値 += 価格보정
+
+VARSET 価格보정
+IF ABL:캐릭터_ID:Ｍ감각 < 3
+	価格보정 = 0
+ELSEIF ABL:캐릭터_ID:Ｍ감각 == 3
+	価格보정 = 250
+ELSEIF ABL:캐릭터_ID:Ｍ감각 == 4
+	価格보정 = 400
+ELSEIF ABL:캐릭터_ID:Ｍ감각 >= 5
+	価格보정 = 100 * (ABL:캐릭터_ID:Ｍ감각)
+ENDIF
+IF 価格보정 != 0 && TALENT:캐릭터_ID:키스마 == 0
+	PRINTFORML Ｍ감각LV{ABL:캐릭터_ID:Ｍ감각} + {価格보정}
+ELSEIF 価格보정 != 0 && TALENT:캐릭터_ID:키스마
+	TIMES 価格보정, 1.50
+	PRINTFORML Ｍ감각LV{ABL:캐릭터_ID:Ｍ감각} + {価格보정} （키스마×1.5）
+ENDIF
+最終価値 += 価格보정
+
+VARSET 価格보정
+IF ABL:캐릭터_ID:순종 == 0
+	価格보정 += 0
+ELSEIF ABL:캐릭터_ID:순종 == 1
+	価格보정 += 500
+ELSEIF ABL:캐릭터_ID:순종 == 2
+	価格보정 += 850
+ELSEIF ABL:캐릭터_ID:순종 == 3
+	価格보정 += 1500
+ELSEIF ABL:캐릭터_ID:순종 == 4
+	価格보정 += 2500
+ELSEIF ABL:캐릭터_ID:순종 >= 5
+	価格보정 += 700 * (ABL:캐릭터_ID:순종)
+ENDIF
+SIF 価格보정 > 0
+	PRINTFORML 순종LV{ABL:캐릭터_ID:순종} + {価格보정}
+最終価値 += 価格보정
+
+
+VARSET 価格보정
+IF ABL:캐릭터_ID:욕망 == 0
+	価格보정 += 0
+ELSEIF ABL:캐릭터_ID:욕망 == 1
+	価格보정 += 200
+ELSEIF ABL:캐릭터_ID:욕망 == 2
+	価格보정 += 450
+ELSEIF ABL:캐릭터_ID:욕망 == 3
+	価格보정 += 900
+ELSEIF ABL:캐릭터_ID:욕망 == 4
+	価格보정 += 1500
+ELSEIF ABL:캐릭터_ID:욕망 >= 5
+	価格보정 += 500 * (ABL:캐릭터_ID:욕망)
+ENDIF
+SIF 価格보정 > 0
+	PRINTFORML 욕망LV{ABL:캐릭터_ID:욕망} + {価格보정}
+最終価値 += 価格보정
 
 
 VARSET 価格보정
@@ -179,79 +313,135 @@ ELSEIF ABL:캐릭터_ID:친밀 == 3
 ELSEIF ABL:캐릭터_ID:친밀 == 4
 	価格보정 += 1500
 ELSE
-	価格보정 += 450 * (ABL:캐릭터_ID:친밀)
+	価格보정 += 500 * (ABL:캐릭터_ID:친밀)
 ENDIF
 SIF 価格보정 > 0
 	PRINTFORML 친밀LV{ABL:캐릭터_ID:친밀} + {価格보정}
 最終価値 += 価格보정
 
-VARSET 価格보정
-IF ABL:캐릭터_ID:순종 == 0
-	価格보정 += 0
-ELSEIF ABL:캐릭터_ID:순종 == 1
-	価格보정 += 200
-ELSEIF ABL:캐릭터_ID:순종 == 2
-	価格보정 += 500
-ELSEIF ABL:캐릭터_ID:순종 == 3
-	価格보정 += 850
-ELSEIF ABL:캐릭터_ID:순종 == 4
-	価格보정 += 1500
-ELSE
-	価格보정 += 450 * (ABL:캐릭터_ID:순종)
-ENDIF
-SIF 価格보정 > 0
-	PRINTFORML 순종LV{ABL:캐릭터_ID:순종} + {価格보정}
-最終価値 += 価格보정
-
-VARSET 価格보정
-IF ABL:캐릭터_ID:욕망 == 0
-	価格보정 += 0
-ELSEIF ABL:캐릭터_ID:욕망 == 1
-	価格보정 += 100
-ELSEIF ABL:캐릭터_ID:욕망 == 2
-	価格보정 += 300
-ELSEIF ABL:캐릭터_ID:욕망 == 3
-	価格보정 += 700
-ELSEIF ABL:캐릭터_ID:욕망 == 4
-	価格보정 += 1200
-ELSE
-	価格보정 += 300 * (ABL:캐릭터_ID:욕망)
-ENDIF
-SIF 価格보정 > 0
-	PRINTFORML 욕망LV{ABL:캐릭터_ID:욕망} + {価格보정}
-最終価値 += 価格보정
 
 VARSET 価格보정
 IF ABL:캐릭터_ID:기교 == 0
 	価格보정 += 0
 ELSEIF ABL:캐릭터_ID:기교 == 1
-	価格보정 += 100
+	価格보정 += 150
 ELSEIF ABL:캐릭터_ID:기교 == 2
-	価格보정 += 200
+	価格보정 += 300
 ELSEIF ABL:캐릭터_ID:기교 == 3
-	価格보정 += 400
+	価格보정 += 600
 ELSEIF ABL:캐릭터_ID:기교 == 4
-	価格보정 += 700
-ELSE
-	価格보정 += 250 * (ABL:캐릭터_ID:기교)
+	価格보정 += 1000
+ELSEIF ABL:캐릭터_ID:기교 >= 5
+	価格보정 += 350 * (ABL:캐릭터_ID:기교)
 ENDIF
 SIF 価格보정 > 0
 	PRINTFORML 기교LV{ABL:캐릭터_ID:기교} + {価格보정}
 最終価値 += 価格보정
 
+
+
+VARSET 価格보정
+IF ABL:캐릭터_ID:봉사정신 == 0
+	価格보정 += 0
+ELSEIF ABL:캐릭터_ID:봉사정신 == 1
+	価格보정 += 500
+ELSEIF ABL:캐릭터_ID:봉사정신 == 2
+	価格보정 += 900
+ELSEIF ABL:캐릭터_ID:봉사정신 == 3
+	価格보정 += 1400
+ELSEIF ABL:캐릭터_ID:봉사정신 == 4
+	価格보정 += 2100
+ELSEIF ABL:캐릭터_ID:봉사정신 >= 5
+	価格보정 += 600 * (ABL:캐릭터_ID:봉사정신)
+ENDIF
+SIF 価格보정 > 0
+	PRINTFORML 봉사정신LV{ABL:캐릭터_ID:봉사정신} + {価格보정}
+最終価値 += 価格보정
+
+
+
+VARSET 価格보정
+IF ABL:캐릭터_ID:노출증 == 0
+	価格보정 += 0
+ELSEIF ABL:캐릭터_ID:노출증 == 1
+	価格보정 += 100
+ELSEIF ABL:캐릭터_ID:노출증 == 2
+	価格보정 += 200
+ELSEIF ABL:캐릭터_ID:노출증 == 3
+	価格보정 += 300
+ELSEIF ABL:캐릭터_ID:노출증 == 4
+	価格보정 += 500
+ELSEIF ABL:캐릭터_ID:노출증 >= 5
+	価格보정 += 100 * (ABL:캐릭터_ID:노출증)
+ENDIF
+IF 価格보정 != 0 && TALENT:캐릭터_ID:실금벽 == 0
+	PRINTFORML 노출증LV{ABL:캐릭터_ID:노출증} + {価格보정}
+ELSEIF 価格보정 != 0 && TALENT:캐릭터_ID:실금벽
+	TIMES 価格보정, 1.50
+	PRINTFORML 노출증LV{ABL:캐릭터_ID:노출증} + {価格보정} （실금벽×1.5）
+ENDIF
+最終価値 += 価格보정
+
+
+VARSET 価格보정
+IF ABL:캐릭터_ID:새드끼 == 0
+	価格보정 += 0
+ELSEIF ABL:캐릭터_ID:새드끼 == 1
+	価格보정 += 200
+ELSEIF ABL:캐릭터_ID:새드끼 == 2
+	価格보정 += 400
+ELSEIF ABL:캐릭터_ID:새드끼 == 3
+	価格보정 += 700
+ELSEIF ABL:캐릭터_ID:새드끼 == 4
+	価格보정 += 1200
+ELSEIF ABL:캐릭터_ID:새드끼 >= 5
+	価格보정 += 300 * (ABL:캐릭터_ID:새드끼)
+ENDIF
+IF 価格보정 != 0 && TALENT:캐릭터_ID:새드 == 0
+	PRINTFORML 새드끼LV{ABL:캐릭터_ID:새드끼} + {価格보정}
+ELSEIF 価格보정 != 0 && TALENT:캐릭터_ID:새드
+	TIMES 価格보정, 1.50
+	PRINTFORML 새드끼LV{ABL:캐릭터_ID:새드끼} + {価格보정} （새드×1.5）
+ENDIF
+最終価値 += 価格보정
+
+
+VARSET 価格보정
+IF ABL:캐릭터_ID:마조끼 == 0
+	価格보정 += 0
+ELSEIF ABL:캐릭터_ID:마조끼 == 1
+	価格보정 += 200
+ELSEIF ABL:캐릭터_ID:마조끼 == 2
+	価格보정 += 400
+ELSEIF ABL:캐릭터_ID:마조끼 == 3
+	価格보정 += 700
+ELSEIF ABL:캐릭터_ID:마조끼 == 4
+	価格보정 += 1200
+ELSEIF ABL:캐릭터_ID:마조끼 >= 5
+	価格보정 += 300 * (ABL:캐릭터_ID:마조끼)
+ENDIF
+IF 価格보정 != 0 && TALENT:캐릭터_ID:마조 == 0
+	PRINTFORML 마조끼LV{ABL:캐릭터_ID:마조끼} + {価格보정}
+ELSEIF 価格보정 != 0 && TALENT:캐릭터_ID:마조
+	TIMES 価格보정, 1.50
+	PRINTFORML 마조끼LV{ABL:캐릭터_ID:마조끼} + {価格보정} （마조×1.5）
+ENDIF
+最終価値 += 価格보정
+
+
 VARSET 価格보정
 IF ABL:캐릭터_ID:자위중독 == 0
 	価格보정 += 0
 ELSEIF ABL:캐릭터_ID:자위중독 == 1
-	価格보정 += 250
+	価格보정 += 560
 ELSEIF ABL:캐릭터_ID:자위중독 == 2
-	価格보정 += 500
+	価格보정 += 850
 ELSEIF ABL:캐릭터_ID:자위중독 == 3
-	価格보정 += 750
+	価格보정 += 1400
 ELSEIF ABL:캐릭터_ID:자위중독 == 4
-	価格보정 += 1000
-ELSE
-	価格보정 += 250 * (ABL:캐릭터_ID:자위중독)
+	価格보정 += 1900
+ELSEIF ABL:캐릭터_ID:자위중독 >= 5
+	価格보정 += 550 * (ABL:캐릭터_ID:자위중독)
 ENDIF
 SIF 価格보정 > 0
 	PRINTFORML 자위중독LV{ABL:캐릭터_ID:자위중독} + {価格보정}
@@ -262,245 +452,51 @@ VARSET 価格보정
 IF ABL:캐릭터_ID:정액중독 == 0
 	価格보정 += 0
 ELSEIF ABL:캐릭터_ID:정액중독 == 1
-	価格보정 += 300
+	価格보정 += 400
 ELSEIF ABL:캐릭터_ID:정액중독 == 2
-	価格보정 += 600
+	価格보정 += 800
 ELSEIF ABL:캐릭터_ID:정액중독 == 3
-	価格보정 += 900
+	価格보정 += 1200
 ELSEIF ABL:캐릭터_ID:정액중독 == 4
-	価格보정 += 1300
-ELSE
-	価格보정 += 350 * (ABL:캐릭터_ID:정액중독)
+	価格보정 += 1800
+ELSEIF ABL:캐릭터_ID:정액중독 >= 5
+	価格보정 += 500 * (ABL:캐릭터_ID:정액중독)
 ENDIF
 SIF 価格보정 > 0
 	PRINTFORML 정액중독LV{ABL:캐릭터_ID:정액중독} + {価格보정}
 最終価値 += 価格보정
 
 
-;각인
-
-IF MARK:캐릭터_ID:고통각인 == 1
-	PRINTFORML 고통각인LV1 + 100
-	最終価値 += 100
-ENDIF
-IF MARK:캐릭터_ID:고통각인 == 2
-	PRINTFORML 고통각인LV2 + 400
-	最終価値 += 400
-ENDIF
-IF MARK:캐릭터_ID:고통각인 == 3
-	PRINTFORML 고통각인LV3 + 1000
-	最終価値 += 1000
-ENDIF
-
-IF MARK:캐릭터_ID:쾌락각인 == 1
-	PRINTFORML 쾌락각인LV1 + 100
-	最終価値 += 100
-ENDIF
-IF MARK:캐릭터_ID:쾌락각인 == 2
-	PRINTFORML 쾌락각인LV2 + 400
-	最終価値 += 400
-ENDIF
-IF MARK:캐릭터_ID:쾌락각인 == 3
-	PRINTFORML 쾌락각인LV3 + 1000
-	最終価値 += 1000
-ENDIF
-
-IF MARK:캐릭터_ID:굴복각인 == 1
-	PRINTFORML 굴복각인LV1 + 100
-	最終価値 += 100
-ENDIF
-IF MARK:캐릭터_ID:굴복각인 == 2
-	PRINTFORML 굴복각인LV2 + 400
-	最終価値 += 400
-ENDIF
-IF MARK:캐릭터_ID:굴복각인 == 3
-	PRINTFORML 굴복각인LV3 + 1000
-	最終価値 += 1000
-ENDIF
-
-
 IF ABL:캐릭터_ID:손가락 >= 1
-	PRINTFORML 성기술손가락LV{ABL:캐릭터_ID:손가락} + {100 * (ABL:캐릭터_ID:손가락)}
+	PRINTFORML 성기술 손가락LV{ABL:캐릭터_ID:손가락} + {100 * (ABL:캐릭터_ID:손가락)}
 	最終価値 += 100 * (ABL:캐릭터_ID:손가락)
 ENDIF
 
 IF ABL:캐릭터_ID:혀 >= 1
-	PRINTFORML 성기술혀LV{ABL:캐릭터_ID:혀} + {100 * (ABL:캐릭터_ID:혀)}
+	PRINTFORML 성기술 혀LV{ABL:캐릭터_ID:혀} + {100 * (ABL:캐릭터_ID:혀)}
 	最終価値 += 100 * (ABL:캐릭터_ID:혀)
 ENDIF
 
 IF ABL:캐릭터_ID:가슴 >= 1
-	PRINTFORML 성기술가슴LV{ABL:캐릭터_ID:가슴} + {100 * (ABL:캐릭터_ID:가슴)}
+	PRINTFORML 성기술 가슴LV{ABL:캐릭터_ID:가슴} + {100 * (ABL:캐릭터_ID:가슴)}
 	最終価値 += 100 * (ABL:캐릭터_ID:가슴)
 ENDIF
 
 IF ABL:캐릭터_ID:허리 >= 1
-	PRINTFORML 성기술허리LV{ABL:캐릭터_ID:허리} + {100 * (ABL:캐릭터_ID:허리)}
+	PRINTFORML 성기술 허리LV{ABL:캐릭터_ID:허리} + {100 * (ABL:캐릭터_ID:허리)}
 	最終価値 += 100 * (ABL:캐릭터_ID:허리)
 ENDIF
 
 IF ABL:캐릭터_ID:질 >= 1
-	PRINTFORML 성기술질LV{ABL:캐릭터_ID:질} + {100 * (ABL:캐릭터_ID:질)}
+	PRINTFORML 성기술 질LV{ABL:캐릭터_ID:질} + {100 * (ABL:캐릭터_ID:질)}
 	最終価値 += 100 * (ABL:캐릭터_ID:질)
 ENDIF
 
 IF ABL:캐릭터_ID:애널 >= 1
-	PRINTFORML 성기술애널LV{ABL:캐릭터_ID:애널} + {100 * (ABL:캐릭터_ID:애널)}
+	PRINTFORML 성기술 애널LV{ABL:캐릭터_ID:애널} + {100 * (ABL:캐릭터_ID:애널)}
 	最終価値 += 100 * (ABL:캐릭터_ID:애널)
 ENDIF
 
-価格보정 = 100
-IF ABL:캐릭터_ID:봉사정신 == 3
-	価格보정 = 110
-	TIMES 最終価値 , 1.10
-ELSEIF ABL:캐릭터_ID:봉사정신 == 4
-	価格보정 = 130
-	TIMES 最終価値 , 1.30
-ELSEIF ABL:캐릭터_ID:봉사정신 >= 5
-	価格보정 = 150
-	TIMES 最終価値 , 1.5
-ENDIF
-SIF 価格보정 != 100
-	PRINTFORML 봉사정신LV{ABL:캐릭터_ID:봉사정신} × {価格보정/100}.{価格보정%100}
-
-価格보정 = 100
-IF ABL:캐릭터_ID:노출증 == 3
-	価格보정 = 110
-	TIMES 最終価値 , 1.10
-ELSEIF ABL:캐릭터_ID:노출증 == 4
-	価格보정 = 130
-	TIMES 最終価値 , 1.30
-ELSEIF ABL:캐릭터_ID:노출증 >= 5
-	価格보정 = 150
-	TIMES 最終価値 , 1.5
-ENDIF
-SIF 価格보정 != 100
-	PRINTFORML 노출증LV{ABL:캐릭터_ID:노출증} × {価格보정/100}.{価格보정%100}
-
-価格보정 = 100
-IF ABL:캐릭터_ID:마조끼 == 1
-	価格보정 = 110
-	TIMES 最終価値 , 1.10
-ELSEIF ABL:캐릭터_ID:마조끼 == 2
-	価格보정 = 130
-	TIMES 最終価値 , 1.30
-ELSEIF ABL:캐릭터_ID:마조끼 == 3
-	価格보정 = 150
-	TIMES 最終価値 , 1.50
-ELSEIF ABL:캐릭터_ID:마조끼 == 4
-	価格보정 = 200
-	TIMES 最終価値 , 2.00
-ELSEIF ABL:캐릭터_ID:마조끼 >= 5
-	価格보정 = 250
-	TIMES 最終価値 , 2.5
-ENDIF
-SIF 価格보정 != 100
-	PRINTFORML 마조끼LV{ABL:캐릭터_ID:마조끼} × {価格보정/100}.{価格보정%100}
-	
-価格보정 = 100
-IF ABL:캐릭터_ID:새드끼 == 1
-	価格보정 = 110
-	TIMES 最終価値 , 1.10
-ELSEIF ABL:캐릭터_ID:새드끼 == 2
-	価格보정 = 130
-	TIMES 最終価値 , 1.30
-ELSEIF ABL:캐릭터_ID:새드끼 == 3
-	価格보정 = 150
-	TIMES 最終価値 , 1.50
-ELSEIF ABL:캐릭터_ID:새드끼 == 4
-	価格보정 = 200
-	TIMES 最終価値 , 2.00
-ELSEIF ABL:캐릭터_ID:새드끼 >= 5
-	価格보정 = 250
-	TIMES 最終価値 , 2.5
-ENDIF
-SIF 価格보정 != 100
-	PRINTFORML 새드끼LV{ABL:캐릭터_ID:새드끼} × {価格보정/100}.{価格보정%100}
-
-価格보정 = 100
-IF ABL:캐릭터_ID:Ｃ감각 == 2
-	価格보정 = 110
-	TIMES 最終価値 , 1.10
-ELSEIF ABL:캐릭터_ID:Ｃ감각 == 3
-	価格보정 = 120
-	TIMES 最終価値 , 1.20
-ELSEIF ABL:캐릭터_ID:Ｃ감각 == 4
-	価格보정 = 140
-	TIMES 最終価値 , 1.40
-ELSEIF ABL:캐릭터_ID:Ｃ감각 >= 5
-	価格보정 = 150
-	TIMES 最終価値 , 1.5
-ENDIF
-SIF 価格보정 != 100
-	PRINTFORML Ｃ감각LV{ABL:캐릭터_ID:Ｃ감각} × {価格보정/100}.{価格보정%100}
-
-価格보정 = 100
-IF ABL:캐릭터_ID:Ｖ감각 == 2
-	価格보정 = 110
-	TIMES 最終価値 , 1.10
-ELSEIF ABL:캐릭터_ID:Ｖ감각 == 3
-	価格보정 = 120
-	TIMES 最終価値 , 1.20
-ELSEIF ABL:캐릭터_ID:Ｖ감각 == 4
-	価格보정 = 140
-	TIMES 最終価値 , 1.40
-ELSEIF ABL:캐릭터_ID:Ｖ감각 >= 5
-	価格보정 = 150
-	TIMES 最終価値 , 1.5
-ENDIF
-SIF 価格보정 != 100
-	PRINTFORML Ｖ감각LV{ABL:캐릭터_ID:Ｖ감각} × {価格보정/100}.{価格보정%100}
-
-価格보정 = 100
-IF ABL:캐릭터_ID:Ａ감각 == 2
-	価格보정 = 110
-	TIMES 最終価値 , 1.10
-ELSEIF ABL:캐릭터_ID:Ａ감각 == 3
-	価格보정 = 120
-	TIMES 最終価値 , 1.20
-ELSEIF ABL:캐릭터_ID:Ａ감각 == 4
-	価格보정 = 140
-	TIMES 最終価値 , 1.40
-ELSEIF ABL:캐릭터_ID:Ａ감각 >= 5
-	価格보정 = 150
-	TIMES 最終価値 , 1.5
-ENDIF
-SIF 価格보정 != 100
-	PRINTFORML Ａ감각LV{ABL:캐릭터_ID:Ａ감각} × {価格보정/100}.{価格보정%100}
-
-価格보정 = 100
-IF ABL:캐릭터_ID:Ｂ감각 == 2
-	価格보정 = 110
-	TIMES 最終価値 , 1.10
-ELSEIF ABL:캐릭터_ID:Ｂ감각 == 3
-	価格보정 = 120
-	TIMES 最終価値 , 1.20
-ELSEIF ABL:캐릭터_ID:Ｂ감각 == 4
-	価格보정 = 140
-	TIMES 最終価値 , 1.40
-ELSEIF ABL:캐릭터_ID:Ｂ감각 >= 5
-	価格보정 = 150
-	TIMES 最終価値 , 1.5
-ENDIF
-SIF 価格보정 != 100
-	PRINTFORML Ｂ감각LV{ABL:캐릭터_ID:Ｂ감각} × {価格보정/100}.{価格보정%100}
-
-価格보정 = 100
-IF ABL:캐릭터_ID:Ｍ감각 == 2
-	価格보정 = 110
-	TIMES 最終価値 , 1.10
-ELSEIF ABL:캐릭터_ID:Ｍ감각 == 3
-	価格보정 = 120
-	TIMES 最終価値 , 1.20
-ELSEIF ABL:캐릭터_ID:Ｍ감각 == 4
-	価格보정 = 140
-	TIMES 最終価値 , 1.40
-ELSEIF ABL:캐릭터_ID:Ｍ감각 >= 5
-	価格보정 = 150
-	TIMES 最終価値 , 1.5
-ENDIF
-SIF 価格보정 != 100
-	PRINTFORML Ｍ감각LV{ABL:캐릭터_ID:Ｍ감각} × {価格보정/100}.{価格보정%100}
 
 
 IF TALENT:캐릭터_ID:Ｃ감도 == -1
@@ -655,11 +651,6 @@ IF TALENT:캐릭터_ID:자위하기쉬움
 	PRINTFORML 자위하기쉬움 × 1.2
 	TIMES 最終価値 , 1.20
 ENDIF
-
-IF TALENT:캐릭터_ID:프라이드 == -1
-	PRINTFORML 프라이드 낮음 × 1.2
-	TIMES 最終価値 , 1.20
-ENDIF
 IF TALENT:캐릭터_ID:프라이드 == 1
 	PRINTFORML 프라이드 높음 × 0.8
 	TIMES 最終価値 , 0.80
@@ -785,33 +776,12 @@ IF TALENT:캐릭터_ID:소악마
 	TIMES 最終価値 , 1.20
 ENDIF
 
-
-IF TALENT:캐릭터_ID:자위광
-	PRINTFORML 자위광 × 1.3
-	TIMES 最終価値 , 1.30
-ENDIF
-
-IF TALENT:캐릭터_ID:음호
-	PRINTFORML 음호 × 1.3
-	TIMES 最終価値 , 1.30
-ENDIF
-
-IF TALENT:캐릭터_ID:엉덩이광
-	PRINTFORML 엉덩이광 × 1.3
-	TIMES 最終価値 , 1.30
-ENDIF
-
-IF TALENT:캐릭터_ID:음유
-	PRINTFORML 음유 × 1.3
-	TIMES 最終価値 , 1.30
-ENDIF
-
-IF TALENT:캐릭터_ID:연모 == 1
+IF TALENT:캐릭터_ID:연모
 	PRINTFORML 연모 × 1.3
 	TIMES 最終価値 , 1.30
 ENDIF
 IF TALENT:캐릭터_ID:연모 == 2
-	PRINTFORML 친애 × 1.5
+	PRINTFORML 연모 × 1.5
 	TIMES 最終価値 , 1.50
 ENDIF
 
@@ -853,7 +823,7 @@ ENDIF
 IF TALENT:캐릭터_ID:가슴사이즈 >= 1
 	価格보정 = 200
 	TIMES 最終価値 , 2.0
-	PRINTFORML 바스트사이즈{TALENT:캐릭터_ID:가슴사이즈} × {価格보정/100}.{価格보정%100}
+	PRINTFORML 가슴 사이즈{TALENT:캐릭터_ID:가슴사이즈} × {価格보정/100}.{価格보정%100}
 ENDIF
 
 IF TALENT:캐릭터_ID:모유체질 == 1
@@ -922,6 +892,47 @@ IF TALENT:캐릭터_ID:처녀
 	最終価値 = 最終価値 * 3
 ENDIF
 
+
+;刻印
+IF MARK:캐릭터_ID:고통각인 == 1
+	PRINTFORML 고통각인LV1 × 1.1
+	最終価値 += 100
+ENDIF
+IF MARK:캐릭터_ID:고통각인 == 2
+	PRINTFORML 고통각인LV2 × 1.3
+	最終価値 += 400
+ENDIF
+IF MARK:캐릭터_ID:고통각인 == 3
+	PRINTFORML 고통각인LV3 × 1.5
+	最終価値 += 1000
+ENDIF
+
+IF MARK:캐릭터_ID:쾌락각인 == 1
+	PRINTFORML 쾌락각인LV1 × 1.1
+	TIMES 最終価値 , 1.10
+ENDIF
+IF MARK:캐릭터_ID:쾌락각인 == 2
+	PRINTFORML 쾌락각인LV2 × 1.3
+	TIMES 最終価値 , 1.30
+ENDIF
+IF MARK:캐릭터_ID:쾌락각인 == 3
+	PRINTFORML 쾌락각인LV3 × 1.5
+	TIMES 最終価値 , 1.50
+ENDIF
+
+IF MARK:캐릭터_ID:굴복각인 == 1
+	PRINTFORML 굴복각인LV1 × 1.1
+	TIMES 最終価値 , 1.10
+ENDIF
+IF MARK:캐릭터_ID:굴복각인 == 2
+	PRINTFORML 굴복각인LV2 × 1.3
+	TIMES 最終価値 , 1.30
+ENDIF
+IF MARK:캐릭터_ID:굴복각인 == 3
+	PRINTFORML 굴복각인LV3 × 1.5
+	TIMES 最終価値 , 1.50
+ENDIF
+
 IF MARK:캐릭터_ID:반발각인 == 1
 	PRINTFORML 반발각인LV1 ÷ 5
 	TIMES 最終価値 , 0.20
@@ -935,8 +946,8 @@ IF MARK:캐릭터_ID:반발각인 == 3
 	TIMES 最終価値 , 0.01
 ENDIF
 IF TALENT:캐릭터_ID:중고
-	PRINTFORML 중고 ÷ 3
-	TIMES 最終価値 , 0.33
+	PRINTFORML 중고 ÷ 20
+	TIMES 最終価値 , 0.05
 ENDIF
 
 

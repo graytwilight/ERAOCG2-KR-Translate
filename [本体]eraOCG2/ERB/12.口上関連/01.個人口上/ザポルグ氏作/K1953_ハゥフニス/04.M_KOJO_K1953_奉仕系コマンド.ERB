@@ -74,7 +74,7 @@ IF LOCAL
 
 	;청소
 	IF STAIN:MASTER:2 & 4 && ABL:TARGET:기교 >= 3
-		PRINTFORMW 「음풉❤ 츄릅❤ 츄르르릅❤ 푸하ッ・・・❤」
+		PRINTFORMW 「음풉❤ 츄릅❤ 츄르르릅❤ 푸하・・・❤」
 		PRINTFORMW 「・・・・・・지독한 맛❤」
 	
 	;通常
@@ -90,9 +90,9 @@ IF LOCAL
 				PRINTFORML 「쪽❤여기 같은 데, 약하잖아?」
 				PRINTFORMW 「자, 여기❤여기도❤」
 			CASE 3
-				PRINTFORMW 「んぷ❤　んぶっ❤　じゅるるるっ❤」
+				PRINTFORMW 「음후❤　응후읍❤　쥬르르르❤」
 			CASE 4
-				PRINTFORMW 「はむ・・・ちゅ・・・❤　れー・・・❤」
+				PRINTFORMW 「하음・・・츄・・・❤　할짝ー・・・❤」
 		ENDSELECT
 	ENDIF
 ENDIF
@@ -122,9 +122,9 @@ IF LOCAL
 	LOCAL:1 = 1
 	;-------------------------------------------------
 	IF LOCAL:1 && FIRSTTIME(SELECTCOM)
-		PRINTFORMW 「・・・나, 끼울 만큼 없는데」
+		PRINTFORMW 「・・・나, 끼울 만큼은 없는데」
 		PRINTFORMW 「그렇더라도・・・ 뭐, 할게」
-		PRINTFORMW 「끙끙・・・ 이거, 절대 기분 좋지 않지・・・」
+		PRINTFORMW 「끙끙・・・ 이거, 절대 기분 좋지 않겠지・・・」
 		RETURN 1
 	ENDIF
 	;基本セット
@@ -132,15 +132,15 @@ IF LOCAL
 	IF TALENT:TARGET:가슴사이즈 >= 1
 		SELECTCASE RAND:5
 			CASE 0
-				PRINTFORMW 「ふふっ❤　胸の中でビクビクしてるわよ❤」
+				PRINTFORMW 「후훗❤　가슴 속에서 움찔움찔거리고 있어❤」
 			CASE 1
-				PRINTFORMW 「ふっ❤ふっ❤　重くて大変だわ・・・❤」
+				PRINTFORMW 「훗❤ 후웃❤　무거워서 큰일이야・・・❤」
 			CASE 2
-				PRINTFORMW 「腰、あんまり動かさないでよね・・・動かし辛いじゃない」
+				PRINTFORMW 「허리、너무 움직이지 마・・・움직이지 힘들잖아」
 			CASE 3
-				PRINTFORMW 「んっ・・・❤　あっつ・・・❤」
+				PRINTFORMW 「음・・・❤　아으윽・・・❤」
 			CASE 4
-				PRINTFORMW 「男って、ホント胸が好きよね・・・❤」
+				PRINTFORMW 「남자들은、정말 가슴을 좋아하네・・・❤」
 		ENDSELECT
 	ELSE
 		SELECTCASE RAND:5
@@ -153,7 +153,7 @@ IF LOCAL
 		CASE 0
 			PRINTFORMW 「흐읍 흐읍 흐읍・・・ 전신을 움직여야 하는 거, 꽤 힘드네・・・」
 		CASE 4
-			PRINTFORMW 「こんなのでも気持ちいいの？　変なの・・・❤」
+			PRINTFORMW 「이런 거에도 기분 좋아？　이상하네・・・❤」
 		ENDSELECT
 	ENDIF
 ENDIF
@@ -197,9 +197,9 @@ IF LOCAL
 		CASE 0
 			PRINTFORMW 「허벅지, 세게 해봤는데・・・ 아프거나 하지 않아?」
 		CASE 3
-			PRINTFORMW 「ん・・・すごい熱くなってる・・・❤」
+			PRINTFORMW 「음・・・엄청 뜨거워졌어・・・❤」
 		CASE 4
-			PRINTFORMW 「はっ・・・はっ・・・❤　あっ❤　んんっ・・・❤」
+			PRINTFORMW 「헉・・・헉・・・❤　아앗❤　으음・・・❤」
 	ENDSELECT
 ENDIF
 RETURN 1
@@ -293,10 +293,10 @@ IF LOCAL
 			PRINTFORMW 「뭔가 이거, 발로 짓밟는 것 같아서 좋네❤」
 			PRINTFORMW 「자아❤ 자아❤ 이런 게 좋은 거지❤」
 		CASE 3
-			PRINTFORMW 「ヒレは水に触れたりすると大きくなるのよ、今は小さいしやわらかいけど」
-			PRINTFORMW 「정액？　・・・・・・どうかしら」
+			PRINTFORMW 「지느러미는 물에 닿거나 하면 커지는 거야、지금은 작고 부드럽지만」
+			PRINTFORMW 「정액？　・・・・・・어떨까」
 		CASE 4
-			PRINTFORMW 「・・・何、もっと強くして欲しいの？　・・・変態❤」
+			PRINTFORMW 「・・・뭐、더 세게 해달라는 거야？　・・・변태❤」
 	ENDSELECT
 ENDIF
 RETURN 1
@@ -337,7 +337,7 @@ IF LOCAL
 			CASE 0
 				PRINTFORMW 「핫❤ 앗❤ 꽉❤ 기분 좋아❤ %CALLNAME:MASTER%❤ 좋아해❤」
 			CASE 1
-				PRINTFORMW 「왜っ❤ 너는❤ 그렇게 여유로워 보여っ❤ ────아아앗❤」
+				PRINTFORMW 「왜❤ 너는❤ 그렇게 여유로워 보여❤ ────아아앗❤」
 			CASE 2
 				PRINTFORML 「평소보다❤ 조임이 좋다느니❤ 기분 좋은 말 해주는 거 아니야...!!!❤」
 				PRINTFORMW 좀 짜증이 났는지, %CALLNAME:TARGET%의 조임이 더욱 강해졌다・・・
@@ -347,11 +347,11 @@ IF LOCAL
 			CASE 0
 				PRINTFORMW 「(이런 바보 같은 짓을 시키는 이 자식에게 화가 나지만, 이걸로 흥분하고 있는 자신에게도 화가 나네・・・❤)」
 			CASE 1
-				PRINTFORMW 「아까부터っ❤ 축이 흔들린다고っ❤ 시끄러워っ❤ 집중っ, 못 하잖아っ❤」
+				PRINTFORMW 「아까부터っ❤ 축이 흔들린다고오❤ 시끄러워어❤ 집중, 못 하잖아❤」
 			CASE 2
-				PRINTFORMW 「큭・・・❤큭・・・❤앗・・・❤ 그, 기분 좋은 곳에 닿았다고 라든지, 그런 거 아니니까っ!❤」
+				PRINTFORMW 「큭・・・❤큭・・・❤앗・・・❤ 그, 기분 좋은 곳에 닿았다고 라든지, 그런 거 아니니까!❤」
 			CASE 3
-				PRINTFORMW 「이제 슬슬っ❤ 한계야っ❤ 그러니까っ❤ 쉬게 해줘っ❤」
+				PRINTFORMW 「이제 슬슬❤ 한계야❤ 그러니까❤ 쉬게 해줘❤」
 		ENDSELECT
 	ELSE
 		SELECTCASE RAND:호감도修正 + 1
@@ -359,9 +359,9 @@ IF LOCAL
 				PRINTFORML 「흐읏・・・크읏・・・！」
 				PRINTFORMW %CALLNAME:TARGET%는 얼굴을 찌푸리고, 이마에서 땀을 줄줄 흘리고 있다・・・
 			CASE 2
-				PRINTFORMW 「이っ・・・！자세っ・・・！힘들어っ・・・・・・！」
+				PRINTFORMW 「이・・・！자세・・・！힘들어엇・・・・・・！」
 			CASE 3
-				PRINTFORMW 「나중에っ, 본때를 보여줄 테니까っ・・・！ 각오해っ・・・❤」
+				PRINTFORMW 「나중에, 본때를 보여줄 테니까・・・！ 각오해・・・❤」
 			CASE 4
 				PRINTFORML 「이게 끝나면・・・！%CALLNAME:MASTER%의 가랑이 사이의 그거, 엉망진창으로 만들어줄 테니까・・・！」
 				PRINTFORMW 　「기대하고 있어・・・！❤」

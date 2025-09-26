@@ -67,6 +67,8 @@ IF 종류 == 소환時 || 종류 == 특수소환時
 
 	RETURN 1
 ELSEIF 종류 == 필드起動
+	SIF GETVAR(@"%듀얼리스트%_魔_T1汎数:場所") < 3
+		RETURN 0
 	SIF メインフェイズ != 1
 		RETURN 0
 	SIF ターンプレイヤー != 듀얼리스트
@@ -109,7 +111,7 @@ IF 종류 == 소환時 || 종류 == 특수소환時
 		CALL SET_FIELD_INFO(듀얼리스트,"필드",場所,"個Ｃ",RESULT)
 	ENDIF
 ELSEIF 종류 == 필드起動
-	CALL CARD_CHOICE(듀얼리스트,종류,ゾーン,場所,31263,0)
+	CALL CARD_CHOICE(듀얼리스트,종류,ゾーン,場所,31263,30)
 	IF RESULT == 0
 		CALL SET_FIELD_INFO(듀얼리스트,"필드",場所,"個Ｃ",-2)
 		CALL FULLRESET

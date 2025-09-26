@@ -141,10 +141,10 @@ IF 종류 == 마함起動 && GETVAR(@"%듀얼리스트%_魔_表:場所") == 1
 		IF 듀얼리스트 == "자신"
 			BINPUT
 			選択肢 = RESULT
+			CALL SET_FIELD_INFO(듀얼리스트,"마함",場所,"個Ｃ",-選択肢)
 		ENDIF
 
 		IF 選択肢 == 2
-			CALL SET_FIELD_INFO(듀얼리스트,"마함",場所,"個Ｃ",-2)
 			CALL FULLRESET
 			효과条件カテゴリ = 여섯 무사
 			CALL CARD_CHOOSE_BASIC(듀얼리스트,"필드",ゾーン,場所)
@@ -153,7 +153,7 @@ IF 종류 == 마함起動 && GETVAR(@"%듀얼리스트%_魔_表:場所") == 1
 				CALL SET_FIELD_INFO(듀얼리스트,"필드",選択カード,"一攻",500)
 			ENDIF
 		ELSEIF 選択肢 == 4
-			CALL SET_FIELD_INFO(듀얼리스트,"마함",場所,"個Ｃ",-4)
+
 			CALL FULLRESET
 			효과範囲덱 = 1
 			효과範囲묘지 = 1
@@ -161,7 +161,6 @@ IF 종류 == 마함起動 && GETVAR(@"%듀얼리스트%_魔_表:場所") == 1
 			효과条件종류 = モン全般			
 			CALL CARD_ADD_ADV(듀얼리스트,ゾーン,場所)
 		ELSEIF 選択肢 == 6
-			CALL SET_FIELD_INFO(듀얼리스트,"마함",場所,"個Ｃ",-6)
 			CALL FULLRESET
 			효과範囲묘지 = 1
 			효과条件カテゴリ = 시엔

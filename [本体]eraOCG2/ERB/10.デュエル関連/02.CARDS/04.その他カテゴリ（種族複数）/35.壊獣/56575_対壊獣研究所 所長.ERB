@@ -1,0 +1,185 @@
+﻿@CARDNAME_56575,参照先
+;ココで지정カードの名前、略称を返す予定
+#DIMS DYNAMIC 参照先
+
+VARSET RESULT
+VARSET RESULTS
+
+SELECTCASE 参照先
+	CASE "名前"
+		RESULTS = 대파괴수 연구소 소장
+	CASE "略称"
+		RESULTS = 소장
+	CASE "カテゴリ"
+		RESULTS:0 = 대파괴수
+		RESULTS:1 = 게임 오리지널
+ENDSELECT
+
+
+@CARD_56575(参照先)
+
+#DIMS DYNAMIC 参照先
+VARSET RESULT
+VARSET RESULTS
+
+SELECTCASE 参照先
+	CASE "종류"
+		RETURN 싱크로
+	CASE "속성"
+		RETURN 빛속성
+	CASE "종족"
+		RETURN 사이킥족
+	CASE "レベル"
+		RETURN 5
+	CASE "攻撃力"
+		RETURN 0
+	CASE "守備力"
+		RETURN 300
+	CASE "성별"
+		RETURN 牝性
+	CASE "レア度"
+		RETURN SPR
+	CASE "추가日"
+		RETURN 250923
+ENDSELECT
+
+RETURN 0
+
+@CARD_EXPLANATION_56575(종류)
+#DIM DYNAMIC 종류
+
+PRINTL 튜너＋튜너以外のモンスター１体以上
+PRINTL このカード名の①③の효과はそれぞれ１ターンに１度しか使用できない。
+CALLFORM CARD_ABLE(1,EX소환時)
+PRINTL ①：このカードがS소환に成功した場合に발동できる。
+PRINTL 덱から「파괴수」カードか「대파괴수」カード１枚を손패に加える。
+CALLFORM CARD_ABLE(2,지속효과)
+PRINTL ②：フィールドに「대파괴수 연구소 소장」以外の「파괴수」または「대파괴수」モンスターが存在する場合、このカードは攻撃・효과の대상にならない。
+CALLFORM CARD_ABLE(3,필드起動)
+PRINTL ③：자신メインフェイズに발동できる。
+PRINTL 묘지・제외状態の「파괴수」または「대파괴수」カード２枚を덱に戻し、덱から１枚ドローする。
+PRINTL その後、손패を１枚捨てる。
+
+@CARDSUMMON_56575(듀얼리스트,소환カード,EX参照)
+#DIMS DYNAMIC 듀얼리스트
+#DIM DYNAMIC カウンタ
+#DIM DYNAMIC 소환カード
+#DIM DYNAMIC EX参照
+;素材条件
+
+CALL RESETCONDITION_MAT
+必要レベル数 = 5
+IF EX参照 == 0 || EX参照 == 1
+	素材条件튜너 = 1
+ELSEIF EX参照 >= 10
+	素材条件튜너 = -1
+ENDIF
+
+IF EX参照 == 1
+	CALL SYNCAN(듀얼리스트,소환カード,56575) 
+	RETURN RESULT
+ENDIF
+
+
+@CARDCAN_56575(듀얼리스트,종류,ゾーン,場所)
+#DIMS DYNAMIC 듀얼리스트
+#DIMS DYNAMIC ゾーン
+#DIM DYNAMIC 종류
+#DIM DYNAMIC 場所
+
+CALL CARD_NEGATE(듀얼리스트,종류,ゾーン,場所,56575)
+SIF RESULT == 1
+	RETURN 0
+
+IF 종류 == EX소환時
+	SIF 발동済_1(듀얼리스트,56575)
+		RETURN 0
+	CALL FULLRESET
+	효과範囲덱 = 1
+	효과条件カテゴリ:0 = 파괴수
+	효과条件カテゴリ:1 = 대파괴수
+	CALL CARD_CHECK_ADV(듀얼리스트,종류,ゾーン,場所)
+	SIF RESULT != 1
+		RETURN 0
+	CALL CARD_DRAW_CHECK
+	RETURN 1
+
+ELSEIF 종류 == 지속효과
+	SIF ゾーン != "필드"
+		RETURN 0
+	CALL FULLRESET
+	효과範囲필드 = 1
+	효과範囲상대필드 = 1
+	효과条件カテゴリ:0 = 파괴수
+	효과条件カテゴリ:1 = 대파괴수
+	효과条件固名前 = 대파괴수 연구소 소장
+	CALL CARD_CHECK_ADV(듀얼리스트,종류,ゾーン,場所)
+	SIF RESULT != 1
+		RETURN 0
+	RETURN 1
+
+ELSEIF 종류 == 필드起動
+	SIF 발동済_3(듀얼리스트,56575)
+		RETURN 0
+	SIF ゾーン != "필드"
+		RETURN 0
+	SIF メインフェイズ != 1
+		RETURN 0
+	SIF ターンプレイヤー != 듀얼리스트
+		RETURN 0
+	CALL FULLRESET
+	효과範囲묘지 = 1
+	효과範囲제외 = 1
+	효과条件カテゴリ:0 = 파괴수
+	효과条件カテゴリ:1 = 대파괴수
+	효과条件CNT = 1
+	CALL CARD_CHECK_ADV(듀얼리스트,종류,ゾーン,場所)
+	SIF RESULT < 2
+		RETURN 0
+	CALL CARD_DRAW_CHECK
+	RETURN 1
+
+ENDIF
+
+@CARDEFFECT_56575(듀얼리스트,종류,ゾーン,場所)
+#DIMS DYNAMIC 듀얼리스트
+#DIMS DYNAMIC ゾーン
+#DIM DYNAMIC 종류
+#DIM DYNAMIC 場所
+
+IF 종류 == EX소환時
+	CALL CARD_CHOICE(듀얼리스트,종류,ゾーン,場所,56575,1)
+	IF RESULT == 0
+		CALL FULLRESET
+		효과範囲덱 = 1
+		효과条件カテゴリ:0 = 파괴수
+		효과条件カテゴリ:1 = 대파괴수
+		CALL CARD_ADD_ADV(듀얼리스트,ゾーン,場所)
+	ENDIF
+
+ELSEIF 종류 == 지속효과
+	CALL STATCHANGE_EFFECT(듀얼리스트,"自身",場所,"対耐")
+	CALL STATCHANGE_EFFECT(듀얼리스트,"自身",場所,"攻避")
+
+ELSEIF 종류 == 필드起動
+	CALL CARD_CHOICE(듀얼리스트,종류,ゾーン,場所,56575,3)
+	IF RESULT == 0
+		CALL FULLRESET
+		효과範囲묘지 = 1
+		효과範囲제외 = 1
+		효과条件カテゴリ:0 = 파괴수
+		효과条件カテゴリ:1 = 대파괴수
+		효과条件行先플래그 = 덱行き
+		효과条件複数 = 2
+		CALL CARD_ADD_GY_ADV(듀얼리스트,ゾーン,場所)
+		IF RESULT == 1
+			CALL CARDDRAW_BASIC(듀얼리스트,1)
+			IF RESULT == 1
+				CALL FULLRESET
+				효과範囲손패 = 1
+				CALL CARD_ADD_GY_ADV(듀얼리스트,ゾーン,場所)
+			ENDIF
+		ENDIF
+	ENDIF
+ENDIF
+

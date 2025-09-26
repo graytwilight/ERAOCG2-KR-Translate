@@ -27,7 +27,6 @@ SELECTCASE 参照先
 	CASE "외부자"
 		RETURN 1
 	CASE "종류"
-
 		RETURN 효과モン
 	CASE "속성"
 		RETURN 화염속성
@@ -47,7 +46,7 @@ RETURN 0
 
 @CARD_EXPLANATION_2783(종류)
 #DIM DYNAMIC 종류
-PRINTL 이 카드명의 ①의 효과는 1턴에 1번밖에 발동할 수 없다.
+PRINTL 이 카드명의 ①의 효과는 1턴에 1번밖에 발동할 수 없으며, "진화(각성)"은 1턴에 1번밖에 할 수 없다.
 
 CALLFORM CARD_ABLE(1,손패起動,フリー誘発)
 PRINTL ①: 자신 상대 턴에 패에서 이 카드 이외의 마법사족 몬스터 1장을 버리고,
@@ -55,9 +54,8 @@ PRINTL 패의 이 카드를 보여주고 발동할 수 있다.
 PRINTL 상대 필드에 존재하는 공격력 1500 이하의 몬스터를 최대 1체까지 선택하고, 파괴한다.
 PRINTL 그 후, 이 카드의 소환할 때의 레벨은 영구적으로 1 하락한다.
 CALLFORM CARD_ABLE(1,필드起動)
-PRINTL ②: 이 카드는, 자신 메인 페이즈에 1번만 "각성"할 수 있다.
+PRINTL ②: 이 카드는, 자신 메인 페이즈에 1번만 "진화"할 수 있다.
 PRINTL 그렇게 했을 경우, 이 카드의 공격력 수비력은 800 올리고, 패에 "유니온 매직"을 더한다.
-PRINTL "각성"은 1턴에 1번밖에 할 수 없다.
 
 
 
@@ -141,11 +139,11 @@ VARSET RESULTS
 
 SELECTCASE 参照先
 	CASE "名前"
-RESULTS = 유니온 매직
+		RESULTS = 유니온 매직
 	CASE "略称"
-RESULTS = 유니온 매직
+		RESULTS = 유니온 매직
 	CASE "カテゴリ"
-RESULTS:0 = 위치 클래스
+		RESULTS:0 = 위치 클래스
 ENDSELECT
 
 
@@ -226,8 +224,8 @@ IF 종류 == 마함起動 || 종류 == 손패起動
 		SETCOLOR C_MAGIC_G
 		PRINTFORML >>——MESSAGE:——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————>>>
 		PRINTL
-		PRINTFORML 「迷って、それでも──
-		PRINTFORML 　　　　　　　　　　　　進むだけ！」
+		PRINTFORML 「방황했어、하지만──
+		PRINTFORML 　　　　　　　　　　　　나아갈 뿐이야！」
 		PRINTL
 		CUSTOMDRAWLINE ―
 		RESETCOLOR
@@ -255,7 +253,7 @@ IF 종류 == 마함起動 || 종류 == 손패起動
 			SETCOLOR C_MAGIC_G
 			PRINTFORML >>——MESSAGE:——————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————>>>
 			PRINTL
-			PRINTFORML "さぁ！これで終わりよ！！"
+			PRINTFORML "자！이걸로 끝이야！！"
 			PRINTL
 			CUSTOMDRAWLINE ―
 			RESETCOLOR

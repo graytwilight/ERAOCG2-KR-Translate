@@ -26,7 +26,6 @@ SELECTCASE 参照先
 	CASE "외부자"
 		RETURN 1
 	CASE "종류"
-
 		RETURN 효과モン
 	CASE "속성"
 		RETURN 땅속성
@@ -48,14 +47,14 @@ RETURN 0
 #DIM DYNAMIC 종류
 CALLFORM CARD_ABLE(0,소환時強制,특수소환時強制)
 PRINTL ①: 이 카드가 소환 특수 소환되었을 경우 발동한다.
-PRINTL 이 몬스터의 공격력은 턴 종료 시까지, 이번 턴 중 자신이 발동한 효과의 수×500 증가한다.
+PRINTL 이 몬스터의 공격력은 턴 종료 시까지, 이번 턴 중 자신이 발동한 효과의 수×500 오른다.
 IF ターンプレイヤー == "자신"
-	PRINTFORML （현재의 ターンプレイヤーが발동した효과の数は{자신_발동数}回）
+	PRINTFORML （현재의 턴 플레이어가 발동한 효과의 수는 {자신_발동数}회）
 ELSE
-	PRINTFORML （현재의 ターンプレイヤーが발동した효과の数は{상대_발동数}回）
+	PRINTFORML （현재의 턴 플레이어가 발동한 효과의 수는 {상대_발동数}회）
 ENDIF
 CALLFORM CARD_ABLE(0,지속효과)
-PRINTL ②: 필드의 이 카드는 [직접 공격]을 가진다.
+PRINTL ②: 필드의 이 카드는【직접 공격】을 갖는다.
 
 @CARDCAN_30830(듀얼리스트,종류,ゾーン,場所)
 #DIMS DYNAMIC 듀얼리스트
@@ -65,7 +64,7 @@ PRINTL ②: 필드의 이 카드는 [직접 공격]을 가진다.
 CALL CARD_NEGATE(듀얼리스트,종류,ゾーン,場所,30830)
 SIF RESULT == 1
 	RETURN 0
-IF 종류 == 소환時強制 || 종류 == 특수소환時強制
+IF 종류 == 소환時強制
 	RETURN 1
 ELSEIF 종류 == 지속효과
 	SIF ゾーン != "필드"
@@ -82,11 +81,15 @@ ENDIF
 #DIM DYNAMIC カウンタ
 #DIM DYNAMIC 選択カード_ID
 #DIM DYNAMIC 발동数
-IF 종류 == 소환時強制 || 종류 == 특수소환時強制
+IF 종류 == 소환時強制
 	CALL CARD_CHOICE(듀얼리스트,종류,ゾーン,場所,4402)
 	IF RESULT == 0
-		PRINTFORML ﾁｷﾁｷﾁｷﾁｷﾁｷﾁｷﾁｷﾁｷ………
+
 		발동数 = GETVAR(@"%듀얼리스트%_발동数") - 1
+		REPEAT 발동数
+			PRINTFORM ﾁｷﾁｷ
+		REND
+		PRINTFORML ﾁｷﾁｷ………
 		CALL SET_FIELD_INFO(듀얼리스트,"필드",場所,"一攻",발동数*500)
 	ENDIF
 ELSEIF 종류 == 지속효과

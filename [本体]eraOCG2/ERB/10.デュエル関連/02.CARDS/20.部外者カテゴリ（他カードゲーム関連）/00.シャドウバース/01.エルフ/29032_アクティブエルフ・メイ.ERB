@@ -1,0 +1,171 @@
+﻿@CARDNAME_29032,参照先
+;ココで지정カードの名前、略称を返す予定
+#DIMS DYNAMIC 参照先
+
+VARSET RESULT
+VARSET RESULTS
+
+SELECTCASE 参照先
+	CASE "名前"
+		RESULTS = 활발한 엘프 메이
+	CASE "略称"
+		RESULTS = 엘프 메이
+	CASE "カテゴリ"
+		RESULTS:0 = 엘프 클래스
+		RESULTS:4 = Shadowverse
+ENDSELECT
+
+
+@CARD_29032(参照先)
+
+#DIMS DYNAMIC 参照先
+VARSET RESULT
+VARSET RESULTS
+
+SELECTCASE 参照先
+	CASE "外部者"
+		RETURN 1
+	CASE "종류"
+		RETURN 효과モン
+	CASE "속성"
+		RETURN 바람속성
+	CASE "종족"
+		RETURN 사이킥족
+	CASE "レベル"
+		RETURN 1
+	CASE "攻撃力"
+		RETURN 400
+	CASE "守備力"
+		RETURN 400
+	CASE "성별"
+		RETURN 牝性
+	CASE "추가日"
+		RETURN 250925
+ENDSELECT
+
+RETURN 0
+
+@CARD_EXPLANATION_29032(종류)
+#DIM DYNAMIC 종류
+
+PRINTL このカード名の①②の효과はそれぞれ１ターンに１度しか발동できない。
+CALLFORM CARD_ABLE(1,손패起動)
+PRINTL ①：자신メインフェイズに손패のこのカードを덱に戻して발동できる。
+PRINTL このデュエル中、자신は以下の能力を持つ。（重複불가）
+PRINTL ●１ターンに１度、このターン中に자신が４回以上カードの효과を使用している場合、強制的に발동する。
+PRINTL 자신の덱から、「활발한 엘프 메이」１体を특수소환する。
+CALLFORM CARD_ABLE(2,소환時,특수소환時)
+PRINTL ②：このカードが소환・특수소환した場合、このターン中に자신が４回以上カードの효과を발동していれば발동できる。
+PRINTL 상대フィールドの一番攻撃力の高いモンスター１体を破壊する。
+PRINTL 
+
+IF 確認듀얼리스트 == "자신"
+	
+	PRINTFORML （現在のターンにプレイヤーが발동した효과の数は{자신_발동数}回）
+ELSE
+	PRINTFORML （現在のターンにプレイヤーが발동した효과の数は{상대_발동数}回）
+ENDIF
+
+@CARDCAN_29032(듀얼리스트,종류,ゾーン,場所)
+#DIMS DYNAMIC 듀얼리스트
+#DIMS DYNAMIC ゾーン
+#DIM DYNAMIC 종류
+#DIM DYNAMIC 場所
+
+CALL CARD_NEGATE(듀얼리스트,종류,ゾーン,場所,29032)
+SIF RESULT == 1
+	RETURN 0
+
+IF 종류 == 손패起動
+	SIF 발동済_1(듀얼리스트,29032)
+		RETURN 0
+	SIF メインフェイズ != 1
+		RETURN 0
+	SIF ターンプレイヤー != 듀얼리스트
+		RETURN 0
+	CALL FULLRESET
+	효과範囲덱 = 1
+	효과条件カテゴリ = 엘프 클래스
+	효과条件종류 = モン全般
+	CALL CARD_CHECK_ADV(듀얼리스트,종류,ゾーン,場所)
+	SIF RESULT != 1
+		RETURN 0
+	RETURN 1
+ELSEIF 종류 == 効後紋章起動
+	SIF 발동済_3(듀얼리스트,29032)
+		RETURN 0
+	SIF GETVAR(@"%듀얼리스트%_발동数") < 4
+		RETURN 0
+	CALL FULLRESET
+	효과範囲덱 = 1
+	효과条件名前 = 활발한 엘프 메이
+	효과条件소환可 = 1
+	CALL CARD_CHECK_ADV(듀얼리스트,종류,ゾーン,場所)
+	SIF RESULT != 1
+		RETURN 0
+
+	RETURN 1
+ELSEIF 종류 == 소환時 || 종류 == 특수소환時
+	SIF 발동済_2(듀얼리스트,29032)
+		RETURN 0
+	SIF GETVAR(@"%듀얼리스트%_발동数") < 4
+		RETURN 0
+	RETURN 1
+ENDIF
+
+@CARDEFFECT_29032(듀얼리스트,종류,ゾーン,場所)
+#DIMS DYNAMIC 듀얼리스트
+#DIMS DYNAMIC 対面者
+#DIMS DYNAMIC ゾーン
+#DIM DYNAMIC 종류
+#DIM DYNAMIC 場所
+#DIM DYNAMIC カウンタ
+#DIM DYNAMIC 選択カード
+#DIM DYNAMIC 守備力修正
+#DIM DYNAMIC 攻撃力판정
+
+攻撃力판정 = -1
+
+CALL 対面者판정(듀얼리스트)
+対面者 = %RESULTS%
+
+
+
+
+IF 종류 == 손패起動
+	CALL CARD_CHOICE(듀얼리스트,종류,ゾーン,場所,29032,1)
+	IF RESULT == 0
+		CALL CARD_DISPOSE(듀얼리스트,ゾーン,場所,덱行き)
+		IF 발동済_D1(듀얼리스트,29032) == 0
+			CALL CARD_RESERV(듀얼리스트,29032,効後紋章予約)
+			CALL CARD_EFFECT_D1USE(듀얼리스트,49032)
+		ENDIF
+	ENDIF
+ELSEIF 종류 == 効後紋章起動
+	CALL CARD_CHOICE(듀얼리스트,종류,ゾーン,場所,29032,3)
+	IF RESULT == 0
+		CALL FULLRESET
+		효과範囲덱 = 1
+		효과条件名前 = 활발한 엘프 메이
+		CALL CARD_SP_SUMMON_ADV(듀얼리스트,ゾーン,場所)
+	ENDIF
+
+ELSEIF 종류 == 소환時 || 종류 == 특수소환時
+	CALL CARD_CHOICE(듀얼리스트,종류,ゾーン,場所,29032,2)
+	IF RESULT == 0
+		FOR カウンタ,0,5
+			SIF GETVAR(@"%対面者%_필드:カウンタ") == -1
+				CONTINUE
+			SIF GETVAR(@"%対面者%_MZ_表:カウンタ") == 3
+				CONTINUE
+			IF 攻撃力판정 < GETVAR(@"%対面者%_MZ_攻:カウンタ")
+				攻撃力판정 = GETVAR(@"%対面者%_MZ_攻:カウンタ")
+				選択カード = カウンタ
+			ENDIF
+		NEXT
+		IF 選択カード >= 0
+			CALL FULLRESET
+			CALL CARD_REMOVAL_BASIC(듀얼리스트,"自動処理",選択カード,"묘지")
+		ENDIF
+	ENDIF
+ENDIF

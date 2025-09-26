@@ -68,14 +68,17 @@ FOR 캐릭터_ID,0,CHARANUM
 	CFLAG:캐릭터_ID:현재위치 = CFLAG:캐릭터_ID:시작위치
 	;처녀情報
 	CFLAG:캐릭터_ID:처녀버린상대 = -1
-	;道程情報
+	;동정情報
 	CFLAG:캐릭터_ID:동정버린상대 = -1
 	;키스情報
 	CFLAG:캐릭터_ID:키스상실상대 = -1
-	;키스情報
+	;父親情報
 	CFLAG:캐릭터_ID:부친종 = -1
-	;키스情報
+	;母親情報
 	CFLAG:캐릭터_ID:모친종 = -1
+	;Anonym추가
+	SIF TALENT:캐릭터_ID:듀얼리스트 >= 1 && TALENT:캐릭터_ID:외부자 == 0
+		CFLAG:캐릭터_ID:오프라인레이트 = 4000
 NEXT
 
 ;용사ちゃん能力コピー

@@ -47,23 +47,25 @@ RETURN 0
 
 @CARD_EXPLANATION_2780(종류)
 #DIM DYNAMIC 종류
-PRINTL 이 카드명의 ①의 효과는 1턴에 1번밖에 발동할 수 없다.
-CALLFORM CARD_ABLE(1,소환時,특수소환時)
+PRINTL 이 카드명의 ①의 효과는 1턴에 1번밖에 발동할 수 없으며, "진화(각성)"은 1턴에 1번밖에 할 수 없다.
+CALLFORM CARD_ABLE(1,손패起動)
+PRINTL ①：이 턴동안、자신이 ２번 이상 카드의 효과를 사용했을 경우、자신 메인 페이즈에 발동할 수 있다。
+PRINTL 이 카드를 패에서 특수 소환한다。
+CALLFORM CARD_ABLE(2,소환時,특수소환時)
 PRINTL ①: 이 카드가 소환 / 특수 소환했을 경우, 이 턴 중에 자신이 2회 이상 카드의 효과를 발동하고 있었다면 발동할 수 있다.
 PRINTL 덱에서 "엘프 클래스" 카드 1장을 패에 추가한다.
-PRINTL 그 후, 수비력이 자신의 패 × 500 이하인 상대 몬스터 1장을 파괴한다.
-CALLFORM CARD_ABLE(1,필드起動)
+CALLFORM CARD_ABLE(10,필드起動)
 PRINTL ②: 이 카드는, 자신이 4회 이상 카드의 효과를 발동한 자신의 메인 페이즈에 1번만 "진화"할 수 있다.
 PRINTL 그렇게 했을 경우, 이 카드의 공격력 / 수비력은 1000 상승하고, 패에 "폭풍의 화살"를 추가한다.
-PRINTL "진화(각성)"은 1턴에 1번밖에 할 수 없다.
-PRINTL 이 듀얼 중에 "자신의 몬스터가 진화(각성)한 횟수"가 3회 이상이라면,
+PRINTL 이 듀얼 중에 "자신의 몬스터가 진화(각성)한 횟수"가 2회 이상이라면,
 PRINTL 이 카드의 "진화(각성)"은 1턴에 1번밖에 할 수 없는 제한을 받지 않는다.
-IF ターンプレイヤー == "자신"
+PRINTL
+IF 確認듀얼리스트 == "자신"
 	PRINTFORML （현재의 턴 플레이어가 발동한 효과의 수는{자신_발동数}회）
 ELSE
 	PRINTFORML （현재의 턴 플레이어가 발동한 효과의 수는{상대_발동数}회）
 ENDIF
-IF ターンプレイヤー == "자신"
+IF 確認듀얼리스트 == "자신"
 	PRINTFORML （현재의 턴 플레이어가 진화(각성)한 수는{자신_覚醒횟수}회）
 ELSE
 	PRINTFORML （현재의 턴 플레이어가 진화(각성)한 수는{상대_覚醒횟수}회）
@@ -80,9 +82,21 @@ ENDIF
 CALL CARD_NEGATE(듀얼리스트,종류,ゾーン,場所,2780)
 SIF RESULT == 1
 	RETURN 0
-
-IF 종류 == 소환時 || 종류 == 특수소환時
+IF 종류 == 손패起動
 	SIF 발동済_1(듀얼리스트,2780)
+		RETURN 0
+	SIF メインフェイズ != 1
+		RETURN 0
+	SIF ターンプレイヤー != 듀얼리스트
+		RETURN 0
+	SIF GETVAR(@"%듀얼리스트%_발동数") < 2
+		RETURN 0
+	CALL CARD_SS_CHECK(듀얼리스트,2780,"손패")
+	SIF RESULT == 1
+		RETURN 0
+	RETURN 1
+ELSEIF 종류 == 소환時 || 종류 == 특수소환時
+	SIF 발동済_2(듀얼리스트,2780)
 		RETURN 0
 	SIF GETVAR(@"%듀얼리스트%_발동数") < 2
 		RETURN 0
@@ -96,7 +110,7 @@ IF 종류 == 소환時 || 종류 == 특수소환時
 ELSEIF 종류 == 필드起動
 	SIF GETVAR(@"%듀얼리스트%_MZ_条達:場所") != 0
 		RETURN 0
-	IF 覚醒횟수(듀얼리스트) < 3
+	IF 覚醒횟수(듀얼리스트) < 2
 		SIF 발동済_1(듀얼리스트,覚醒발동)
 			RETURN 0
 	ENDIF
@@ -118,7 +132,13 @@ ENDIF
 #DIM DYNAMIC カウンタ
 #DIM DYNAMIC 選択カード
 #DIM DYNAMIC 守備力修正
-IF 종류 == 소환時 || 종류 == 특수소환時
+IF 종류 == 손패起動
+	CALL CARD_CHOICE(듀얼리스트,종류,ゾーン,場所,2780,1)
+	IF RESULT == 0
+		CALL FULLRESET
+		CALL CARD_SP_SUMMON(듀얼리스트,"손패",場所)
+	ENDIF
+ELSEIF 종류 == 소환時 || 종류 == 특수소환時
 	CALL CARD_CHOICE(듀얼리스트,종류,ゾーン,場所,2780,1)
 	IF RESULT == 0
 		CALL FULLRESET
@@ -130,16 +150,6 @@ IF 종류 == 소환時 || 종류 == 특수소환時
 		효과条件표시 = 表側표시
 		효과条件除去種 = 묘지
 		CALL CARD_CHECK_ADV(듀얼리스트,종류,ゾーン,場所)
-		IF RESULT == 1
-			CALL FULLRESET
-			효과範囲손패 = 1
-			CALL CARD_CHECK_ADV(듀얼리스트,종류,ゾーン,場所)
-			守備力修正 = RESULT * 500
-			CALL FULLRESET
-			효과条件표시 = 表側표시
-			효과条件守備力 = 守備力修正
-			CALL CARD_REMOVAL_BASIC(듀얼리스트,"필드単体",場所,"묘지")
-		ENDIF
 	ENDIF
 ELSEIF 종류 == 필드起動
 	IF 覚醒횟수(듀얼리스트) >= 3

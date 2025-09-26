@@ -153,7 +153,8 @@ IF LOCAL
 			PRINTFORMW 「……えーっと、オーバレイネットワークを構築、엑시즈소환。%カード名%。……よし、言えた」
 		CASE 링크
 		IF GROUPMATCH(カードID,2030,12030)
-			PRINTFORMW 「開け、寒風吹きすさぶ世界のサー키트……！　링크소환！　これがわたし、%カード名%の姿よ！」
+			PRINTFORML 「開け、寒風吹きすさぶ世界のサーキット……！
+			PRINTFORMW 　링크소환！　これがわたし、%カード名%の力よ！」
 			ELSEIF カードID == 42030
 			PRINTFORMW 「……アハハハハッ！　ついにわたしは『わたし』となる！　링크소환！　そう、わたしこそ魔妖の切り札！　%カード名%！！」
 			ELSE
@@ -183,7 +184,28 @@ IF LOCAL
 	SELECTCASE 발동出処
 		CASE 1
 			;손패발동
+			IF GROUPMATCH(カードID,79840,79841,79842,79843,79844,79845,79846,79847,79848,79853,79854,79855,79857)
+			;多分、本人の認識は《逢華妖麗譚－魔妖不知火語》みたいなの握ってるんだとおもう　MCでブザマだね❤
+				SELECTCASE RAND:5
+					CASE 0
+						PRINTFORML 「──√￣……わかり、ましたっ❤　……？　……魔妖の禁呪、使わせてもらうわ
+						PRINTFORMW 　%カード名%발동。……ふふっ%CSTR:TARGET:MASCALL%も終わりね……❤」
+					CASE 1
+						PRINTFORML 「──√￣……めいれい、じゅだくっ❤　……？　……%カード名%を발동するわ……っ
+						PRINTFORMW 　ふふっ……！　恐怖におののくがいいわ……っ❤
+					CASE 2
+					PRINTFORML 「──√￣……したがい、まぁす❤　……？　……ふふふ、さすがの%CSTR:TARGET:MASCALL%も予想できなかったでしょう……？
+						PRINTFORMW 　……わたしが%カード名%を握っていることをね！　さぁ、かくごはできているかしら……❤」
+					CASE 3
+						PRINTFORML 「──√￣……りょうかい、しましたっ❤　……？　……不知火の力、いまこそ借りるわ……！
+						PRINTFORMW 　……%カード名%、いざ！　……いくわよぉ❤」
+					CASE 4
+						PRINTFORML 「──√￣……アッ、アアッ❤　……？　……これぞ究極の力！
+						PRINTFORMW 　발동、%カード名%！　ふふふ……これで、けっちゃくよ❤」
+				ENDSELECT
+			ELSE
 			PRINTFORMW 「손패から、%カード名%を使用するわ」
+			ENDIF
 		CASE 2
 			;필드발동
 			PRINTFORMW 「さて、ここはこいつの出番ね。%カード名%、발동」
@@ -525,6 +547,788 @@ IF LOCAL
 			PRINTFORMW 「……あれ？　わたし、なんでお腹、膨らんで……。アァッ！？」
 			PRINTFORMW 「ウソ！？　これ、わたし、あかちゃ、孕んで……！？　あ、ああ、あああああああぁぁあ！！！」
 			PRINTFORMW 「……ふ、ふふふふ。……嗚呼、あなたが、わたしの、赤ちゃん……❤　ふふ、……えぇ、えぇ、かか様の、おっぱい飲んで、大きく育つんですよ……❤」
+		CASE "憑依펠라"
+			PRINTFORML 「……ほら、%CSTR:TARGET:MASCALL%のおちんぽ、だしなさい……。くち、オナホにしてあげるから……」
+			PRINTFORMW 「んっ、ぐっ、んっ、ぐっ、ぐっ、じゅるっ、じゅるるるるる……」
+			IF ABL:TARGET:정액중독 >= 2
+				PRINTFORMW （……なに、してるのかしらわたし……。あぁ、でも……口のナカ、あったかい、わね……❤）
+			ENDIF
+		CASE "憑依파이즈리"
+			PRINTFORML 「……ほら、%CSTR:TARGET:MASCALL%のおちんぽ、だしなさい……。おっぱいで、しごいてあげるから……。」
+			PRINTFORMW 「んっ、ふっ、むぅ、くっ、ふっ、んっ……きもちいい、かしら？」
+			IF ABL:TARGET:정액중독 >= 2
+				PRINTFORMW （……なんで、파이즈리、してるの……？　あっ❤　おちんちん、でそうっ❤　うれしい……❤）
+			ENDIF
+		CASE "憑依기승위"
+			PRINTFORML 「……それでは、기승위で、ご奉仕いたします……」
+			IF TALENT:TARGET:처녀
+				PRINTFORMW 「……%CALLNAME:TARGET%の、처녀散らし기승위、ご賞味ください……。……！？」
+				PRINTFORMW 「も、もんだい、ありません……。さ、さぁ、腰をふらせて、もらいます……っ」
+				IF ABL:TARGET:정액중독 >= 2
+					PRINTFORMW 「そ、そうです……っ♪　射精、射精をしなさい……っ♪　全部、ぜんぶっ♪　わたしのナカでしぼりとってあげます……っ❤」
+				ENDIF
+			ELSE
+				PRINTFORMW 「……%CSTR:TARGET:MASCALL%は動く必要ありません……。すべてこの%CALLNAME:TARGET%におまかせっ！？　……くだ、さい……っ」
+				PRINTFORMW 「んっ……くっ……ど、どうでしょう……安心して、射精を、おねがいします……っ♪」
+				IF ABL:TARGET:정액중독 >= 2
+					PRINTFORMW （あぁっ❤　これこそあるべき姿っ❤　わたしが上であいつが下っ❤　あいつは黙って精子だしてればいいのよっ♪）
+				ENDIF
+			ENDIF
+		CASE "노출単発"
+			SELECTCASE RAND:3
+			CASE 0
+				PRINTFORMW 「……へぇ、わたしを見に来たのかしら……？　殊勝なことね」
+				IF ABL:TARGET:노출증 > 2 || ABL:TARGET:욕망 > 3 || TALENT:TARGET:음란 || TALENT:TARGET:굴복됨
+					PRINTFORMW 「ふふふ……❤　どう、かしらわたしの裸は……❤　……あら、ふふっ。くちよりもおチンチンのほうが語ってくれてるわね……❤」
+				ENDIF
+			CASE 1
+				PRINTFORMW 「……んっ❤　ニンゲンのオンナとは一味ちがう……。この%CALLNAME:TARGET%の魅力の虜になりなさいな……♪」
+				IF ABL:TARGET:노출증 > 2 || ABL:TARGET:욕망 > 3 || TALENT:TARGET:음란 || TALENT:TARGET:굴복됨
+					PRINTFORM 「ほらほら……❤　
+					IF BUST_SIZE(TARGET) == -2
+						PRINTFORM ややこにも劣る絶壁おっぱい
+					ELSEIF BUST_SIZE(TARGET) == -1
+						PRINTFORM わらしのような貧乳ちっぱい
+					ELSEIF BUST_SIZE(TARGET) == 0
+						PRINTFORM なだらかなラインが美しい自慢のおっぱい
+					ELSEIF BUST_SIZE(TARGET) == 1
+						PRINTFORM だれもが振り返るおっきなおっぱい
+					ELSEIF BUST_SIZE(TARGET) == 2
+						PRINTFORM まるでスイカのようなおおきいおっぱい
+					ELSEIF BUST_SIZE(TARGET) == 3
+						PRINTFORM まるでウシみたいな卑しいなおっぱい
+					ELSEIF BUST_SIZE(TARGET) >= 4
+						PRINTFORM 地面をすっちゃう下品なおっぱい
+					ENDIF
+					PRINTFORML も❤　くびれた腰つきも❤　いつでも赤ちゃんを産めるこのお尻もっ❤　じぃぃ……っくり、見ていいのよ……❤」
+				ENDIF
+			CASE 2
+				PRINTFORML 「あら？　そんなところから見てるだけでいいのかしら。……ふふ、朝日で溶ける初雪のように、この機会のがせば一生後悔するかもしれないわよ……❤」
+				PRINTFORMW 「……もっとも❤　そんな簡単におさわりなんてさせてあげないけど……ふふっ♪」
+				IF ABL:TARGET:노출증 > 2 || ABL:TARGET:욕망 > 3 || TALENT:TARGET:음란 || TALENT:TARGET:굴복됨
+					PRINTFORM 「ほらほら……❤　ふれたいならアピールなさい❤　どれだけおチンチン勃てられるかしら❤　どれだけお射精はだせるかしら❤　わたしを만족させる自身はおあり？　……ふふっ❤」
+				ENDIF
+			ENDSELECT
+		CASE "최면自発자위"
+			IF ABL:TARGET:자위중독 >2
+				SELECTCASE RAND:4
+					CASE 0
+						PRINTFORML 「み゛て゛ぇ❤　わ゛た゛し゛の゛オ゛ニ゛ャニ゛ーしょー、も゛っと゛み゛て゛ぇ゛っ❤
+						PRINTFORMW 　ア゛ッ、ア゛ッ゛❤　き゛も゛ち゛い゛い゛❤　オ゛ナ゛ニ゛ー゛き゛も゛ち゛い゛い゛の゛お゛ぉ゛ぉぉ！！❤」
+					CASE 1
+						PRINTFORML 「あ゛あ゛っ゛❤　お゛ほ゛ぉ゛❤　イ゛キ゛ま゛す゛❤　イ゛グ゛イ゛グ゛イ゛グ゛ゥ゛ゥウウ❤❤
+						PRINTFORMW 　や゛だ゛ぁ゛❤　お゛手゛々゛と゛ま゛ん゛な゛い゛❤　と゛ま゛ん゛な゛い゛に゛ょ゛ほ゛ぉ゛ぉ゛お゛お❤❤……❤❤」
+					CASE 2
+						PRINTFORML 「ひ、ひひっ❤　みて……❤　ほら、みてよっ❤　わたしっ❤　オナニーぐるいのっ❤　マゾメスなのぉ……っ❤❤
+						PRINTFORMW 　い、いひひっ❤　%CSTR:TARGET:MASCALL%のおちんちんが欲しくてほしくて❤　腰がカクカクヘコヘコ❤　止められないのぉ❤」
+					CASE 3
+						PRINTFORML 「おちんちん❤　おちんちんくださいっ❤　おちんちん❤　おちんちんほしいのぉ❤
+						PRINTFORMW 　あはっ❤　프라이드ぉ？　そんなのっ❤　なんのいみがあるのぉ❤　おちんちん❤　%CSTR:TARGET:MASCALL%のおちんちんがいいのぉ❤」
+				ENDSELECT
+			ELSE
+				SELECTCASE RAND:3
+					CASE 0
+						PRINTFORML 「くぅぅぅ……なんでぇ……きもち、きもちよくなりたいのにぃ……
+						PRINTFORMW 　だめっ、もうっ、あぁもぅ！　もどかしい、だけじゃないっ……！」
+					CASE 1
+						PRINTFORML 「はっ、はぁっ、ふっ、ひぅ、！？　づぅ……ぅん……
+						PRINTFORMW 　……あ！？　やだ、そんな、こし、かってに、ヘコヘコ、してる……ッ♪」
+					CASE 2
+						PRINTFORML 「んっ、くっ、ふっ、ちぃ、あっ、んっ、ぅん……、ふぅっ……」
+						PRINTFORMW （くっ、ダメッ、わたしのっ、指じゃ……っ。くそっ、%CSTR:TARGET:MASCALL%の、だったらっ、イケるのにぃ……っ）
+				ENDSELECT
+			ENDIF		
+		CASE "최면自発펠라"
+			IF ABL:TARGET:정액중독 >2
+				SELECTCASE RAND:2
+					CASE 0
+						PRINTFORML 「じゅぽっ❤　ジュルルるるるる❤　んぢゅっ❤　ぐぽっ、ごぽぉ……ぉ❤
+						PRINTFORMW 　……ふふ♪　%CSTR:TARGET:MASCALL%のくっさいチンカス、ごちそうさま……❤」
+					CASE 1
+						PRINTFORML 「もっろ！　もっろだひへぇぇえ❤　ははひほ、ふひはんほひ、だひへぇぇぇえ❤
+						PRINTFORMW 　……ん❤　あぁぁ……ん❤　……ごくんっ❤　……ふふ、よかったでしょ？　わたしの口マンコ……❤　%CSTR:TARGET:MASCALL%のためにがんばったんだから……❤」
+				ENDSELECT
+			ELSE
+				SELECTCASE RAND:2
+					CASE 0
+						PRINTFORML 「んんっ、れろっ、れろぉっ、くちゅっ♪　じゅぽ、ぢゅぽ……っ
+						PRINTFORMW 　……くぅぅ、うまく、できなくて、もどかしい……！」
+					CASE 1
+						PRINTFORML 「んっ、……ちゅっ♪　んぷっ、ぐぷっ、れろぉ、ちゅぶっ……
+						PRINTFORMW 　……だめっ、どうして、射精してよ、もう……！」
+				ENDSELECT
+			ENDIF
+		CASE "최면自発スロート","최면自発파이즈리スロート"
+			SELECTCASE RAND:2	
+				CASE 0
+					PRINTFORML 「……んぐっ！？❤　ごっ❤　がっ❤　げほっ❤　ぢゅぅ❤　んぐぇぇ……❤」
+					PRINTFORMW （いいわっ❤　わたし❤　%CSTR:TARGET:MASCALL%に求められてるっ❤　のどオナホ、必要とされてるぅぅぅ❤❤❤）
+				CASE 1
+					PRINTFORML 「こ゛ぉ゛ぉ……っ❤　ぢゅる、んじゅっ❤　う゛んっ❤　け゛ほ゛っ❤　ち゛ゅる゛っ❤　し゛ゅほ゛っ❤　し゛ゅ゛る゛る゛る゛る゛る゛っ゛！！❤❤❤」
+					PRINTFORMW （しあわせっ❤　しあわせなのっ❤　わた、わたしっ❤　このためにっ❤　このために産まれてきたんだわ……❤❤❤）
+			ENDSELECT		
+		CASE "최면自発기승위"
+			SELECTCASE RAND:2
+			CASE 0
+				IF TALENT:TARGET:처녀
+					PRINTFORMW 「ふふっ……❤　みえる、かしらっ❤　わたしの……大事な、처녀❤　……%CSTR:TARGET:MASCALL%に、捧げるわね……❤
+				ENDIF
+				PRINTFORMW 「どう……っ❤　きもちいいっ！？　ちゃんとできてるかしらっ❤　……そう❤　じゃあ❤　もっと、ペースっ❤　あげてあげるね……っ❤」
+			CASE 1
+				IF TALENT:TARGET:처녀
+					PRINTFORML 「……あはっ❤　やったっ❤　うれしいっ❤　うれしいわっ❤　わたしのっ❤　처녀❤　%CSTR:TARGET:MASCALL%にささげられたぁ❤」
+					PRINTFORMW 「ぅん、いたい、いたいわ……❤　とっても、いたいの❤　うれしい❤　ゆめじゃ❤　ないのねっ……❤」
+					PRINTFORMW 「……とっても、しあわせぇ❤」
+				ELSE
+					PRINTFORML 「ほらっ❤　どうっ❤　いつでもっ❤　びゅっびゅっ❤　だしてぇ❤　どぷどぷっ❤　たねつけぇ❤　はやくぅ❤」
+					PRINTFORMW 「あっ❤　おなか、ドクドク❤　いっぱいっ❤　はらむぅ❤　いっぱいぃ❤　うんじゃう……❤」
+				ENDIF
+			CASE 2
+				PRINTFORML 「やっとっ❤　あるべきかたちになったわねっ❤　そうよっ❤　わたしがうえでっ❤　%CSTR:TARGET:MASCALL%はしたっ❤　わたしが、%CSTR:TARGET:MASCALL%を食べるんだから……❤
+				IF TALENT:TARGET:처녀
+					PRINTFORMW 　……そうよっ❤　처녀よっ❤　血がどくどく、流れてるでしょ❤　……でもねっ、この、いたみがぁぁ❤　%CSTR:TARGET:MASCALL%をつよく、かんじるのぉ❤」
+				ELSE
+					PRINTFORMW 　ほぉら❤　抵抗は❤　無意味よっ❤　おとなしく❤　しゃせーなさいっ❤　はらませろ❤　はらませろ❤　%CSTR:TARGET:MASCALL%のわたしを❤　はらませろぉ❤」
+				ENDIF
+			ENDSELECT
+		CASE "최면수음"
+			IF ABL:TARGET:봉사정신 >= 5
+				SELECTCASE RAND:2
+					CASE 0
+						PRINTFORML 「キンタマおもぉい♪　精子がグツグツ、つくられてるのがわかるわ❤　ふふっ、わたしのお手々、孕まそうというの？
+						PRINTFORMW 　ほら、だーせ、だーせ♪　せーしだぁせ♪　いっぱいだぁせ♪　せーえきお手々にぶっかけろ～……❤」
+					CASE 1
+						PRINTFORML 「ほぉら♪　%CSTR:TARGET:MASCALL%のおちんぽ、ガマンしなくていいからね……❤
+						PRINTFORMW 　……しーこ、しーこ……♪　しーこ、しーこ……♪　やけどしそうっ❤　おちんちん、あっついわぁ❤　いつでもだしてっ❤　ぶっかけてっ❤」
+					CASE 2
+						PRINTFORML 「……はぁい、%CSTR:TARGET:MASCALL%のおちんちんくん、ちゃんとぴゅっぴゅ、できるかなぁ……❤
+						PRINTFORMW 　ほぉら、いっちにぃ♪　ふふっ♪　こぉら、手の中で暴れないのっ♪　ちゃぁんと受け止めて、あげるから……❤」
+					CASE 3
+						PRINTFORML 「はぁ～……っ、はぁ～……っ、ん？　なにしてるかって？　手を温めてんのよ
+						PRINTFORMW 　……わたしの手、冷たいからね。%CSTR:TARGET:MASCALL%の大事なマラを冷やすわけにはいかないでしょ……！　……うん、よし！　じゃあ……いくわよ❤」
+				ENDSELECT
+			ELSE
+				SELECTCASE RAND:4
+					CASE 0
+						PRINTFORML 「ふふっ、かかったわねっ♪　このカードによって%CSTR:TARGET:MASCALL%のおちんちんはわたしの手から逃れられないのよ♪
+						PRINTFORMW 　ほぉら、いっちに、いっちに♪　あら、顔が歪んでるわよ♪　こらえ性のない子ね……♪」
+					CASE 1
+						PRINTFORML 「……思ったより、やわらかいのね。うぅ、なんかビクビクしてるわ。それに……あっつい……
+						PRINTFORMW 　ぅうん、どう、かしら……。えっ、単調でつまらない！？　あぁ、もう！　むずかしいわね……」
+					CASE 2
+						PRINTFORML 「ちゃんと洗ってるの……？　うぅ、くさい……。手に、ニオイのこらないでしょうね……？
+						PRINTFORMW 　……は！？　なんでわたしが%CSTR:TARGET:MASCALL%のちんぽを洗わないといけないのよ！？　大のオトナでしょう！？」
+					CASE 3
+						PRINTFORML 「ふ、ふふふ……っ！　口でなんと言おうとも、%CSTR:TARGET:MASCALL%のちんぽはわたしの手の内……！
+						PRINTFORMW 　はい、しーこ、シーコ……♪　ふふっ♪　いっぱいピュッピュ、しましょうねぇ……♪			
+				ENDSELECT
+			ENDIF
+		CASE "최면펠라"
+			IF ABL:TARGET:봉사정신 >= 5
+				SELECTCASE RAND:4
+					CASE 0
+						PRINTFORML 「ほぉよ♪　わはひひ、ほくひへ、ほふひさへて……♪　ふふっ、ひほひよはほうへ……♪
+						PRINTFORMW 　……んっ！？　……❤❤❤　んんっ、……ぷはぁ……ぁっ❤　ふふん、%CSTR:TARGET:MASCALL%褒めていいのよ……❤」
+					CASE 1
+						PRINTFORML 「ほぉぉ……ぉら♪　%CSTR:TARGET:MASCALL%のだぁいすきな、くちマンコよぉ……❤　あぁぁ……ぁん……♪
+						PRINTFORMW 　んひぃ❤　もぐ、むぐっ……♪　んじゅっ♪　んぶっ♪　じゅるるるる……っ♪　んふ……っ❤」
+					CASE 2
+						PRINTFORML 「あ～、くっさ❤　こんなのをおくちで奉仕しなきゃいけないなんて、わたしったら不幸だわぁ……♪
+						IF ABL:TARGET:정액중독 >= 2
+							PRINTFORMW 　……❤　ちゅっ……❤　れろっ❤　れろぉぉ……っ❤　きんたまドクドク、いってるわよ……❤　かっこいいわぁ……❤」
+						ELSE
+							PRINTFORMW 　ちゅっ……♪　ふふっ♪　べろっ、れろぉっ♪　ちゅ、ちゅっ♪　ビクビクしちゃうんだ、かわいいっ❤」
+						ENDIF
+					CASE 3
+						PRINTFORML 「……♪　……ぷはぁ……ぁ♪　……あらっ？　なにって、休憩よっ♪　……おやぁ？　%CSTR:TARGET:MASCALL%すっっごいミジメな顔してるわよ❤　ふふっ、あと少しで、イケそうだったもんね……♪
+						PRINTFORMW 　ふふっ……❤　はいはい、イジワルしないわよ。……ほぉら、あー……んっ♪　くち、あけてあげるから자신でシコってだしなさいっ❤　……わたしをコキ捨て便器にしなさいって言ってるのよ……❤
+				ENDSELECT
+			ELSE
+				SELECTCASE RAND:4
+					CASE 0
+						PRINTFORML 「……じゃ、口に含むわね。やったこと？　……昔隠れて覗いたことなら、あるわ。こら、……逃げるな
+						PRINTFORMW 　そもそもこれはわたしのカードによるもの、どっちみち%CSTR:TARGET:MASCALL%に拒否権はないのよ……。じゃ、いただきまぁぁす……♪」
+					CASE 1
+						PRINTFORML 「……れろっ……！？　ゲホッ！　ゴホッ、ガホッ……！　……うえぇ、まずい……
+						IF ABL:TARGET:정액중독 >= 2
+							PRINTFORMW 　……でも、これがいいのよねぇ……❤　んちゅっ……♪　れろっ、れろぉ……っ❤　ふふっ♪」
+						ELSE
+							PRINTFORMW 　この、味……なんとかならないのかしら……。でも、まだ、효과処理おわってないし……はぁ、……れろっ」
+						ENDIF
+					CASE 2
+						PRINTFORML 「ちゅぼ……んぢゅ……じゅる……！？　んー！？　……げほっ！？　げほ、ごほっ、……はぁっ！　はぁっ、はぁ……っ
+						PRINTFORMW 　……い、いきなり突いてこないで！？　わたしのペースでやらせなさいよ、まったく……！　つづき、いくわよ……あぁぁ……ぁん」
+					CASE 3
+						PRINTFORML 「なにかコツ、ない？　……上目遣いでやると興奮する？　ふぅん……、やるだけやってみるか
+						PRINTFORMW 　んっ……ぢゅ、ぢゅるっ……ぢゅぼっ、じゅるっ……んんっ……、……なによ%CSTR:TARGET:MASCALL%、鼻息あらいわよ……♪」
+				ENDSELECT
+			ENDIF
+		CASE "최면파이즈리"
+			IF ABL:TARGET:봉사정신 >= 5
+				SELECTCASE RAND:2
+					CASE 0
+						PRINTFORM 「くくっ、きもちよさそうねぇ♪　わたしの
+						IF BUST_SIZE(TARGET) == -2
+							PRINTFORM 絶壁❤　乳首ズリっ❤
+						ELSEIF BUST_SIZE(TARGET) == -1
+							PRINTFORM ちっぱいズリ❤
+						ELSEIF BUST_SIZE(TARGET) == 0
+							PRINTFORM おっぱいズリ❤
+						ELSEIF BUST_SIZE(TARGET) == 1
+							PRINTFORM おっきなおっぱいズリ❤
+						ELSEIF BUST_SIZE(TARGET) == 2
+							PRINTFORM 母性あふれるおっぱいズリ❤
+						ELSEIF BUST_SIZE(TARGET) == 3
+							PRINTFORM スイカみたいにおっきくてみずみずしいデカパイずり❤
+						ELSEIF BUST_SIZE(TARGET) >= 4
+							PRINTFORM おっぱいだけで呑み込んじゃう❤　%CSTR:TARGET:MASCALL%専用おっぱいオナホ❤
+						ENDIF
+						PRINTFORML 　あぁら、言葉もないわけぇ♪　悔しかったらおっぱい反撃してみなさいよぉ♪
+						PRINTFORMW 　……あんっ❤　ごめんなさいっ、さわってほしくて挑発しちゃいましたっ❤　%CSTR:TARGET:MASCALL%といっしょに、気持ちよくなりたいのよぉ……❤」
+					CASE 1
+						PRINTFORML 「파이즈리、好きかしらっ♪　ふふっ、わたしもだぁいすき……❤　%CSTR:TARGET:MASCALL%のちんちん、あっつくておっぱい溶けちゃいそうなのぉ……❤
+						PRINTFORM 　……ああっ❤　ひぅう❤　おちんちんが
+						IF BUST_SIZE(TARGET) == -2
+							PRINTFORM わたしのっ❤　ちくびにあたってぇ……❤
+						ELSEIF BUST_SIZE(TARGET) == -1
+							PRINTFORM ぷにぷにおっぱいと❤　乳首、こすれちゃってぇ❤
+						ELSEIF BUST_SIZE(TARGET) == 0
+							PRINTFORM プニプニとわたしのおっぱい、焦らさないでよっ❤
+						ELSEIF BUST_SIZE(TARGET) == 1
+							PRINTFORM おっぱいから鈴口がみえてるわよ❤　ふふ、かーわい……❤
+						ELSEIF BUST_SIZE(TARGET) == 2
+							PRINTFORM あっつくて、おっぱい、やけどしそう……っ❤
+						ELSEIF BUST_SIZE(TARGET) == 3
+							PRINTFORM わたしのおっぱい、「孕ませたいよー」っていってるわ❤
+						ELSEIF BUST_SIZE(TARGET) >= 4
+							PRINTFORM 埋もれて❤　せーし、ださないと窒息しちゃうわよっ❤
+						ENDIF
+						PRINTFORMW 　ふふっ、だーせ♪　せーしいっぱい、だぁせ♪　%CSTR:TARGET:MASCALL%のあっついの❤　わたしのおっぱいで❤　ぜぇんぶ、うけとめたげる……っ❤」
+					CASE 2
+						PRINTFORML 「くくっ……♪　このカード使ったの、何回目かしら……♪　すぅっかり、%CSTR:TARGET:MASCALL%のちんちん、おっぱいのとりこね……♪
+						PRINTFORMW 　……あれ？　ふつう、同じカードは三枚までのはず……──√￣＼＿ガッ！？　……んっ？　まぁいいわ、もっととりこにしてあげる……❤」
+					CASE 3
+						PRINTFORML 「……ねぇ、聞こえるかしら？　わたしの、心臓の音……♪　ふふっ、언데드족だからって、みんな死人ってわけじゃないのよ……❤
+						PRINTFORMW 　ねぇ感じて……❤　感じてよ……❤　どうしようもなく！　わたしも今を生きてるって……っ♪　%CSTR:TARGET:MASCALL%の熱で果てたいって……っ❤」
+				ENDSELECT
+			ELSE
+				SELECTCASE RAND:4
+					CASE 0
+						PRINTFORML 「『はぁ……。オトコってこういうの、すきよねぇ……。ま、そういう효과だしやったげるわ……
+						PRINTFORMW 　……っ、ああもう……！　おちんちん暴れるなっ、うまく挟めないじゃない……！？」
+					CASE 1
+						PRINTFORM 「……파이즈리って、思った以上に……っめんどう、ね……っ！　ちんちん勝手にうごくし、気持ち悪い感触だし……っ
+						PRINTFORM 　そもそも、
+						IF BUST_SIZE(TARGET) == -2
+							PRINTFORML %CSTR:TARGET:MASCALL%のせいでおっぱいなんてないんだけど……！？　ほぼすりつけてるだけだったら、手とかでいいじゃない……」
+						ELSEIF BUST_SIZE(TARGET) == -1
+							PRINTFORML %CSTR:TARGET:MASCALL%、わざわざ雪娘ぐらいにしておいて挟めって、矛盾してない？　はいはい、まぁやるわよ……」
+						ELSEIF BUST_SIZE(TARGET) == 0
+							PRINTFORML %CSTR:TARGET:MASCALL%もうすこしペニスちいさくできないの？　びみょうに挟みにくいのよ……っ」
+						ELSEIF BUST_SIZE(TARGET) == 1
+							PRINTFORML %CSTR:TARGET:MASCALL%こういうのしたくてわたしのおっぱいおおきくしたの？　呆れるわー……」
+						ELSEIF BUST_SIZE(TARGET) == 2
+							PRINTFORML %CSTR:TARGET:MASCALL%のおちんぽ、ちゃんと包めるぐらい大きくされたの腹ただしいわ……！　ひとの胸をなんだと思ってるのっ」
+						ELSEIF BUST_SIZE(TARGET) == 3
+							PRINTFORML いくらなんでもスイカぐらいおっぱい大きくしてくれちゃってぇ……っ。ああもう、만족そうな顔するな……っ」
+						ELSEIF BUST_SIZE(TARGET) >= 4
+							PRINTFORML %CSTR:TARGET:MASCALL%わたしのおっぱいなんだと思ってるの！？　おっぱいオナホとかふざけてんの……っ！？」
+						ENDIF
+					CASE 2
+						PRINTFORML 「ほぉら、気持ちいいかしらっ♪　わたしのおっぱい、ヒンヤリしてるから、他では味わえないでしょっ♪
+						IF ABL:TARGET:Ｂ감각 >= 2
+							PRINTFORMW 　……きゃん❤　……聞かなかったことにしなさい……！　ちょ、ちょっとおっぱい、敏感なだけよ……っ」
+						ELSE
+							PRINTFORMW 　……ふふっ♪　ほぉらほぉら、おっぱいに負けちゃえ♪　わたしは負け犬ですって、패배お射精しちゃいなさい……♪」
+						ENDIF
+					CASE 3
+						PRINTFORML 「파이즈리ってほんとに気持ちいいの？　昔、聞いた話だと視覚的に만족するためらしいけど……
+						PRINTFORMW 　ま、それならそれでいいんだけど。つまりこのカードは%CSTR:TARGET:MASCALL%に파이즈리の現実を教えてショックを受けさせる효과だったってことね……♪」
+				ENDSELECT
+			ENDIF
+		CASE "최면ふとももコキ"
+			IF ABL:TARGET:봉사정신 >= 5
+				SELECTCASE RAND:4
+					CASE 0
+						PRINTFORML 「ほらっ、ほぉらっ♪　さっさとだしなさいよっ❤　%CSTR:TARGET:MASCALL%もわたしのふともも、すきでしょっ❤
+						PRINTFORMW 　だぁせっ♪　だぁせっ♪　まっしろせーしでいっぱいだぁせっ……❤」
+					CASE 1
+						PRINTFORML 「ふふんっ♪　%CSTR:TARGET:MASCALL%のおちんちん❤　立派よねぇ……♪
+						PRINTFORMW 　……なのにぃ♪　おまんこじゃなくてっ♪　ふとももでぇ♪　きもちよくなっちゃってるねぇ……❤　かーわいぃ❤」
+					CASE 2
+						PRINTFORML 「どうよっ♪　わたしの腰つきっ♪　%CSTR:TARGET:MASCALL%のためにっ♪　頑張ってあげたのよっ❤
+						PRINTFORMW 　ふふっ♪　いぃっぱいっ❤　堪能なさい……♪　ぜぇんぶ……%CSTR:TARGET:MASCALL%のため、なんだから……❤」
+					CASE 3
+						PRINTFORML 「ふっ、ふふっ……♪　ガマンはよくないわよっ♪　情けなくふとももにびゅーびゅーなさいな……♪
+						PRINTFORMW 　……えっ！？　わたしも濡れてるっ！？　し、しかたないじゃない、わたしっ、ぬれやすいのよぉ……❤」
+				ENDSELECT	
+			ELSE
+				SELECTCASE RAND:4
+					CASE 0
+						PRINTFORML 「ふ、ふふっ♪　どうかしらっ、わたし、ふとももには少々自信があるのよっ♪
+						PRINTFORMW 　……ほぉら、ほら……♪　ふふっ、ブザマねっ。ふとももで射精して、いいのかしら……っ」
+					CASE 1
+						PRINTFORML 「……くぅぅっ、ちょ、ちょっと、運動不足、かしら……っ
+						PRINTFORMW 　あぁん、もう……！　腰が、もっとうまく、できるはずなのに……っ！」
+					CASE 2
+						PRINTFORML 「……ふふっ、そこらのオンナじゃ味わえないわよ……？　わたしのすべすべ、ヒンヤリふともも……♪
+						PRINTFORMW 　あはっ♪　ビクッビクッ！　って、ガマンしきれないのかしらっ♪　いいじゃない、さっさと熱いの、だしなさいよ……っ♪」
+					CASE 3
+						PRINTFORML 「まったく……このカードもおかしなこと書いてあるわ。なによ、ふとももでおちんちん挟めって……
+						PRINTFORMW 　ほら、挟んだわよ。……そのうえでわたしも動くのね……。はいはい、よいしょ……っと……」
+				ENDSELECT
+			ENDIF
+		CASE "최면陰部嗅ぎ"
+			IF ABL:TARGET:순종 >= 5
+				SELECTCASE RAND:4
+					CASE 0
+						PRINTFORML 「スンスンスンッ❤　はぁっ、はぁっ、はぁっ……❤　クンクンッ❤　はぁ……っ❤はぁ……っ❤はぁ……っ❤
+						PRINTFORMW 　（スンスン……♪）だめ、かしら❤　（スンスン……♪）ニオイ嗅ぐだけ、（スンスン……♪）しかだめなのぉ❤　（スンスン……♪）まだガマンしなきゃ、だめ……？」
+					CASE 1
+						PRINTFORML 「か、感想をつたえろっ？　わ、わかったわよ……❤　まったく、なにを聞いてるのかしら……
+						PRINTFORMW 　んっ❤　すえたニオイがするわ……❤　ひと嗅ぎ、するごとに脳がとろけて……❤　バカになっちゃうの❤　き、危険だわっ❤　わたしが、独占しないと……♪」
+					CASE 2
+						PRINTFORML 「……くぅぅっ❤　발동タイミングを、ミスったわね……❤　いまっ❤　チン嗅ぎなんてしたらっ❤　集中できないわっ❤
+						PRINTFORMW 　だめぇ❤　からだがうずくのぉ❤　ゆ、ゆびがぁ❤　しびれてぇ❤　て、てふだぁぁ……❤　おとしちゃうぅぅ……❤」
+					CASE 3
+						PRINTFORML 「はっ❤はっ❤はっ❤はっ❤はっ❤はっ❤はっ❤はっ❤はっ……。もっと……嗅ぎたい……❤　もっと……もっと……♪
+						PRINTFORMW 　あっ❤　やだっ❤　しゃ、しゃぶりたいっ❤　ちんちん、しゃぶりたいのぉ❤　デカ魔羅、ちょおだぁい……？」
+				ENDSELECT
+			ELSE
+				SELECTCASE RAND:4
+					CASE 0
+						PRINTFORML 「ふふっ、%CSTR:TARGET:MASCALL%の負けよ！　いまからチン嗅ぎ攻撃をはじめるわ！
+						PRINTFORML 　……んっ！？　……スンスン、うへぇ……、クンクン……
+						PRINTFORMW 　……ふ、ふふっ、どうかしら！？　急におちんちん嗅がれてビックリしたでしょう……！？」
+					CASE 1
+						PRINTFORML 「%CSTR:TARGET:MASCALL%ってほんと、隙がおおいわね……！　おちんちんをクンクン作戦、발동するわ！
+						PRINTFORMW 　スー……ハー……、スー……ハー……、ふふ、どう、かしら！？　美少女におちんちんのニオイ嗅がれて、さぞかし屈辱でしょうね……！」
+					CASE 2
+						PRINTFORML 「あのねぇ……%CSTR:TARGET:MASCALL%、ちゃんと毎日お風呂はいってるの？　くさいんだけど
+						PRINTFORMW 　まったく、ガニ股でおちんちんをクンクンしなきゃならないのよ……？　ちゃんとわたしを気遣いなさいな……　はぁ、くっさ……」
+					CASE 3
+						PRINTFORML 「スー……、はぁぁぁ……♪　……はっ！？　ま、待てってなによ！？　ひとをイヌみたいに！
+						PRINTFORML 　……うぅぅぅ❤　ハッハッハッ……❤　うぅぅぅ❤　……はぁっ、はぁっ❤　……くぅっ、まだ、なのぉ……？
+						PRINTFORMW 　……！！　やたっ❤　すぅぅぅ……はぁぁぁ……❤　……ふふ、くっさぁい……❤」
+				ENDSELECT
+			ENDIF
+		CASE "최면정음"
+			IF ABL:TARGET:정액중독 >= 5
+				SELECTCASE RAND:5
+					CASE 0
+						PRINTFORML 「んぐっ……❤くぷっ……❤ぐぷっ……❤ぷはぁ、……ゲェェェップ……❤
+						PRINTFORMW 　……あれ、まだ、のこってる、わよね……あれっ、あれっ、でない……どうして……っ」
+					CASE 1
+						PRINTFORML 「ゴキュッ……❤　ゴプッ……❤　ングッ……❤　んぐっ、ゴクッ、げぇぇぇ……っぷ♪
+						PRINTFORMW 　……もっと、おかわり……❤　……まだ、そこに、たまってる……❤　あぁぁ……ん❤」
+					CASE 2
+						PRINTFORML 「最初はマズイ飲料水だと思ってたけど、慣れると案外くせになるわね……
+						PRINTFORMW 　んぐっ……ごくっ……ぷは……ぁ……♪　……おかわりないかしら、もっとほしい……❤」
+					CASE 3
+						PRINTFORML 「は、食レポ？　まぁいいけど……。ニオイは、臭くて鼻がまがりそう。好みは分かれるわよね、わたしは好きだけど……❤
+						PRINTFORML 　んぐっ……♪　のどごしは、最悪ね……ネバついて、ずっとのこっちゃう……♪　おかげであのニオイが喉から鼻に戻ってきちゃうのよね……❤
+						PRINTFORMW 　……で、味は、そうね……。……せかいで、いちばん、だぁいすき❤」
+					CASE 4
+						PRINTFORML 「こいつの中身？　知ってるわよ정액でしょ。たまにチンカス、浮いてるし
+						PRINTFORMW 　……もちろん飲むわよ？　飲まなきゃデュエルが進まないじゃない……。それに、美味しいしね……❤」
+				ENDSELECT	
+			ELSE
+				SELECTCASE RAND:4
+					CASE 0
+						PRINTFORML 「ふふ、そこで見てなさいな。ペットボトル一気飲みチャレンジを……！
+						PRINTFORML 　……んふっ！？　べぇ！？　ぐぅっ……！　……んくっ、んく……っ……はぁー……っ、はぁー……っ……
+						PRINTFORMW 　……は、ははは、どう！？　ちゃんと飲めたわよ……っ」
+					CASE 1
+						PRINTFORML 「このカードの효과で、정액ド링크を飲み干しちゃうわ……！
+						PRINTFORML 　……ん！？　んんっ……！　んん……っ！　ん……くぅ……、ぷはぁ……っ
+						PRINTFORMW 　……ど、どう！？　おどろいた、でしょう……！？」
+					CASE 2
+						PRINTFORML 「……あら便利ね、このカード。ちょうど疲れたし水分補給を、っと……
+						PRINTFORMW 　んぐっ！？　ごきゅっ、ごきゅっ……ごくっ！　……ぷはぁ、……なにこれ、まっず……」
+					CASE 3
+						PRINTFORML 「んぐっ……くぷっ……くぷっ……ぷはぁ……。げぷっ……！？
+						PRINTFORMW 　き、聞いてないわよね……？　わすれろっ！？　わたしはゲップなんてしないわ……っ！？」
+				ENDSELECT
+			ENDIF
+		CASE "최면Ｖ자위"
+			IF ABL:TARGET:Ｖ감각 >= 5
+				SELECTCASE RAND:4
+					CASE 0
+						PRINTFORML 「えへっ❤　えへへっ❤　どぉう？❤　ゆび、ゆびぃ❤　いぃ……っぱい、ほじくっちゃうっ❤
+						PRINTFORMW 　はずかしいっ❤　はしたなぁいっ❤　でもでもっ、そういう효과だからっ❤　しかたないもんっ❤　えへっ、えへへ❤」
+						IF TALENT:TARGET:처녀
+							PRINTFORMW （はやくっ❤　%CSTR:TARGET:MASCALL%のぉ❤　おちんちんほしいぃ❤　わたしを犯してぇ❤　❤）
+						ENDIF
+					CASE 1
+						PRINTFORM 「あぁん❤　ちがうのっ❤　ちがいますぅ❤　わたしっ❤　ていしゅくなオトメなのおっ❤
+						IF TALENT:TARGET:처녀
+							PRINTFORML 　だってわたし、まだ처녀なのよっ❤
+						ELSE
+							PRINTFORML 　%CSTR:TARGET:MASCALL%に孕ませてほしいだけの普通の女の子だもん❤
+						ENDIF
+						PRINTFORMW 　このカードが悪いのよっ❤　もっと、もっとオマンコいじくれって書いてるからぁ❤　したがってるだけなのよぉ……ぅ❤」
+					CASE 2
+						IF TALENT:TARGET:처녀
+							PRINTFORML 「%CALLNAME:TARGET%はぁ❤　オマンコほじくるのがだぁいすきなぁ❤　%CSTR:TARGET:MASCALL%のメスイヌでぇす……❤
+							PRINTFORMW 　はやくぅ❤　わたしをぶち犯してぇ❤　%CSTR:TARGET:MASCALL%とぉ❤　いっしょになりたいのぉ……❤」
+						ELSE
+							PRINTFORML 「%CALLNAME:TARGET%はぁ❤　赤ちゃん孕みたくてぇ❤　オマンコじゅぽじゅぽしちゃってる❤　ダメオンナでぇす……❤
+							PRINTFORMW 　%CSTR:TARGET:MASCALL%のぉ❤　りっぱなおちんちんでぇ❤　このダメなオンナをぉ❤　たいじ、してくださぁい……❤」
+						ENDIF
+					CASE 3
+						PRINTFORML 「どうしたのよぉ❤　いやらしい目でみるくせに❤　ノッてこないじゃない❤
+						PRINTFORMW 　……えぇ、デュエル中？❤　そうだったっけぇ❤　いいじゃない、いっしょにたのしみましょうよぉ❤」
+				ENDSELECT	
+			ELSE
+				SELECTCASE RAND:5
+					CASE 0
+						PRINTFORML 「……ふっ、ふぅっ……！　ど、どうっ！？　ガニ股で女性の秘所見せつけられて……、ど、動揺したんじゃないのっ！？
+						IF TALENT:TARGET:처녀
+							PRINTFORMW 　さらに！　わたしの처녀膜も見せつけちゃうわ……！？　ふ、ふふっ、さすがの%CSTR:TARGET:MASCALL%でも驚いちゃったようね……っ！」
+						ELSE
+							PRINTFORMW 　よーく見なさいよ……っ♪　わたし、すでに子どもをうめるのよっ♪　ふふ、わたしだってオトナなんだから……♪」
+						ENDIF
+					CASE 1
+						PRINTFORML 「んん、んぅ……。……はっ！？　いえ、休んでは、いないわ……。きちんと秘所で気持ちよくならなきゃいけないのが、효과だからね……
+						IF TALENT:TARGET:처녀
+							PRINTFORMW 　……くっ、しかし……大事な처녀膜を傷つけないようにするのは神経、つかうわね……っ。くぅ、まだまだ……ぁ」
+						ELSE
+							PRINTFORMW 　んっ……、ふふっ、これで처녀だったら苦労、してたでしょうね……っ。こうして、いっぱい、指をジュポジュポ、できな、かっ、たでしょう、ね……」
+						ENDIF
+					CASE 2
+						PRINTFORML 「효과にぃ……っ、よりっ、ぷれい、やぁぁ、はっ……、お、おまん、こをぉっ、いじらせてっ、もらう、わ……っ！
+						PRINTFORMW 　んんっ……！　くぅっ、ひゃ！？　くぅぅ……っ。だ、だめっ、ちから、かげんがっ、うまく……っ」
+					CASE 3
+						PRINTFORML 「ふぅ、ふぅ……。くっ、%CSTR:TARGET:MASCALL%、ずいぶん強情ね……。さすが、だわ……っ
+							IF TALENT:TARGET:처녀
+								PRINTFORMW 　……えっ！？　처녀なのにポタポタ愛液がおちてる……っ！？　……っ、しかたないでしょう、それがっ、カードのコストなんだからっ……！」
+							ELSE
+								PRINTFORMW 　……い、イッてないわ！？　こ、この地面のシミはぁっ、……このカード！　このカードの효과処理のせいよ……っ！」
+							ENDIF
+					CASE 4
+						PRINTFORML 「よぉく、みなさい……っ、わたしがっ、おまんこ、こんな、みせつけるの……っ！　め、めったにないんだからぁ……！
+						PRINTFORMW 　え、なんでって、普通そんなはずかしいこと……！？　……いえ、ちがうわね……そうよ、おまんこ、みせつけるのは普通のことよね……」
+					ENDSELECT
+			ENDIF
+		CASE "최면Ａ자위"
+			IF ABL:TARGET:Ａ감각 >= 5
+				SELECTCASE RAND:5
+					CASE 0
+						PRINTFORML 「だめっ❤　だめぇ❤　あにゃるっ❤　애널ずぽずぽなんてダメにゃのぉ❤　ゆびっ❤　とめなきゃなにょおぉぉ❤
+						PRINTFORMW 　やだぁ❤　みとめたくにゃいっ❤　%CALLNAME:TARGET%はぁ❤　애널できもちよくなるなんてぇ❤　みちょめたくにゃぁぁい❤」
+					CASE 1
+						PRINTFORML 「きもちいっ❤　ダメなことは❤　きもちいいっ❤　すきぃ❤　%CALLNAME:TARGET%애널だいすきぃぃ……ぃ❤
+						PRINTFORMW 　あはっ❤　%CSTR:TARGET:MASCALL%も見てるぅ……？　こぉんなに拡がっちゃったぁ❤　もう指じゃものたりないのぉ❤　%CSTR:TARGET:MASCALL%のほしいのぉぉ❤」
+					CASE 2
+						PRINTFORML 「いたぁい❤　おしりにっ❤　むりやりズポズポ❤　いたいのきらぁいぃ❤　ひぃぃ❤　きもちいい❤　イッちゃうのぉぉぉ❤
+						PRINTFORMW 　……あはっ❤　よぉくほぐれてるでしょう❤　애널孕ませせっくす❤　しましょうよぉ……❤」
+					CASE 3
+						PRINTFORML 「でゅえるぅ……？　なにそれぇ……❤　いまはぁ❤　애널をぉ❤　かわいがる時間でしょお❤
+						PRINTFORMW 　ほらぁ❤　もっとみなさい❤　ゆびがずーぽずーぽ❤　おしりがビクビクけーれんっ❤　きもちいぃぃ……❤」
+					CASE 4
+						PRINTFORML 「まやかしぃ？　ゆきおんなぁ？　なぁにそれ❤　わたしはただの❤　ケツあな奴隷っ❤
+						PRINTFORMW 　なににこだわってたんだろ❤　ばかなわたしっ❤　프라이드なんてぇ❤　排泄しちゃえばよかったのよぉ……❤」
+				ENDSELECT	
+			ELSE
+				SELECTCASE RAND:5
+					CASE 0
+						PRINTFORML 「……さぁ！　みてなさい……！　わたしの、애널に、指が呑まれていくところを……！
+						PRINTFORMW 　あっ！？　いたっ、くぅっ……！　だ、だめぇ……まだ、なれないわ……っ」
+					CASE 1
+						PRINTFORML 「ダメッ！？　お、お尻で気持ちよくなるなんてっ、おかしいわよ！？
+						PRINTFORMW 　……おかしいのにぃ……！　くぅっ、いっ……！　はぁ、はぁっ……ぅんっ、ヒャぁっ！？」
+					CASE 2
+						PRINTFORML 「こっ효과にぃ……っ、よりっ、ぷれい、やぁぁ、はっ……、あ、あ、애널、をっ、いじって、みせるわ……っ！
+						PRINTFORMW 　ひっ……！　いやっ！？　やぁぁ……っ。……で、でもカードの효과、だから……や、やらないと……」
+					CASE 3
+						PRINTFORML 「くぅっ……！？　なによ、これ……っ、おしりのっ、穴みられてぇ……く、くつじょくだわ……っ
+						PRINTFORML 　でっ、でもっ、わたしが使った효과だか、ら……？　あれ、なんで、こんなカードを……？　……がっ！？
+						PRINTFORMW 　……そうだわ、애널、イジらないと……っ！？　애널、イジる……、애널……イジ、るぅ……」
+					CASE 4
+						PRINTFORML 「……えっ？　あ、そ、そうねっ！　ちゃんと애널、イジってるかわかるように、%CSTR:TARGET:MASCALL%にお尻、見てもらわないとねっ！」
+						PRINTFORMW （あっ！　やだぁ……！？　見られてるっ！？　わかるっ！　%CSTR:TARGET:MASCALL%の熱い視線っ！　おしりのあなっ！　シワの一本一本！　みられて、るぅ……！）
+					ENDSELECT
+			ENDIF
+		CASE "최면Ｃ자위"
+			IF ABL:TARGET:Ｃ감각 >= 5
+				SELECTCASE RAND:3
+					CASE 0
+						PRINTFORML 「いいっ❤　いいのぉ❤　わたしのクリトリスっ❤　よわむしクリトリスッ❤　ちょっとっ❤　はじいただけでっ❤　おもらし、ぶしゃあぁぁぁ……❤
+						PRINTFORMW 　えへへぇ……❤　でゅえるぅ？　やだぁ❤　もっとっ❤　もっとクリちゃんいじるのぉ❤　わたし、負け犬でいいのぉ❤」
+					CASE 1
+						PRINTFORML 「見てぇ❤　%CALLNAME:TARGET%のっ❤　ブザマなクリトリス見てぇぇ❤　イジりすぎてぇ❤　こぉんなに腫れ上がっちゃったぁ❤
+						PRINTFORMW 　あは、あはは……❤　どぅしたのよぉ❤　%CSTR:TARGET:MASCALL%もこっちにきて、クリトリスいじめてもいいのよぉ❤」
+					CASE 2
+						PRINTFORML 「ごめんなさいっ❤　しらなかったのぉ❤　わたしのクリトリス❤　こぉんなにびんかんっだったなんてぇ❤
+						PRINTFORMW 　やだぁ❤　マン汁とまんなぁい❤　手もとまんなぁい❤　もっとシコシコするぅ❤　もっと気持ちよくなるのぉ❤」
+				ENDSELECT	
+			ELSEIF ABL:TARGET:Ｃ감각 == 4
+				PRINTFORML 「えへ、えへへぇ……クリ、クリトリスッ！　ゴシゴシっ、ゴシゴ～シ……♪　きゅっ！？　ひゃぅんっ❤　えへ、えへへ……♪
+				PRINTFORMW 　……はぁっ、はぁっ……❤　……はっ！？　は、はいっ、まだ、わたしのターン、つづけるわ……」
+				PRINTFORMW （なんで！？　なんで途中で止めるのぉ！！　あとちょっとで気持ちよくなれたのにぃ……やだぁ、からだ、疼くのぉ……）
+			ELSEIF ABL:TARGET:Ｃ감각 == 3
+				PRINTFORML 「いっ！？　あっ！？　あっ、あっ、あっ……、あぁっ、あ゛ぁ゛～～～～～～～～っ
+				PRINTFORMW 　イッ、イッてな……！？　こんな、こんなのでイッてな……あぁ、あ゛ぁ゛ぁぁぁ……」
+				PRINTFORMW 「……えへ、えへ、……ぇ？　でゅ、エル……？　……！？　え、えぇっ！　……まだ、わたしのターン、だったわね……っ」
+			ELSE
+				SELECTCASE RAND:3
+					CASE 0
+						PRINTFORML 「ふふっ……！　残念だったわね♪　さわるのはあくまで陰核、膣内じゃないのよ……ぉうっ！？
+						PRINTFORMW 　……えっ！？　どうして！？　クリトリス、さわっただけよ……！？　なんで、こんな……っ！？」
+					CASE 1
+						PRINTFORML 「ふぅ～……っ、ふぅ～……っ……！？　び、ビビるわけないでしょ、やるわよ……！
+						PRINTFORMW 　……ひゃんっ！？　んん……っ、くぅ……っ……！？　はぁ……はぁ……。……ん゛っ！　あ、ひぃぃんっ……❤」
+					CASE 2
+						PRINTFORML 「こっ、この효과でっ、発どぅ、したっ、ぷれい、やぁぁ、はっ……、陰核っ、クリトリスをっ、いじらないとっ、いけない……っ！
+						PRINTFORMW 　ぴぎゅっ……！？　あれっ！？　ぎぴっ！？　ひにゅっ！？　……ちょ、ちょっとさわっただけでっ、なんで、こんなぁ……！？」
+					ENDSELECT
+			ENDIF
+		CASE "최면Ｂ자위"
+			IF ABL:TARGET:Ｂ감각 >= 5
+				SELECTCASE RAND:5
+					CASE 0
+						PRINTFORML 「オトコのひとってぇ……❤　おっぱい、だいすきですよねぇ❤　いまも視線かんじまぁす❤　わたしもさわるの、だぁいすきでぇす❤
+						PRINTFORM 　えへへ❤　%CALLNAME:TARGET%のおっぱいはあなたのモノっ❤　この
+						IF BUST_SIZE(TARGET) == -2
+							PRINTFORM ちくびが目立ってしかたない絶壁❤　
+						ELSEIF BUST_SIZE(TARGET) == -1
+							PRINTFORM ロリコンさんが喜ぶちっぱい❤　
+						ELSEIF BUST_SIZE(TARGET) == 0
+							PRINTFORM いつもは服にかくれた褐色おっぱい❤　
+						ELSEIF BUST_SIZE(TARGET) == 1
+							PRINTFORM あなたに育ててもらったタプタプおっぱい❤　
+						ELSEIF BUST_SIZE(TARGET) == 2
+							PRINTFORM オトナ用サイズの服でもパツパツおっぱい❤　
+						ELSEIF BUST_SIZE(TARGET) == 3
+							PRINTFORM 一度に５、６人は育てられそうな規格外おっぱい❤　
+						ELSEIF BUST_SIZE(TARGET) >= 4
+							PRINTFORM あなたに支えてもらわないとあるくこともできないおっぱい❤　
+						ENDIF
+						PRINTFORMW 好きにしてぇ❤　わたしを気持ちよくして……ぇ❤」
+					CASE 1
+						PRINTFORM 「もう❤　
+						IF BUST_SIZE(TARGET) == -2
+							PRINTFORM 勝手にひとのおっぱいぜっぺきにしてくれちゃって
+						ELSEIF BUST_SIZE(TARGET) == -1
+							PRINTFORM 勝手にひとのおっぱいちっちゃくしてくれちゃって
+						ELSEIF BUST_SIZE(TARGET) == 0
+							PRINTFORM 最初からわたしのおっぱいが大好きだったもんね❤　
+						ELSEIF BUST_SIZE(TARGET) == 1
+							PRINTFORM %CSTR:TARGET:MASCALL%におっぱい大きく育ててもらっちゃって❤　
+						ELSEIF BUST_SIZE(TARGET) == 2
+							PRINTFORM いっぱい%CSTR:TARGET:MASCALL%に愛情注げるぐらい大きくしてもらっちゃって
+						ELSEIF BUST_SIZE(TARGET) == 3
+							PRINTFORM 勝手にひとのおっぱいスイカみたいにふくらませちゃって
+						ELSEIF BUST_SIZE(TARGET) >= 4
+							PRINTFORM 勝手にひとをおっぱいオナホに改造してくれちゃって
+						ENDIF
+						PRINTFORML ……❤とぉっても、うれしいっ❤　おれいに%CALLNAME:TARGET%のおっぱいショー❤　たぁくさん、みていって、ねっ❤
+						PRINTFORMW 　あぁん❤　ひゃあん❤　ごめんなさいぃ❤　おれいなんてうそ、うそなのぉ❤　ほんとはただ❤　きもちよくなりたかっただけだったのぉぉぉ……❤」
+					CASE 2
+						PRINTFORML 「おっぱいっ❤　ちくびっ❤　えへへ❤　じぶんでもみもみ❤　とまらなぁい……❤　えへへ❤　しあわせぇ❤　もっともっとぉ❤
+						PRINTFORMW 　やだぁ❤　%CSTR:TARGET:MASCALL%のぉ、しせんがこわいっ❤　こわいのぉ❤　おちんちんがぁ❤　おっぱいれーぷしたがってるぅ❤」
+					CASE 3
+						PRINTFORML 「ええ❤　そうよっ❤　ほんとはおっぱいイジり❤　したくないのぉ❤　わたしはそんな❤　はしたなくないもんっ❤
+						PRINTFORMW 　でもぉ❤　カードがやれって❤　いってるんだもん❤　だからいやいやっ❤　しかたなくおっぱいイジるのぉ❤」
+					CASE 4
+						PRINTFORML 「あぁっ❤　いやぁ……っ❤　これいじょう、やったらっ❤　ちくびっ❤　いろ、かわっちゃうっ❤　%CSTR:TARGET:MASCALL%にきらわれちゃうぅ……っ❤
+						PRINTFORMW 　……えっ❤　それでもいいんですか……♪　うれしいっ♪　あはっ❤　わたしのおっぱいっ❤　%CSTR:TARGET:MASCALL%の専用おっぱいだから……❤　すきに、してね……❤」
+				ENDSELECT	
+			ELSE
+				SELECTCASE RAND:5
+					CASE 0
+						PRINTFORML 「ふふ、%CSTR:TARGET:MASCALL%のおわりよ……！　あなたはわたしがおっぱいをイジってるのを、このカードの효과で見続けなきゃならないの……！
+						PRINTFORM 　さぁ、いくわよっ。……んっ、
+						IF BUST_SIZE(TARGET) == -2
+							PRINTFORM おっぱいちいさくされたから、乳首しかないわね……くぅっ……
+						ELSEIF BUST_SIZE(TARGET) == -1
+							PRINTFORM きゃっ……？　あれ、ペチャパイだからかしら、前よりも敏感になってる……？
+						ELSEIF BUST_SIZE(TARGET) == 0
+							PRINTFORM ふふふっ、まえからみたかったでしょ、わたしのおっぱい……っ♪
+						ELSEIF BUST_SIZE(TARGET) == 1
+							PRINTFORM ふ、ふふっ、どう……！？　同年代のオンナどもよりも大きいでしょ♪　あはっ……♪
+						ELSEIF BUST_SIZE(TARGET) == 2
+							PRINTFORM %CSTR:TARGET:MASCALL%の趣味で人のおっぱいおっきくしないでよ……もぅ♪
+						ELSEIF BUST_SIZE(TARGET) == 3
+							PRINTFORM ま、まるでスイカねっ……！　片方の乳房だけでも両手が必要ね……、くぅ……っ
+						ELSEIF BUST_SIZE(TARGET) >= 4
+							PRINTFORM どれだけおっぱい好きなのよ……。毎日、たいへんなんだからぁ……っ
+						ENDIF
+						PRINTFORMW 」
+					CASE 1
+						PRINTFORM 「ど、どう、かしら……！？　この
+						IF BUST_SIZE(TARGET) == -2
+							PRINTFORM ……もしかしたら雪娘のほうが大きいかもしれない
+						ELSEIF BUST_SIZE(TARGET) == -1
+							PRINTFORM %CSTR:TARGET:MASCALL%の趣味によって雪娘ぐらいのサイズになった
+						ELSEIF BUST_SIZE(TARGET) == 0
+							PRINTFORM %CSTR:TARGET:MASCALL%が毎日、チラチラ見てる
+						ELSEIF BUST_SIZE(TARGET) == 1
+							PRINTFORM %CSTR:TARGET:MASCALL%のおかげで大きく育った
+						ELSEIF BUST_SIZE(TARGET) == 2
+							PRINTFORM もう昔の服じゃきれないぐらいたわわに育った
+						ELSEIF BUST_SIZE(TARGET) == 3
+							PRINTFORM 욕망のままに%CSTR:TARGET:MASCALL%がでかくしてくれやがった
+						ELSEIF BUST_SIZE(TARGET) >= 4
+							PRINTFORM ……もう恥ずかしくて外をであるけない、肉のかたまりみたいな
+						ENDIF
+						PRINTFORML おっぱいによる視覚攻撃は……！　手も足もでないでしょう……！
+						PRINTFORMW 　……もちろんそれで終わらないわ……！　揉みしだいて、さらにっ興奮、させたげる……！　ぁんっ、うぅん……！」
+					CASE 2
+						PRINTFORML 「こっ、この효과により、ぷれい、やぁぁ、はぁっ……、おっぱい、もみもみ……いじって、みせつけるぅ……！
+						PRINTFORMW 　ぅん……、くぅ……、び、びみょうな刺激が、もどかしい……っ」
+					CASE 3
+						PRINTFORML 「ふっ、ははっ♪　光栄におもいなさい……！　わたしの、生おっぱいをみたのはっ、%CSTR:TARGET:MASCALL%がはじめてよ……っ
+						PRINTFORMW 　でも調子にのらないことね……！　あくまでこれはぁ……！　%CSTR:TARGET:MASCALL%のっ、おちんぽをっ、あおる、ため、だからっ」
+					CASE 4
+						PRINTFORML 「……なによぉ……、せっかくわたしが、おっぱいを、いじってる、んだからぁ……！　感想ぐらい、いいなさいな……っ
+						PRINTFORMW 　……♪　そうよっ……♪　やわかそうでしょう……♪　きもちよさそうでしょう……♪　もっとよ、もっとほめなさい……♪」
+					ENDSELECT
+			ENDIF
+		CASE "최면자위"
+			IF ABL:TARGET:자위중독 >=2
+				SELECTCASE RAND:5
+					CASE 0
+						PRINTFORML 「んお゛っ❤　ほ゛ぉっ❤　ん゛ひぃ❤　ろ、ろうれふか！❤
+						PRINTFORMW 　わらひにょ、おにゃにーしぇんぽうで❤　%CSTR:TARGET:MASCALL%もおわりよぉ❤……あはっ❤」
+					CASE 1
+						PRINTFORML 「んあ゛っ❤　ひゃあ゛ん❤　ど、どうですかっ❤
+						PRINTFORMW 　こ、これぞっ❤　%TEXTR("魔妖/不知火/わたしの世界")%に伝わる……っ❤　オナニー殺法っです❤　んひ゛ぃ❤」
+					CASE 2
+						PRINTFORML 「やぁぁっ❤　ゆびぃ❤　とまらないよぉ❤　だめぇ❤　%CSTR:TARGET:MASCALL%にぃ、みられてるぅ❤
+						PRINTFORMW 　でもしかたないのぉ❤　こういうこうかだからぁ❤　しかたないのぉ❤　みてぇ❤　もっろ、みてぇ❤」
+					CASE 3
+						PRINTFORML 「くぅぅぅ❤　やだぁぁぁ❤　ゆびぃ❤　わたしのゆびじゃ、ものたりないぃぃぃ❤
+						PRINTFORMW 　%CSTR:TARGET:MASCALL%のぉ❤　%TEXTR("精子ドクドクおちんちん/立派に反り勃つおちんぽ/太くあったかいデカ魔羅")%でぇ❤　わたし、満たされたいのぉぉぉ❤」
+					CASE 4
+						PRINTFORML 「だ、だめよ……っ！　これいじょう、おなにー、したら……っ、脳が、やけ、ついちゃう……っ！？
+						PRINTFORMW 　……あへぁ❤　でもでもぉ❤　カードがやれって言ってるからしかたないわねっ❤　うん、しかたないっ❤　もっともっとしたぁい……❤」
+				ENDSELECT
+			ELSE
+				SELECTCASE RAND:5
+					CASE 0
+						PRINTFORML 「ふふっ……！　%CSTR:TARGET:MASCALL%はこの효과により、わたしのオナニーショーを鑑賞しなければならない……！
+						PRINTFORMW 　……はぁ、はぁ、……くっ。ま、まずいわ……、まだ、オナニー攻撃になれてないからっ、わたしのほうにダメージがっ……！？」
+					CASE 1
+						PRINTFORML 「はっ……❤　はっ……❤　はっ……❤　ふ、ふふっ……%CSTR:TARGET:MASCALL%、隙あり、よ……っ！
+						PRINTFORML 　あんたの立派なおちんちんが、服の上からでも勃起してるわ！　おかげでオカズが増えて자위攻撃がさらにパワーアップ！
+						PRINTFORMW 　……んっ❤　はっ……❤　あひぃ……❤」
+					CASE 2
+						PRINTFORML 「……わたし、%CALLNAME:TARGET%は%CSTR:TARGET:MASCALL%の目の前で誰にも恥ずかしくないオナニーをやってみせるわ……！
+						PRINTFORMW 　……ふぅ、くっ……、は、はずかしいっ。で、でもまけない……っ、そういう효과だから、やりきって、……っく、みせる……っ」
+					CASE 3
+						PRINTFORML 「どうっ！　わたしのっ！　최면、オナニー、はっ！　ふふふっ……！　操られてると、知らずにっ！　ブザマに、オナニー、してるでしょう……！
+						PRINTFORML 　デュエル、中にぃ！　こぉんな、ガニ股でぇ……！　%CSTR:TARGET:MASCALL%に見られながらっ！　これがっ、ただしいと、おもい、こんでぇ……！
+						PRINTFORMW 　……あっ！？　あっ、くぅ……、はぁぁ……っ」
+					CASE 4
+						PRINTFORML 「ぅん♪　ふっ♪　あん♪　ひぃん♪　……え、ノリノリにぃ、みえる、ですって？
+						PRINTFORMW 　当然……で、しょう！？　%CSTR:TARGET:MASCALL%のまえで、オナニー、見せるだけでぇ……しょう、りがっ！　ちかずくん……だからぁ……♪」
+				ENDSELECT
+			ENDIF
+		CASE "최면晒しもの"
+			IF ABL:TARGET:욕망 >= 5
+				SELECTCASE RAND:6
+					CASE 0
+						PRINTFORML 「あははっ❤　ほぉらほぉら❤　%CSTR:TARGET:MASCALL%はねぇ❤　このカードの효과でさぁ❤　わたしにどちゅどちゅハメないといけないのよっ❤
+						PRINTFORMW 　しないのぉ？❤　しなさいよぉ❤　無効化もしてないんでしょお？❤　……じゃあ、こっちから、おそうわよ……❤❤」
+					CASE 1
+						PRINTFORML 「%CALLNAME:TARGET%は%CSTR:TARGET:MASCALL%のモノなのぉ❤　モノはつかわれないとダメなのぉ❤　おまんこ使ってほしくてないちゃうのぉ❤
+						PRINTFORMW 　だからぁ❤　おちんちん様をぉ❤　たぁくさん❤　おねだりマゾメスにぃ❤　おめぐみ、くださぁい❤」
+					CASE 2
+						PRINTFORML 「……くっ、意地はっちゃって……！　きなさいよぉ❤　こうなったらとっておき、%CALLNAME:TARGET%のすべてを晒したハメ乞いダンス、いくわよ……！？
+						PRINTFORM 「%CSTR:TARGET:MASCALL%の
+						IF BUST_SIZE(TARGET) == -2
+							PRINTFORM せいで幼児にも劣るほどちいさくなった絶壁も、
+						ELSEIF BUST_SIZE(TARGET) == -1
+							PRINTFORM 好み通りちいさくされたロリコンちっぱいも、
+						ELSEIF BUST_SIZE(TARGET) == 0
+							PRINTFORM 劣情煽る、なだらかラインの美乳も、
+						ELSEIF BUST_SIZE(TARGET) == 1
+							PRINTFORM いやらしい手つきで、前よりもおっきくなったおっぱいも、
+						ELSEIF BUST_SIZE(TARGET) == 2
+							PRINTFORM だぁいすきな、タプタプ揺れるおっぱいも、
+						ELSEIF BUST_SIZE(TARGET) == 3
+							PRINTFORM 趣味のせいで、まるでウシのようにたわわに実ったおっぱいも、
+						ELSEIF BUST_SIZE(TARGET) >= 4
+							PRINTFORM 価値観にあわせて、もはや着物もきれなくされちゃった規格外おっぱいも、
+						ENDIF
+				PRINTFORMW %CSTR:TARGET:MASCALL%のおちんちん欲しさにジュン……と濡れちゃうおまんこも、みんなみーんな、さらけ出すわ……っ！？」
+					CASE 3
+						PRINTFORML 「ごしゅじんさまぁ❤　わたしはぁ❤　『まて』ができないバカイヌですぅ❤
+						PRINTFORMW 　どうかぁ❤　こらえしょうのないバカイヌにぃ❤　『しつけ』てもらえませんかぁ……❤」
+					CASE 4
+						PRINTFORML 「あはっ❤　なによぉ❤　%CSTR:TARGET:MASCALL%もおちんぽっ❤　おっ勃ててるじゃないの……ぉ❤
+						PRINTFORMW 　ふふふっ……❤　そっちがこないなら、こっちからいくわよ……っ♪　もうガマンできないっ、いただきまぁぁ……っす❤」
+					CASE 5
+						PRINTFORML 「おちんちんっ❤　わたしのだいすきおちんちんっ❤　いっぱいほしいのおちんちんっ❤　……えっ、恥ずかしくないのって？
+						PRINTFORMW 　……しかたないじゃないっ❤　だってカードのこうかだもんっ❤　本心じゃいやだけどしかたないからしかたないもん……♪」
+				ENDSELECT
+			ELSE
+				SELECTCASE RAND:5
+					CASE 0
+						PRINTFORML 「ふふっ……わたし、舞踊はそれなりにできるけど……、そういう意味じゃ、ないわよねぇ……♪
+						PRINTFORMW 　ほぉら、よぉぉく見ておきなさいっ♪　雪女の、ドスケベダンスっ♪」
+					CASE 1
+						PRINTFORML 「발동時のぉ♪　효과処理でぇ♪　プレイヤァはぁっ♪　オトコに媚びなければならないっ♪
+						PRINTFORMW 　あぁん♪　リッパなオスさまっ♪　この卑しいメスにぃ♪　おちんぽ、いかがですかぁ♪」
+					CASE 2
+						PRINTFORML 「あぁっ♪　あついわぁ♪　なんでかしらぁ♪　からだ、あついのぉ♪
+						PRINTFORMW 　どうしましょうか♪　しずまりたいわ♪　あぁっ♪　帯紐、ほどいちゃった……♪」
+					CASE 3
+						PRINTFORML 「ごめんなさぁい♪　ごめんなさぁい♪　わたし、だましてましたぁ♪
+						PRINTFORMW 　貞淑な女きどりでしたけどっ♪　ほんとはおちんちん、だいすきでぇす♪　だれかハメてほしいでぇす……♪」
+					CASE 4
+						PRINTFORML 「おちんちんっ♪　とってもすてきなおちんちんっ♪　かたくてかっこいいおちんちんっ♪　オンナをズポズポッ❤おちんちんっ♪
+						PRINTFORM 　おねがいですっ♪　わたしにいっぱい、いれてほしい♪　わたしの
+						IF TALENT:TARGET:처녀
+							PRINTFORM 처녀を♪　ちらしてほしいっ♪　
+						ELSE
+							PRINTFORM 子宮に♪　そそいでほしいっ♪　
+						ENDIF
+						PRINTFORMW あなたにいっぱい♪　ハメられたいのぉ♪　だからわたしにっ♪　いっぱいください……っ♪」
+				ENDSELECT				
+			ENDIF
+		CASE "최면パンツ晒し"
+			IF ABL:TARGET:노출증 >= 5
+				SELECTCASE RAND:6
+					CASE 0
+						PRINTFORML 「ふふふっ❤　どうかしらぁ❤　%CALLNAME:TARGET%のパンモロ大作戦はぁ……❤
+						PRINTFORMW 　……ほぉらほら、よぉく見ときなさいっ❤　わたしのパンツも、ワレメも、じんわりにじんだマン汁も……❤　目に焼き付けとくことね……❤」
+					CASE 1
+						PRINTFORML 「どうっ❤　わたしのパンツ❤　もっとちかくで見て……ぇ❤
+						PRINTFORMW 　あぁん❤　嬉しくて、おまんこ濡れてきちゃった……❤　やだぁ、お漏らし、してきちゃったかしら❤」
+					CASE 2
+						PRINTFORML 「あははっ……♪　このカードを발동したからにはぁ……♪　%CSTR:TARGET:MASCALL%は逃げられないのよぉ……♪
+						PRINTFORMW 　ほぉら、わたしのパンツよ❤　あら？　なんだかにじんできたわね❤　からだ、あっつくなってきちゃった……❤」
+					CASE 3
+						PRINTFORML 「んっ……♪　ゆび、見えるかしら……❤　そう、ココがクロッチ……❤　大事なトコロを隠しているのよ……❤
+						PRINTFORMW 　ふふ……❤　すこし違うから、ぬれてるのがよぉくわかるでしょ……❤　やだっ、%CSTR:TARGET:MASCALL%の視線でどんどん濡れちゃう……ぅ❤　シミになっちゃうぅ……❤」
+					CASE 4
+						PRINTFORML 「ほんとは見せたりなんか絶対しないんだけどねっ❤　カードの효과だからしかたないわよねっ❤
+						PRINTFORMW 　あらぁ？　なんだか残念そうねぇ……❤　……ふんどしがよかったの？　しょうがないわねぇ❤　イヤだけどカードの효과だしっ❤　考えてあげるわ……❤」
+					CASE 5
+						PRINTFORML 「あん❤　%CSTR:TARGET:MASCALL%の熱視線でっ❤　パンツに穴が空きそう……♪
+						PRINTFORMW 　やだぁ❤　お漏らしなんて言わないでぇ❤　わたし、ゆきむすめじゃないのぉ❤　もうオトナなのぉ……❤」
+				ENDSELECT							
+			ELSE
+				SELECTCASE RAND:5
+					CASE 0
+						PRINTFORML 「ふふっ、どうかしら……♪　%CSTR:TARGET:MASCALL%よくわたしの足に目線がいってるわよねぇ……♪
+						PRINTFORMW 　……その上の、大事なトコ、みたくなぁい……？　んっ……❤　いまだけ、とくべつよ……♪」
+					CASE 1
+						PRINTFORML 「あらあら、まんまとわたしのパンツに目を奪われちゃって……♪　ふふ、わたしの作戦勝ちね……♪
+						PRINTFORMW 　……あら、もういいの？　もうこんな幸運、ないかもしれないわよ……♪」
+					CASE 2
+						PRINTFORML 「じゃ～ん……♪　いつもの見えそで見えない下着、特別だいこうか～い♪
+						PRINTFORMW 　……ふふふっ！　ふんどしだと思ってた？　ざんね～んっ、ふつうのパンツでしたぁ……♪」
+					CASE 3
+						PRINTFORML 「……やぁ～んっ♪　このままじゃ、パンツ、みえちゃうわぁ～♪
+						PRINTFORMW 　……ちょっとっ！？　こっち見なさいよ！　このっデュエルバカッ……！」
+					CASE 4
+						PRINTFORML 「このカードの효과によりっ♪　わたしは%CSTR:TARGET:MASCALL%にパンツを見せたげるわぁ……♪
+						PRINTFORMW 　……ほぉら、いま、指でなぞったところ、もりあがってるでしょ？　ココに大事なトコが隠れているのよ……♪」
+				ENDSELECT				
+			ENDIF
 		;その他全部
 		CASEELSE
 			PRINTFORMW 

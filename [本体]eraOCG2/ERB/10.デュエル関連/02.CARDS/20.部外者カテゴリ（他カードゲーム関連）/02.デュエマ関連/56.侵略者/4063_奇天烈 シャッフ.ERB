@@ -191,7 +191,7 @@ ELSEIF 종류 == ターン開始時予約
 		IF 듀얼리스트 == "자신"
 			PRINT 상대의 
 		ELSE
-			PRINT あなたの
+			PRINT 당신의
 		ENDIF
 		CALL CARD_GET_EMBLEM_VALUES(듀얼리스트,4063)
 		宣言レベル = RESULT:1
@@ -203,7 +203,7 @@ ELSEIF 종류 == ターン開始時予約
 		WAIT
 		PRINTL
 		IF 듀얼리스트 != "자신"
-		PRINTL [0] - 확인
+		PRINTL [0] - ＯＫ
 			PRINTL
 			BINPUT
 		ENDIF

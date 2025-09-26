@@ -11,7 +11,7 @@ SELECTCASE 参照先
 	CASE "略称"
 		RESULTS = 메카도고란
 	CASE "カテゴリ"
-		RESULTS:0 = 파괴수
+		RESULTS:0 = 대파괴수
 ENDSELECT
 
 
@@ -56,7 +56,7 @@ PRINTL ●4종류 이상: 상대가 마법 / 함정/몬스터의 효과를 발�
 PRINTL 　1턴에 1번, 자신 / 상대 필드의 파괴수 카운터를 2개 제거하고 발동할 수 있다.
 PRINTL 　그 발동을 무효로 하고 제외한다.
 CALLFORM CARD_ABLE(3,지속효과)
-PRINTL ●8종류 이상: 이 카드는 완전 내성을 얻는다.
+PRINTL ●7종류 이상: 이 카드는 완전 내성을 얻는다.
 
 @CARDSUMMON_52025(듀얼리스트,소환カード,EX参照)
 #DIMS DYNAMIC 듀얼리스트
@@ -172,7 +172,7 @@ ELSEIF 종류 == 지속효과
 	효과条件固名前選択 = 1
 	효과条件CNT = 1
 	CALL CARD_CHECK_ADV(듀얼리스트,종류,ゾーン,場所)
-	SIF RESULT < 8
+	SIF RESULT < 7
 		RETURN 0
 	RETURN 1
 ENDIF
@@ -206,13 +206,14 @@ ELSEIF 종류 == 필드起動
 	CALL CARD_CHOICE(듀얼리스트,종류,ゾーン,場所,52025,1)
 	IF RESULT == 0
 		REPEAT 2
-PRINTL 파괴수 카운터를 제거할 카드를 선택
+			PRINTL 파괴수 카운터를 제거할 카드를 선택
 			CALL FULLRESET
 			효과範囲필드 = 1
 			효과範囲마함 = 1
 			효과範囲상대필드 = 1
 			효과範囲상대마함 = 1
-			효과条件カテゴリ = 파괴수
+			효과条件カテゴリ:0 = 파괴수
+			효과条件カテゴリ:1 = 대파괴수
 			효과条件個Ｃ所持 = 999
 			CALL CARD_CHOOSE_ADV(듀얼리스트,ゾーン,場所)
 			IF RESULT != 9999
@@ -222,7 +223,7 @@ PRINTL 파괴수 카운터를 제거할 카드를 선택
 			ENDIF
 		REND
 		IF 条件달성 == 2
-			PRINTFORMW ドゴランの魂が赤く輝く！
+			PRINTFORMW 도고란의 영혼이 빨갛게 빛난다！
 			CALL FULLRESET
 			CALL CARD_REMOVAL_BASIC(듀얼리스트,"필드全体",場所,"묘지")
 		ENDIF
@@ -232,13 +233,14 @@ ELSEIF 종류 == 발동誘発
 	CALL CARD_CHOICE(듀얼리스트,종류,ゾーン,場所,52025,2)
 	IF RESULT == 0
 		REPEAT 2
-PRINTL 파괴수 카운터를 제거할 카드를 선택
+			PRINTL 파괴수 카운터를 제거할 카드를 선택
 			CALL FULLRESET
 			효과範囲필드 = 1
 			효과範囲마함 = 1
 			효과範囲상대필드 = 1
 			효과範囲상대마함 = 1
-			효과条件カテゴリ = 파괴수
+			효과条件カテゴリ:0 = 파괴수
+			효과条件カテゴリ:1 = 대파괴수
 			효과条件個Ｃ所持 = 999
 			CALL CARD_CHOOSE_ADV(듀얼리스트,ゾーン,場所)
 			IF RESULT != 9999
@@ -248,7 +250,7 @@ PRINTL 파괴수 카운터를 제거할 카드를 선택
 			ENDIF
 		REND
 		IF 条件달성 == 2
-			PRINTFORMW ガメシエルの魂が青く輝く！
+			PRINTFORMW 가메시엘의 영혼이 파랗게 빛난다！
 			CALL FULLRESET
 			CALL CARD_REMOVAL_BASIC(듀얼리스트,"발동無効",場所,"제외")
 		ENDIF

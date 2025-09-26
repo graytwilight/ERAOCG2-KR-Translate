@@ -3283,7 +3283,7 @@ IF 설정플래그 == 1
 	VARSET 初期値
 	RETURN 0
 ENDIF
-;PRINTFORML チェック！A　効果条件カテゴリ：%効果条件カテゴリ%
+;PRINTFORML チェック！A　효과条件カテゴリ：%효과条件カテゴリ%
 VARSET 묘지起動可
 VARSET 손패起動可
 VARSET EX起動可
@@ -3650,7 +3650,7 @@ SIF 묘지起動可 || EX起動可
 PRINTPLAINFORM ┗━━━━━━━━━━┛
 RESETCOLOR
 PRINTL
-;PRINTFORML チェック！C　効果条件カテゴリ：%効果条件カテゴリ%
+;PRINTFORML チェック！C　효과条件カテゴリ：%효과条件カテゴリ%
 IF 설정플래그 == 0
 	IF G_イベ起動 >= 1
 		VARSET RESULT
@@ -3748,7 +3748,7 @@ ELSEIF RESULT == 9001
 	CALL CARD_CHOOSE_ADV("자신")
 	選択カード = RESULT
 	IF RESULT == 9999
-		PRINTFORMW 돌아갑니다。
+
 	ELSE
 		CALL CARD_SELECT("자신",選択カード)
 		CALL CARD_ADD("자신", 参照先（CS）, "손패", 選択カード（CS）)
@@ -3763,7 +3763,7 @@ ELSEIF RESULT == 9002
 	CALL CARD_CHOOSE_ADV("자신")
 	選択カード = RESULT
 	IF RESULT == 9999
-		PRINTFORMW 돌아갑니다。
+
 	ELSE
 		選択カード -= 2000
 		CALL CARD_SELECT("상대",選択カード)
@@ -3799,10 +3799,8 @@ ELSEIF RESULT == 9004
 	PRINTL [4]덱 위에서 N장
 	PRINTL [100] - 돌아간다
 	BINPUT
-	IF RESULT == 100
-		PRINTFORMW 돌아갑니다。
 	;破壊処理
-	ELSEIF RESULT == 0
+	IF RESULT == 0
 		CUSTOMDRAWLINE —
 		PRINTFORML 「자기 묘지 보내기 처리 화면」
 		CUSTOMDRAWLINE —
@@ -3819,7 +3817,7 @@ ELSEIF RESULT == 9004
 		CALL CARD_CHOOSE_ADV("자신")
 		選択カード = RESULT
 		IF 選択カード == 9999
-			PRINTFORMW 돌아갑니다。
+
 		ELSE
 			CALL CARD_SELECT("자신",選択カード)
 			CALL CARD_ADD("자신", 参照先（CS）, "묘지", 選択カード（CS）)
@@ -3832,7 +3830,7 @@ ELSEIF RESULT == 9004
 		INPUT
 		選択カード = RESULT
 		IF 選択カード == 100
-			PRINTFORMW 돌아갑니다。
+
 		ELSEIF INRANGE (選択カード, 0, (現山札数("자신"))) 
 			REPEAT 選択カード
 				CALL CARD_ADD, "자신", "덱", "묘지", 0
@@ -3860,7 +3858,7 @@ ELSEIF RESULT == 9005
 	CALL CARD_CHOOSE_ADV("자신")
 	選択カード = RESULT
 	IF 選択カード == 9999
-		PRINTFORMW 돌아갑니다。
+
 	ELSE
 		選択カード -= 2000
 		CALL CARD_SELECT("상대",選択カード)
@@ -3887,7 +3885,7 @@ ELSEIF RESULT == 9007
 	選択カード = RESULT
 	;돌아간다
 	IF 選択カード == 9999
-		PRINTFORMW 돌아갑니다。
+
 	ELSE
 		PRINTL 표시형식 선택：
 		PRINTL 
@@ -3937,7 +3935,7 @@ ELSEIF RESULT == 9008
 	選択カード = RESULT
 	;돌아간다
 	IF 選択カード == 9999
-		PRINTFORMW 돌아갑니다。
+
 	ELSE
 		選択カード -= 2000
 		PRINTL 표시형식선택：
@@ -3960,7 +3958,7 @@ ELSEIF RESULT == 9008
 			IF モンスター数("상대") == 5
 				PRINTFORMW 몬스터 존이 가득 차서 소환할 수 없습니다。
 			ELSE
-				PRINTFORMW 통상 소환！
+				PRINTFORMW 일반 소환！
 				CALL FULLRESET
 				CALL CARD_SUMMON("상대", 選択カード, 표시形式)
 			ENDIF

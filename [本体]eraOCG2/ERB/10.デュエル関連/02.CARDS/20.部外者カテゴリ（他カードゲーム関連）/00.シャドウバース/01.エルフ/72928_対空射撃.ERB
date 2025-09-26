@@ -10,6 +10,7 @@ SELECTCASE 参照先
 		RESULTS = 대공사격
 	CASE "カテゴリ"
 		RESULTS:0 = 엘프 클래스
+		RESULTS:1 = 요정
 		RESULTS:4 = Shadowverse
 ENDSELECT
 
@@ -38,6 +39,7 @@ CALL CARD_ABLE(0,마함起動,손패起動)
 PRINTL ①：자신의 턴에 발동할 수 있다.
 PRINTL 자신의 앞면 표시인 "엘프 클래스"카드 １장을 패로 되돌린다。
 PRINTL 그 후、상대 몬스터 １장을 파괴한다。
+PRINTL 그 후、패에서 레벨３ 이하의 "엘프 클래스" 몬스터 １장을 소환할 수 있다。
 
 @CARDCAN_74400(듀얼리스트,종류,ゾーン,場所)
 #DIMS DYNAMIC 듀얼리스트
@@ -105,6 +107,20 @@ IF 종류 == 마함起動 || 종류 == 손패起動 || 종류 == フリー誘発
 		IF RESULT == 1
 			CALL FULLRESET
 			CALL CARD_REMOVAL_BASIC(듀얼리스트,"필드単体",場所,"묘지")
+
+
+
+			CALL FULLRESET
+			CALLFORM 효과条件レベル_ADV(3,"以下")
+			효과条件カテゴリ:0 = 엘프 클래스
+			효과条件종류 = モン全般
+			효과条件任意 = 1
+			CALL CARD_CHOOSE_BASIC(듀얼리스트,"손패",ゾーン,場所)
+			選択カード = RESULT
+			IF 選択カード != 9999
+				CALL CARD_SUMMON_SHORI(듀얼리스트,選択カード,"攻撃표시",1)
+			ENDIF
+
 		ENDIF
 	ENDIF
 ENDIF

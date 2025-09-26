@@ -149,8 +149,7 @@ IF 종류 == EX소환時 || 종류 == 특수소환時
 		NEXT
 		IF 설정場所 >= 0
 			CALL FULLRESET
-			효과条件以攻撃力 = 攻撃力판정
-			CALL CARD_REMOVAL_BASIC(듀얼리스트,"필드単体",場所,"묘지")
+			CALL CARD_REMOVAL_BASIC(듀얼리스트,"自動処理",설정場所,"묘지")
 		ENDIF
 	ENDIF
 ELSEIF 종류 == 지속효과

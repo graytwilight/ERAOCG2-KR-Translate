@@ -376,7 +376,7 @@ FOR カウンタ,0,サーチ範囲
 		SIF チェック플래그 == 1
 			SKIPDISP チェック플래그
 		CALL CARD_SETCOLOR(実行者,参照先,カウンタ)
-		CALLFORM CARD_KANPRINT(参照先,(カウンタ + 上級値),GETVAR(@"%実行者%_%参照先%:カウンタ"))
+		CALLFORM CARD_KANPRINT(元参照先,(カウンタ + 上級値),GETVAR(@"%実行者%_%参照先%:カウンタ"))
 		RESETCOLOR
 
 	ELSEIF 듀얼리스트 == "상대"

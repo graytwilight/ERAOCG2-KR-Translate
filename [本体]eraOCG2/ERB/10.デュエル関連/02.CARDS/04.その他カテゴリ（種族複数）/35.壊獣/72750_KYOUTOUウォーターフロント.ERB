@@ -24,9 +24,6 @@ VARSET RESULTS
 SELECTCASE 参照先
 	CASE "종류"
 		RETURN フィールド
-	CASE "C불가"
-		RETURN 1
-		;카운터の増加処理に"효과無効불가"が上手く機能しなかったので止む無く
 	CASE "レア度"
 		RETURN CMN
 ENDSELECT
@@ -37,7 +34,6 @@ RETURN 0
 #DIM DYNAMIC 종류
 
 PRINTL 자신 필드는 "KYOUTOU"가 된다.
-PRINTL 이 카드의 효과 발동과 효과는 무효화되지 않는다.
 CALLFORM CARD_ABLE(10,발동強制誘発)
 PRINTL ①: 손패 이외에서 카드가 묘지로 보내질 때마다 발동한다.
 PRINTL 이 카드에 파괴수 카운터를 1개 올린다 (최대 5개까지).
@@ -59,11 +55,11 @@ SIF RESULT == 1
 	RETURN 0
 
 IF 종류 == 마함起動 && GETVAR(@"%듀얼리스트%_魔_表:場所") == 1
+	SIF 발동済_1(듀얼리스트,72750)
+		RETURN 0
 	SIF メインフェイズ != 1
 		RETURN 0
 	SIF ターンプレイヤー != 듀얼리스트
-		RETURN 0
-	SIF 발동済_1(듀얼리스트,72750)
 		RETURN 0
 	SIF GETVAR(@"%듀얼리스트%_魔_個Ｃ:場所") < 3
 		RETURN 0
@@ -76,6 +72,7 @@ IF 종류 == 마함起動 && GETVAR(@"%듀얼리스트%_魔_表:場所") == 1
 	SIF RESULT != 1
 		RETURN 0
 	RETURN 1
+
 ELSEIF 종류 == 효과後強制誘発
 	SIF ゾーン != "마함"
 		RETURN 0
@@ -86,6 +83,7 @@ ELSEIF 종류 == 효과後強制誘発
 	SIF RESULT != 1
 		RETURN 0
 	RETURN 1
+
 ELSEIF 종류 == 마함起動 || 종류 == 손패起動
 	IF 종류 == 마함起動
 		SIF GETVAR(@"%듀얼리스트%_魔_表:場所") == 1
@@ -96,6 +94,7 @@ ELSEIF 종류 == 마함起動 || 종류 == 손패起動
 	SIF ターンプレイヤー != 듀얼리스트
 		RETURN 0
 	RETURN 1
+
 ELSEIF 종류 == 身代효과
 	SIF ゾーン != "마함"
 		RETURN 0
@@ -132,7 +131,7 @@ ELSEIF 종류 == 효과後強制誘発
 	CALL FULLRESET
 	CALL CARD_CHOICE(듀얼리스트,종류,ゾーン,場所,72750,10)
 	IF RESULT == 0
-		PRINTFORML KYOUTOUウォ-タ-フロント『{場所}』に카운터が乗りました。
+		PRINTFORML KYOUTOU 워터프론트『{場所}』에 카운터가 놓였습니다。
 		CALL SET_FIELD_INFO(듀얼리스트,"마함",場所,"個Ｃ",1)
 	ENDIF
 ELSEIF 종류 == 마함起動 || 종류 == 손패起動

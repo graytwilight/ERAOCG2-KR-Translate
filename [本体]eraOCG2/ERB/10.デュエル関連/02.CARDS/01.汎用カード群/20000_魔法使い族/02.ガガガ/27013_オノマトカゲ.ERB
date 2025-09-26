@@ -63,6 +63,7 @@ PRINTL 묘지의 이 카드를 제외하고、자신의 묘지에서 X몬스터�
 #DIMS DYNAMIC ゾーン
 #DIM DYNAMIC 종류
 #DIM DYNAMIC 場所
+#DIM DYNAMIC 효과使用불가,3
 CALL CARD_NEGATE(듀얼리스트,종류,ゾーン,場所,27013)
 SIF RESULT == 1
 	RETURN 0
@@ -88,28 +89,37 @@ IF 종류 == 손패起動
 		RETURN 0
 	RETURN 1
 ELSEIF 종류 == 묘지起動
-	SIF 발동済_1(듀얼리스트,27013)
-		RETURN 0
 	SIF メインフェイズ != 1
 		RETURN 0
 	SIF ターンプレイヤー != 듀얼리스트
 		RETURN 0
-		CALL FULLRESET
+
+	SIF 발동済_1(듀얼리스트,27013)
+		효과使用불가:0 = 1		
+	SIF 발동済_2(듀얼리스트,27013)
+		효과使用불가:1 = 1
+	CALL CARD_SS_CHECK(듀얼리스트,27013,ゾーン)
+	SIF RESULT == 1
+		효과使用불가:0 = 1	
+
+	CALL FULLRESET
 	효과範囲필드 = 1
 	효과条件カテゴリ:0 = 주바바
 	효과条件カテゴリ:1 = 가가가
 	효과条件カテゴリ:2 = 고고고
 	효과条件カテゴリ:3 = 도도도
 	CALL CARD_CHECK_ADV(듀얼리스트,종류,ゾーン,場所)
-	SIF RESULT == 1
-		RETURN 1
+	SIF RESULT != 1
+		효과使用불가:0 = 1
 	CALL FULLRESET
 	효과範囲묘지 = 1
 	효과条件종류 = 엑시즈
 	CALL CARD_CHECK_ADV(듀얼리스트,종류,ゾーン,場所)
-	SIF RESULT == 1
-		RETURN 1
-	RETURN 0
+	SIF RESULT != 1
+		효과使用불가:1 = 1
+	SIF 효과使用불가:0 == 1 && 효과使用불가:1 == 1
+		RETURN 0
+	RETURN 1
 ENDIF
 
 @CARDEFFECT_27013(듀얼리스트,종류,ゾーン,場所)
@@ -120,7 +130,7 @@ ENDIF
 #DIM DYNAMIC カウンタ
 #DIM DYNAMIC 条件달성1
 #DIM DYNAMIC 条件달성2
-
+#DIM DYNAMIC 효과使用불가,3
 
 
 IF 종류 == 손패起動
@@ -133,8 +143,12 @@ IF 종류 == 손패起動
 		CALL CARD_SP_SUMMON(듀얼리스트,ゾーン,場所)
 	ENDIF
 ELSEIF 종류 == 묘지起動
-	CALL CARD_CHOICE(듀얼리스트,종류,ゾーン,場所,27013)
-	IF RESULT == 0
+
+	SIF 발동済_1(듀얼리스트,27013)
+		효과使用불가:0 = 1		
+	SIF 발동済_2(듀얼리스트,27013)
+		효과使用불가:1 = 1
+
 		CALL FULLRESET
 		효과範囲필드 = 1
 		효과条件カテゴリ:0 = 주바바
@@ -142,58 +156,42 @@ ELSEIF 종류 == 묘지起動
 		효과条件カテゴリ:2 = 고고고
 		효과条件カテゴリ:3 = 도도도
 		CALL CARD_CHECK_ADV(듀얼리스트,종류,ゾーン,場所)
-		IF RESULT == 1 && 발동済_1(듀얼리스트,27013) == 0
-			CALL CARD_SS_CHECK(듀얼리스트,27013,ゾーン)
-			SIF RESULT != 1
-				条件달성1 = 1
-		ENDIF
+		SIF RESULT != 1
+			효과使用불가:0 = 1
 		CALL FULLRESET
 		효과範囲묘지 = 1
 		효과条件종류 = 엑시즈
 		CALL CARD_CHECK_ADV(듀얼리스트,종류,ゾーン,場所)
-		SIF RESULT == 1 && 발동済_2(듀얼리스트,27013) == 0
-			条件달성2 = 1
+		SIF RESULT != 1
+			효과使用불가:1 = 1
 		
-		IF 条件달성1 == 1 && 条件달성2 == 1
+		IF 효과使用불가:0 == 0 && 효과使用불가:1 == 0
+			PRINTL 이 카드를 특수 소환 하시겠습니까？
+		CALL YN_CHOICE(듀얼리스트)
+	ELSEIF 효과使用불가:1 == 1
+		RESULT = はい
+
+	ELSEIF 효과使用불가:0 == 1
+		RESULT = いいえ
+	ENDIF
+	IF RESULT == はい
+		CALL CARD_CHOICE(듀얼리스트,종류,ゾーン,場所,27013,1)
+		IF RESULT == 0
 			CALL FULLRESET
 			효과範囲묘지 = 1
 			효과条件名前 = 오노마토 도마뱀
 			효과추가종류 = 2
-			효과条件任意 = 1
 			CALL CARD_SP_SUMMON_ADV(듀얼리스트,ゾーン,場所)
-			IF RESULT == 1
-				CALL CARD_EFFECT_USE(듀얼리스트,27013,1)
-			ELSE
-				CALL CARD_DISPOSE(듀얼리스트,ゾーン,場所)
-		IF RESULT == 1
-			CALL FULLRESET
-					효과条件종류 = 엑시즈
-					효과条件複数 = 98
-					효과条件行先플래그 = 덱行き
-					CALL CARD_ADD_GY_BASIC(듀얼리스트,"묘지",ゾーン,場所)
-					SIF RESULT == 1
-						CALL CARD_EFFECT_USE(듀얼리스트,27013,2)
 				ENDIF
-			ENDIF
-		ELSEIF 条件달성1 == 1
-			CALL FULLRESET
-			효과範囲묘지 = 1
-			효과条件名前 = 오노마토 도마뱀
-			효과추가종류 = 2
-			CALL CARD_SP_SUMMON_ADV(듀얼리스트,ゾーン,場所)
-			SIF RESULT == 1
-				CALL CARD_EFFECT_USE(듀얼리스트,27013,1)
-		ELSEIF 条件달성2 == 1
+		ELSEIF RESULT == いいえ
+		CALL CARD_CHOICE(듀얼리스트,종류,ゾーン,場所,27013,1)
+		IF RESULT == 0
 			CALL CARD_DISPOSE(듀얼리스트,ゾーン,場所)
-			IF RESULT == 1
-				CALL FULLRESET
-				효과条件종류 = 엑시즈
-				효과条件複数 = 98
-				효과条件行先플래그 = 덱行き
-				CALL CARD_ADD_GY_BASIC(듀얼리스트,"묘지",ゾーン,場所)
-				SIF RESULT == 1
-					CALL CARD_EFFECT_USE(듀얼리스트,27013,2)
-			ENDIF
+			CALL FULLRESET
+			효과条件종류 = 엑시즈
+			효과条件複数 = 98
+			효과条件行先플래그 = 덱行き
+			CALL CARD_ADD_GY_BASIC(듀얼리스트,"묘지",ゾーン,場所)
 		ENDIF
 	ENDIF
 ENDIF

@@ -7,11 +7,11 @@ VARSET RESULTS
 
 SELECTCASE 参照先
 	CASE "名前"
-RESULTS = 육화정 스노드롭
+		RESULTS = 육화정 스노드롭
 	CASE "略称"
-RESULTS = 육화정 스노드롭
+		RESULTS = 육화정 스노드롭
 	CASE "カテゴリ"
-RESULTS:0 = 육화
+		RESULTS:0 = 육화
 ENDSELECT
 
 
@@ -170,6 +170,7 @@ ELSEIF 종류 == 필드起動
 			설정レベル = GETVAR(@"%듀얼리스트%_MZ_星:選択カード")
 			CALL FULLRESET
 			효과条件종족 = 식물족
+			효과条件종류 = レベル持ち
 			CALL STATCHANGE_EFFECT(듀얼리스트,"필드",場所,"一星",설정レベル)
 		ENDIF
 	ENDIF
